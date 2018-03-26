@@ -3,9 +3,10 @@ package com.pastew.ingameadsserver.AdImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.FileSystemUtils;
@@ -14,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -29,6 +29,10 @@ public class AdImageService {
     public AdImageService(AdImageRepository repository, ResourceLoader resourceLoader){
         this.repository = repository;
         this.resourceLoader = resourceLoader;
+    }
+
+    public Page<AdImage> findPage(Pageable pageable){
+        return repository.findAll(pageable);
     }
 
     public Resource findOneImage(String filename){
