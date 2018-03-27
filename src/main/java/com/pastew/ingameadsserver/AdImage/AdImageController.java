@@ -72,17 +72,14 @@ public class AdImageController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = BASE_PATH + "/" + FILENAME)
-    @ResponseBody
-    public ResponseEntity<?> deleteFile(@PathVariable String filename){
+    public String deleteFile(@PathVariable String filename, RedirectAttributes redirectAttributes){
 
         try {
             adImageService.deleteImage(filename);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                    .body("Succesfully delete " + filename);
-        } catch (IOException e) {
-            return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Coundn't delete " + filename + " => " + e.getMessage());
+            redirectAttributes.addFlashAttribute("flash.message", "Sucessfully deleted image " + filename);
+        } catch (IOException | RuntimeException e) {
+            redirectAttributes.addFlashAttribute("flash.message", "Failed to delete image " + filename + " => " + e.getMessage());
         }
+        return "redirect:/";
     }
 }
