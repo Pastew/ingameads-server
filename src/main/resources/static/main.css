@@ -12,3 +12,8 @@ td, th {
     max-widh: 75px;
     max-height: 75px;
 }
+
+.flash {
+    background-color: lightcoral;
+    padding: 1em;
+}

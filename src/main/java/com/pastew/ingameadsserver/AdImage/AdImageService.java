@@ -41,6 +41,9 @@ public class AdImageService {
 
     public void createImage(MultipartFile file) throws IOException {
 
+        if ("".equals(file.getOriginalFilename()))
+            throw new IOException("Filename is empty");
+
         if (!file.isEmpty()){
             Files.copy(file.getInputStream(), Paths.get(UPLOAD_ROOT, file.getOriginalFilename()));
             repository.save(new AdImage(file.getOriginalFilename()));
