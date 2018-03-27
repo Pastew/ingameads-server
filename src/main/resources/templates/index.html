@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Title to change</title>
+    <link rel="stylesheet" href="/main.css" />
 </head>
 <body>
 
@@ -21,7 +22,7 @@
             <td th:text="${image.id}"/>
 
             <td th:text="${image.name}"/>
-            <td> <img th:src="@{'/images/' + ${image.name} + '/raw'}" /></td>
+            <td> <img class="thumbnail" th:src="@{'/images/' + ${image.name} + '/raw'}" /></td>
         </tr>
         </tbody>
     </table>
