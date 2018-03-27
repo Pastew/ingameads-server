@@ -39,6 +39,12 @@ public class AdImageController {
     public String index (Model model, Pageable pageable){
         final Page<AdImage> page = adImageService.findPage(pageable);
         model.addAttribute("page", page);
+        if(page.hasPrevious())
+            model.addAttribute("prev", page.previousPageable());
+
+        if(page.hasNext())
+            model.addAttribute("next", page.nextPageable());
+
         return "index";
     }
 
