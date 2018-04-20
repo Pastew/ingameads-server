@@ -9,6 +9,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
@@ -56,7 +58,8 @@ public class AdImageService {
         }
     }
 
-    public void deleteImage(String filename) throws IOException {
+    @PreAuthorize("@adImageRepository.findByName(#filename)?.owner?.username == authentication?.name or hasRole('ADMIN')")
+    public void deleteImage(@Param("filename") String filename) throws IOException {
         final AdImage byName = repository.findByName(filename);
         repository.delete(byName);
 
