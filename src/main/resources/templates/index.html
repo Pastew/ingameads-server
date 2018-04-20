@@ -8,9 +8,15 @@
 <body>
 
 <div>
-    <span sec:authentication="name" /> has <span sec:authentication="authorities" />
-    <form method="post" th:action="@{/logout}">
-        <input type="submit" value="Sing Off" />
+    <span sec:authentication="name"/> has <span sec:authentication="authorities"/>
+    <form sec:authorize-expr="isFullyAuthenticated()" method="post" th:action="@{/logout}">
+        <input type="submit" value="Sign Off"/>
+    </form>
+    <form sec:authorize-expr="!isFullyAuthenticated()" method="post" th:action="@{/login}">
+        <label>User</label><input type="text" name="username" value=""/>
+        <label>Password</label><input type="password" name="password"/>
+        <input type="submit" value="Login"/>
+
     </form>
 </div>
 
@@ -38,9 +44,10 @@
             <td th:text="${image.name}"/>
             <td><a th:href="@{'/images/' + ${image.name} + '/raw'}"><img class="thumbnail" th:src="@{'/images/' + ${image.name} + '/raw'}"/></a></td>
             <td th:text="${image.owner.username}"/>
-            <td><form th:method="delete" th:action="@{'images/' + ${image.name}}">
-                <input type="submit" value="Delete" />
-            </form>
+            <td>
+                <form sec:authorize-expr="isFullyAuthenticated()" th:method="delete" th:action="@{'images/' + ${image.name}}">
+                    <input type="submit" value="Delete"/>
+                </form>
             </td>
         </tr>
         </tbody>
@@ -50,7 +57,7 @@
         <li th:if="${prev}"><a th:href="@{/(size=${prev.pageSize}, page=${prev.pageNumber})}">Previous</a></li>
         <li th:if="${next}"><a th:href="@{/(size=${next.pageSize}, page=${next.pageNumber})}">Next</a></li>
     </ul>
-    <form method="post" enctype="multipart/form-data" th:action="@{/images}">
+    <form sec:authorize-url="POST /images" method="post" enctype="multipart/form-data" th:action="@{/images}">
         <p><input type="file" name="file"/></p>
         <p><input type="submit" value="Upload"/></p>
     </form>
