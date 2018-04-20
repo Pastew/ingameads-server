@@ -1,5 +1,7 @@
 package com.pastew.ingameadsserver.AdImage;
 
+import com.pastew.ingameadsserver.User.User;
+import com.pastew.ingameadsserver.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -26,16 +28,16 @@ public class AdImageService {
     private final ResourceLoader resourceLoader;
 
     @Autowired
-    public AdImageService(AdImageRepository repository, ResourceLoader resourceLoader){
+    public AdImageService(AdImageRepository repository, ResourceLoader resourceLoader) {
         this.repository = repository;
         this.resourceLoader = resourceLoader;
     }
 
-    public Page<AdImage> findPage(Pageable pageable){
+    public Page<AdImage> findPage(Pageable pageable) {
         return repository.findAll(pageable);
     }
 
-    public Resource findOneImage(String filename){
+    public Resource findOneImage(String filename) {
         return resourceLoader.getResource("file:" + UPLOAD_ROOT + "/" + filename);
     }
 
@@ -44,7 +46,7 @@ public class AdImageService {
         if ("".equals(file.getOriginalFilename()))
             throw new IOException("Filename is empty");
 
-        if (!file.isEmpty()){
+        if (!file.isEmpty()) {
             Files.copy(file.getInputStream(), Paths.get(UPLOAD_ROOT, file.getOriginalFilename()));
             repository.save(new AdImage(file.getOriginalFilename()));
         }
@@ -58,21 +60,26 @@ public class AdImageService {
     }
 
     @Bean
-    //@Profile("dev")
-    CommandLineRunner setUp(AdImageRepository repository) throws IOException {
+        //@Profile("dev")
+    CommandLineRunner setUp(AdImageRepository adImagerepository,
+                            UserRepository userRepository) throws IOException {
 
         return args -> {
             FileSystemUtils.deleteRecursively(new File(UPLOAD_ROOT));
             Files.createDirectory(Paths.get(UPLOAD_ROOT));
 
+            User greg = userRepository.save(new User("greg", "qwe", "ROLE_ADMIN", "ROLE_USER"));
+            User rob = userRepository.save(new User("rob", "qwe", "ROLE_USER"));
+
             FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test1"));
-            repository.save(new AdImage("test1"));
+            adImagerepository.save(new AdImage("test1"));
 
             FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test2"));
-            repository.save(new AdImage("test2"));
+            adImagerepository.save(new AdImage("test2"));
 
             FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test3"));
-            repository.save(new AdImage("test3"));
+            adImagerepository.save(new AdImage("test3"));
+
         };
 
     }
