@@ -9,6 +9,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.FileSystemUtils;
@@ -26,11 +27,13 @@ public class AdImageService {
     private static String UPLOAD_ROOT = "adimages";
     private final AdImageRepository repository;
     private final ResourceLoader resourceLoader;
+    private final UserRepository userRepository;
 
     @Autowired
-    public AdImageService(AdImageRepository repository, ResourceLoader resourceLoader) {
-        this.repository = repository;
+    public AdImageService(AdImageRepository adImageRepository, ResourceLoader resourceLoader, UserRepository userRepository) {
+        this.repository = adImageRepository;
         this.resourceLoader = resourceLoader;
+        this.userRepository = userRepository;
     }
 
     public Page<AdImage> findPage(Pageable pageable) {
@@ -48,7 +51,8 @@ public class AdImageService {
 
         if (!file.isEmpty()) {
             Files.copy(file.getInputStream(), Paths.get(UPLOAD_ROOT, file.getOriginalFilename()));
-            repository.save(new AdImage(file.getOriginalFilename()));
+            repository.save(new AdImage(file.getOriginalFilename(),
+                    userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())));
         }
     }
 
@@ -72,13 +76,13 @@ public class AdImageService {
             User rob = userRepository.save(new User("rob", "qwe", "ROLE_USER"));
 
             FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test1"));
-            adImagerepository.save(new AdImage("test1"));
+            adImagerepository.save(new AdImage("test1", greg));
 
             FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test2"));
-            adImagerepository.save(new AdImage("test2"));
+            adImagerepository.save(new AdImage("test2", greg));
 
             FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test3"));
-            adImagerepository.save(new AdImage("test3"));
+            adImagerepository.save(new AdImage("test3", rob));
 
         };
 
