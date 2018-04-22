@@ -1,4 +1,4 @@
-package com.pastew.ingameadsserver.AdImage;
+package com.pastew.ingameadsserver.Image;
 
 import com.pastew.ingameadsserver.User.User;
 
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class AdImage {
+public class Image {
 
     @Id @GeneratedValue
     private Long id;
@@ -18,9 +18,9 @@ public class AdImage {
 
     private String name;
 
-    private AdImage() {}
+    private Image() {}
 
-    public AdImage(String name, User owner) {
+    public Image(String name, User owner) {
         this.name = name;
         this.owner = owner;
     }

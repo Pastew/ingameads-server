@@ -1,4 +1,4 @@
-package com.pastew.ingameadsserver.AdImage;
+package com.pastew.ingameadsserver.Image;
 
 import com.pastew.ingameadsserver.User.User;
 import com.pastew.ingameadsserver.User.UserRepository;
@@ -24,21 +24,21 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 @Service
-public class AdImageService {
+public class ImageService {
 
-    private static String UPLOAD_ROOT = "adimages";
-    private final AdImageRepository repository;
+    private static String UPLOAD_ROOT = "images";
+    private final ImageRepository repository;
     private final ResourceLoader resourceLoader;
     private final UserRepository userRepository;
 
     @Autowired
-    public AdImageService(AdImageRepository adImageRepository, ResourceLoader resourceLoader, UserRepository userRepository) {
-        this.repository = adImageRepository;
+    public ImageService(ImageRepository imageRepository, ResourceLoader resourceLoader, UserRepository userRepository) {
+        this.repository = imageRepository;
         this.resourceLoader = resourceLoader;
         this.userRepository = userRepository;
     }
 
-    public Page<AdImage> findPage(Pageable pageable) {
+    public Page<Image> findPage(Pageable pageable) {
         return repository.findAll(pageable);
     }
 
@@ -53,14 +53,14 @@ public class AdImageService {
 
         if (!file.isEmpty()) {
             Files.copy(file.getInputStream(), Paths.get(UPLOAD_ROOT, file.getOriginalFilename()));
-            repository.save(new AdImage(file.getOriginalFilename(),
+            repository.save(new Image(file.getOriginalFilename(),
                     userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())));
         }
     }
 
-    @PreAuthorize("@adImageRepository.findByName(#filename)?.owner?.username == authentication?.name or hasRole('ADMIN')")
+    @PreAuthorize("@ImageRepository.findByName(#filename)?.owner?.username == authentication?.name or hasRole('ADMIN')")
     public void deleteImage(@Param("filename") String filename) throws IOException {
-        final AdImage byName = repository.findByName(filename);
+        final Image byName = repository.findByName(filename);
         repository.delete(byName);
 
         Files.deleteIfExists(Paths.get(UPLOAD_ROOT, filename));
@@ -68,7 +68,7 @@ public class AdImageService {
 
     @Bean
         //@Profile("dev")
-    CommandLineRunner setUp(AdImageRepository adImagerepository,
+    CommandLineRunner setUp(ImageRepository imagerepository,
                             UserRepository userRepository) throws IOException {
 
         return args -> {
@@ -76,16 +76,16 @@ public class AdImageService {
             Files.createDirectory(Paths.get(UPLOAD_ROOT));
 
             User greg = userRepository.save(new User("greg", "qwe", "ROLE_ADMIN", "ROLE_USER"));
-            User rob = userRepository.save(new User("rob", "qwe", "ROLE_USER"));
+            User rob = userRepository.save(new User("rob", "qwe", "ROLE_USER", "ROLE_GAME_DEVELOPER"));
 
             FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test1"));
-            adImagerepository.save(new AdImage("test1", greg));
+            imagerepository.save(new Image("test1", greg));
 
             FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test2"));
-            adImagerepository.save(new AdImage("test2", greg));
+            imagerepository.save(new Image("test2", greg));
 
             FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test3"));
-            adImagerepository.save(new AdImage("test3", rob));
+            imagerepository.save(new Image("test3", rob));
 
         };
 
