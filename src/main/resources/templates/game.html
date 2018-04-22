@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thmyeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:insert="fragments/header :: header"></head>
+<body>
+
+<div th:insert="fragments/user_info :: user_info">...</div>
+
+<h1>Gra</h1>
+
+<div>
+    <h1 th:text="${game.title}"/>
+    <p th:text="${game.description}"/>
+    <footer th:text="${game.owner.username}"/>
+
+</div>
+</body>
+</html>

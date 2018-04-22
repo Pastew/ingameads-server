@@ -5,10 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class GameController {
@@ -36,5 +33,13 @@ public class GameController {
             model.addAttribute("next", page.nextPageable());
 
         return "games";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "games/{id}")
+    public String getGame(Model model, @PathVariable String id){
+        Game game = gameService.getGame(id);
+
+        model.addAttribute("game", game);
+        return "game";
     }
 }

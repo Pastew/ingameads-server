@@ -1,12 +1,13 @@
 package com.pastew.ingameadsserver.Game;
 
-import com.pastew.ingameadsserver.Image.Image;
 import com.pastew.ingameadsserver.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class GameService {
@@ -24,5 +25,9 @@ public class GameService {
 
     public Page<Game> findPage(Pageable pageable) {
         return gameRepository.findAll(pageable);
+    }
+
+    public Game getGame(String id) {
+        return gameRepository.findById(id).orElse(null);
     }
 }
