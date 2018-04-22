@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thmyeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en" xmlns:th="http://www.thmyeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:insert="fragments/header :: header"></head>
 <body>
 
@@ -13,10 +14,15 @@
 
     <ul>
         <li th:each="game : ${page.content}">
-            <div>
+            <div class="game">
                 <h3 th:text="${game.title}"/>
                 <p th:text="${game.description}"/>
                 <span th:text="${game.owner.username}"/>
+                <ul>
+                    <li th:each="gameImage : ${game.images}">
+                        <img class="thumbnail" th:src="@{'/images/' + ${gameImage.name} + '/raw'}"/>
+                    </li>
+                </ul>
             </div>
         </li>
     </ul>
