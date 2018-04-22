@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thmyeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="user_info">
+    <span sec:authentication="name"/> has <span sec:authentication="authorities"/>
+    <form sec:authorize-expr="isFullyAuthenticated()" method="post" th:action="@{/logout}">
+        <input type="submit" value="Sign Off"/>
+    </form>
+    <form sec:authorize-expr="!isFullyAuthenticated()" method="post" th:action="@{/login}">
+        <label>User</label><input type="text" name="username" value=""/>
+        <label>Password</label><input type="password" name="password"/>
+        <input type="submit" value="Login"/>
+    </form>
+</div>
+
+</body>
+</html>

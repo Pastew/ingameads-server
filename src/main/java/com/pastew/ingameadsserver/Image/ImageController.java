@@ -29,7 +29,7 @@ public class ImageController {
     }
 
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/images")
     public String index (Model model, Pageable pageable){
         final Page<Image> page = imageService.findPage(pageable);
         model.addAttribute("page", page);
@@ -39,7 +39,7 @@ public class ImageController {
         if(page.hasNext())
             model.addAttribute("next", page.nextPageable());
 
-        return "index";
+        return "images";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = BASE_PATH + "/" + FILENAME + "/raw")

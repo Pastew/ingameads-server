@@ -19,15 +19,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/", "images/**", "main.css").permitAll()
-                .antMatchers(HttpMethod.POST, "/images").hasRole("USER")
-                .and()
-                .formLogin()
-                .permitAll()
-                .and()
-                .logout()
-                .logoutSuccessUrl("/");
+            .authorizeRequests()
+            .antMatchers(HttpMethod.GET, "/", "images/**", "main.css").permitAll()
+            .antMatchers(HttpMethod.POST, "/images").hasRole("USER")
+            //.antMatchers("/h2/**").hasRole("ADMIN").anyRequest()
+        .and()
+            .formLogin()
+            .permitAll()
+        .and()
+            .logout()
+            .logoutSuccessUrl("/");
+
+        // To enable h2 console.
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 
     @Autowired

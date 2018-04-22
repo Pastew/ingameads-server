@@ -1,7 +1,10 @@
 package com.pastew.ingameadsserver.Image;
 
+import com.pastew.ingameadsserver.Game.Game;
+import com.pastew.ingameadsserver.Game.GameRepository;
 import com.pastew.ingameadsserver.User.User;
 import com.pastew.ingameadsserver.User.UserRepository;
+import com.pastew.ingameadsserver.dev.Dev;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +25,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 @Service
 public class ImageService {
@@ -69,25 +73,33 @@ public class ImageService {
     @Bean
         //@Profile("dev")
     CommandLineRunner setUp(ImageRepository imagerepository,
-                            UserRepository userRepository) throws IOException {
+                            UserRepository userRepository,
+                            GameRepository gameRepository) throws IOException {
 
         return args -> {
             FileSystemUtils.deleteRecursively(new File(UPLOAD_ROOT));
             Files.createDirectory(Paths.get(UPLOAD_ROOT));
 
-            User greg = userRepository.save(new User("greg", "qwe", "ROLE_ADMIN", "ROLE_USER"));
-            User rob = userRepository.save(new User("rob", "qwe", "ROLE_USER", "ROLE_GAME_DEVELOPER"));
+            User greg = userRepository.save(new User(Dev.GREG, Dev.userPassword, "ROLE_ADMIN", "ROLE_USER"));
+            User bob = userRepository.save(new User(Dev.BOB, Dev.userPassword, "ROLE_USER", "ROLE_GAME_DEVELOPER"));
+
+            Image[] images = {
+                    new Image("test1", greg),
+                    new Image("test2", greg),
+                    new Image("test3", bob)
+            };
 
             FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test1"));
-            imagerepository.save(new Image("test1", greg));
+            imagerepository.save(images[0]);
 
             FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test2"));
-            imagerepository.save(new Image("test2", greg));
+            imagerepository.save(images[1]);
 
             FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test3"));
-            imagerepository.save(new Image("test3", rob));
+            imagerepository.save(images[2]);
 
+            gameRepository.save(new Game("com.pastew.game1", greg, "Game 1 title", "Description of game 1", Arrays.asList(images[0], images[1])));
+            gameRepository.save(new Game("com.pastew.game2", bob, "Game 2 title", "Description of game 2", Arrays.asList(images[2])));
         };
-
     }
 }

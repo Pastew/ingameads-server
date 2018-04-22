@@ -1,26 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thmyeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title to change</title>
-    <link rel="stylesheet" href="/main.css"/>
-</head>
+<head th:insert="fragments/header :: header"></head>
 <body>
 
-<div>
-    <span sec:authentication="name"/> has <span sec:authentication="authorities"/>
-    <form sec:authorize-expr="isFullyAuthenticated()" method="post" th:action="@{/logout}">
-        <input type="submit" value="Sign Off"/>
-    </form>
-    <form sec:authorize-expr="!isFullyAuthenticated()" method="post" th:action="@{/login}">
-        <label>User</label><input type="text" name="username" value=""/>
-        <label>Password</label><input type="password" name="password"/>
-        <input type="submit" value="Login"/>
+<div th:insert="fragments/user_info :: user_info">...</div>
 
-    </form>
-</div>
-
-<h1>Header</h1>
+<h1>Obrazki</h1>
 
 <h3 th:if="${#vars['flash.message']}" th:text="${#vars['flash.message']}" class="flash"></h3>
 
