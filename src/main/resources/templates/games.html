@@ -15,7 +15,7 @@
     <ul>
         <li th:each="game : ${page.content}">
             <div class="game">
-                <h3 th:text="${game.title}"/>
+                <h3><a th:href="@{'/games/' + ${game.id}}" th:text="${game.title}"/></h3>
                 <p th:text="${game.description}"/>
                 <span th:text="${game.owner.username}"/>
                 <ul>
