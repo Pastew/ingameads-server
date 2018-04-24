@@ -12,7 +12,11 @@
     <h1 th:text="${game.title}"/>
     <p th:text="${game.description}"/>
     <footer th:text="${game.owner.username}"/>
-
+    <ul>
+        <li th:each="gameImage : ${game.images}">
+            <img class="thumbnail" th:src="@{'/images/' + ${gameImage.name} + '/raw'}"/>
+        </li>
+    </ul>
 </div>
 
 </body>
