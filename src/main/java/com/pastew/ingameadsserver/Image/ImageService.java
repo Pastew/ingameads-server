@@ -5,6 +5,8 @@ import com.pastew.ingameadsserver.Game.GameRepository;
 import com.pastew.ingameadsserver.User.User;
 import com.pastew.ingameadsserver.User.UserRepository;
 import com.pastew.ingameadsserver.dev.Dev;
+import com.thedeanda.lorem.Lorem;
+import com.thedeanda.lorem.LoremIpsum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -102,12 +104,12 @@ public class ImageService {
             for (int i = 0; i < 5; ++i) {
                 imagerepository.save(images[i]);
             }
-
-            gameRepository.save(new Game("com.pastew.game1", greg, "Game 1 title", "Description of game 1", Arrays.asList(images[0], images[1])));
-            gameRepository.save(new Game("com.pastew.game2", greg, "Game 2 title", "Description of game 2", Arrays.asList(images[2])));
-            gameRepository.save(new Game("com.pastew.game3", bob, "Game 3 title", "Description of game 3", Arrays.asList(images[3])));
-            gameRepository.save(new Game("com.pastew.game4", bob, "Game 4 title", "Description of game 4", null));
-            gameRepository.save(new Game("com.pastew.game5", bob, "Game 5 title", "Description of game 5", Arrays.asList(images[4])));
+            Lorem l = LoremIpsum.getInstance();
+            gameRepository.save(new Game("com.pastew.game1", greg, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[0], images[1])));
+            gameRepository.save(new Game("com.pastew.game2", greg, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[2])));
+            gameRepository.save(new Game("com.pastew.game3", bob, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[3])));
+            gameRepository.save(new Game("com.pastew.game4", bob, l.getTitle(1, 4), l.getWords(70, 120), null));
+            gameRepository.save(new Game("com.pastew.game5", bob, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[4])));
         };
     }
 }

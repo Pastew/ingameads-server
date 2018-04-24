@@ -12,6 +12,8 @@ public class Game {
     @Id
     private String id;
     private String title;
+
+    @Column( length = 100000 )
     private String description;
 
     @ManyToOne
