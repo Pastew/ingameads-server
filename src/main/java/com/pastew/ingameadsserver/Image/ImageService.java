@@ -79,7 +79,13 @@ public class ImageService {
                             GameRepository gameRepository) throws IOException {
 
         return args -> {
-            //FileSystemUtils.deleteRecursively(new File(UPLOAD_ROOT));
+            File folder = new File(UPLOAD_ROOT);
+            for (File file : folder.listFiles()) {
+                if (!file.getName().startsWith("test")) {
+                    file.delete();
+                }
+            }
+
             //Files.createDirectory(Paths.get(UPLOAD_ROOT));
 
             User greg = userRepository.save(new User(Dev.GREG, Dev.userPassword, "ROLE_ADMIN", "ROLE_USER"));
@@ -93,7 +99,7 @@ public class ImageService {
                     new Image("test5.PNG", bob)
             };
 
-            for (int i = 0 ; i < 5; ++i) {
+            for (int i = 0; i < 5; ++i) {
                 imagerepository.save(images[i]);
             }
 
