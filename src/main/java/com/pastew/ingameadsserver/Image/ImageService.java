@@ -18,12 +18,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -36,12 +33,14 @@ public class ImageService {
     private final ImageRepository repository;
     private final ResourceLoader resourceLoader;
     private final UserRepository userRepository;
+    private final GameRepository gameRepository;
 
     @Autowired
-    public ImageService(ImageRepository imageRepository, ResourceLoader resourceLoader, UserRepository userRepository) {
+    public ImageService(ImageRepository imageRepository, ResourceLoader resourceLoader, UserRepository userRepository, GameRepository gameRepository) {
         this.repository = imageRepository;
         this.resourceLoader = resourceLoader;
         this.userRepository = userRepository;
+        this.gameRepository = gameRepository;
     }
 
     public Page<Image> findPage(Pageable pageable) {
@@ -66,10 +65,14 @@ public class ImageService {
         return null;
     }
 
-    @PreAuthorize("@ImageRepository.findByName(#filename)?.owner?.username == authentication?.name or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteImage(@Param("filename") String filename) throws IOException {
-        final Image byName = repository.findByName(filename);
-        repository.delete(byName);
+        final Image image = repository.findByName(filename);
+        Game game = gameRepository.findByImages(image);
+        game.getImages().remove(image);
+        gameRepository.save(game);
+
+        repository.delete(image);
 
         Files.deleteIfExists(Paths.get(UPLOAD_ROOT, filename));
     }

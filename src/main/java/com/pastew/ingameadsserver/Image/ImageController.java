@@ -80,6 +80,6 @@ public class ImageController {
         } catch (IOException | RuntimeException e) {
             redirectAttributes.addFlashAttribute("flash.message", "Failed to delete image " + filename + " => " + e.getMessage());
         }
-        return "redirect:/";
+        return "redirect:/images";
     }
 }
