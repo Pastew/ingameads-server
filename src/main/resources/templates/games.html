@@ -31,10 +31,6 @@
         <li th:if="${prev}"><a th:href="@{/(size=${prev.pageSize}, page=${prev.pageNumber})}">Previous</a></li>
         <li th:if="${next}"><a th:href="@{/(size=${next.pageSize}, page=${next.pageNumber})}">Next</a></li>
     </ul>
-    <form sec:authorize-url="POST /images" method="post" enctype="multipart/form-data" th:action="@{/images}">
-        <p><input type="file" name="file"/></p>
-        <p><input type="submit" value="Upload"/></p>
-    </form>
 </div>
 </body>
 </html>

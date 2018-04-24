@@ -9,6 +9,7 @@
 
 <body>
 <div>
+    <h3 th:if="${#vars['flash.message']}" th:text="${#vars['flash.message']}" class="flash"></h3>
     <ul>
         <li th:each="game : ${mygames}">
             <div class="game">
@@ -21,15 +22,20 @@
                     </li>
                 </ul>
 
+                <div class="image_upload_for_game">
+                    Upload more images
+                    <form method="post" enctype="multipart/form-data"
+                          th:action="@{'/games/' + ${game.id} + '/images'}">
+                        <p><input type="file" name="file"/></p>
+                        <!--<input type="hidden" name="gameId" th:value="${game.id}">-->
+                        <p><input type="submit" value="Upload"/></p>
+                    </form>
+                </div>
+
                 <span th:text="${game.owner.username}"/>
             </div>
         </li>
     </ul>
-
-    <form sec:authorize-url="POST /images" method="post" enctype="multipart/form-data" th:action="@{/images}">
-        <p><input type="file" name="file"/></p>
-        <p><input type="submit" value="Upload"/></p>
-    </form>
 </div>
 </body>
 </html>

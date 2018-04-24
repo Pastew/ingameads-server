@@ -50,16 +50,18 @@ public class ImageService {
         return resourceLoader.getResource("file:" + UPLOAD_ROOT + "/" + filename);
     }
 
-    public void createImage(MultipartFile file) throws IOException {
+    public Image createImage(MultipartFile file) throws IOException {
 
         if ("".equals(file.getOriginalFilename()))
             throw new IOException("Filename is empty");
 
         if (!file.isEmpty()) {
             Files.copy(file.getInputStream(), Paths.get(UPLOAD_ROOT, file.getOriginalFilename()));
-            repository.save(new Image(file.getOriginalFilename(),
+            return repository.save(new Image(file.getOriginalFilename(),
                     userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())));
         }
+
+        return null;
     }
 
     @PreAuthorize("@ImageRepository.findByName(#filename)?.owner?.username == authentication?.name or hasRole('ADMIN')")

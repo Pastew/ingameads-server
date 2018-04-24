@@ -21,3 +21,7 @@ td, th {
 .game {
     background-color: #abcafc;
 }
+
+.image_upload_for_game {
+    border: 1px solid #999;
+}
