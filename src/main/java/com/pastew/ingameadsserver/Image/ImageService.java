@@ -77,18 +77,18 @@ public class ImageService {
                             GameRepository gameRepository) throws IOException {
 
         return args -> {
-            FileSystemUtils.deleteRecursively(new File(UPLOAD_ROOT));
-            Files.createDirectory(Paths.get(UPLOAD_ROOT));
+            //FileSystemUtils.deleteRecursively(new File(UPLOAD_ROOT));
+            //Files.createDirectory(Paths.get(UPLOAD_ROOT));
 
             User greg = userRepository.save(new User(Dev.GREG, Dev.userPassword, "ROLE_ADMIN", "ROLE_USER"));
             User bob = userRepository.save(new User(Dev.BOB, Dev.userPassword, "ROLE_USER", "ROLE_GAME_DEVELOPER"));
 
             Image[] images = {
-                    new Image("test1", greg),
-                    new Image("test2", greg),
-                    new Image("test3", greg),
-                    new Image("test4", bob),
-                    new Image("test5", bob)
+                    new Image("test1.PNG", greg),
+                    new Image("test2.PNG", greg),
+                    new Image("test3.PNG", greg),
+                    new Image("test4.PNG", bob),
+                    new Image("test5.PNG", bob)
             };
 
             for (int i = 0 ; i < 5; ++i) {
