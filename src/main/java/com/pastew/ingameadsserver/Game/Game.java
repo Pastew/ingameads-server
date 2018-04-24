@@ -3,10 +3,7 @@ package com.pastew.ingameadsserver.Game;
 import com.pastew.ingameadsserver.Image.Image;
 import com.pastew.ingameadsserver.User.User;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -17,7 +14,7 @@ public class Game {
     private String title;
     private String description;
 
-    @OneToOne
+    @ManyToOne
     private User owner;
 
     @OneToMany

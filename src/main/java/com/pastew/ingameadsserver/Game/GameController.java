@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class GameController {
 
@@ -35,11 +37,19 @@ public class GameController {
         return "games";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "games/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/games/{id}")
     public String getGame(Model model, @PathVariable String id){
         Game game = gameService.getGame(id);
 
         model.addAttribute("game", game);
         return "game";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/mygames")
+    public String getMyGames(Model model){
+        List<Game> currentGameDeveloperGames = gameService.getCurrentGameDeveloperGames();
+        model.addAttribute("mygames", currentGameDeveloperGames);
+
+        return "mygames";
     }
 }

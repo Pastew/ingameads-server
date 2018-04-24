@@ -86,20 +86,20 @@ public class ImageService {
             Image[] images = {
                     new Image("test1", greg),
                     new Image("test2", greg),
-                    new Image("test3", bob)
+                    new Image("test3", greg),
+                    new Image("test4", bob),
+                    new Image("test5", bob)
             };
 
-            FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test1"));
-            imagerepository.save(images[0]);
-
-            FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test2"));
-            imagerepository.save(images[1]);
-
-            FileCopyUtils.copy("Test file", new FileWriter(UPLOAD_ROOT + "/test3"));
-            imagerepository.save(images[2]);
+            for (int i = 0 ; i < 5; ++i) {
+                imagerepository.save(images[i]);
+            }
 
             gameRepository.save(new Game("com.pastew.game1", greg, "Game 1 title", "Description of game 1", Arrays.asList(images[0], images[1])));
-            gameRepository.save(new Game("com.pastew.game2", bob, "Game 2 title", "Description of game 2", Arrays.asList(images[2])));
+            gameRepository.save(new Game("com.pastew.game2", greg, "Game 2 title", "Description of game 2", Arrays.asList(images[2])));
+            gameRepository.save(new Game("com.pastew.game3", bob, "Game 3 title", "Description of game 3", Arrays.asList(images[3])));
+            gameRepository.save(new Game("com.pastew.game4", bob, "Game 4 title", "Description of game 4", null));
+            gameRepository.save(new Game("com.pastew.game5", bob, "Game 5 title", "Description of game 5", Arrays.asList(images[4])));
         };
     }
 }

@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en"
+      xmlns:th="http://www.thmyeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+
 <body>
+<div th:insert="fragments/user_info :: user_info">...</div>
+
 <h2>Hello, this is index</h2>
+<ui>
+    <li><a th:href="@{/images}">Images</a></li>
+    <li><a th:href="@{/games}">Games</a></li>
+</ui>
 </body>
 </html>

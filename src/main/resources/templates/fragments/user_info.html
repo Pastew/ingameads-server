@@ -17,6 +17,14 @@
         <label>Password</label><input type="password" name="password"/>
         <input type="submit" value="Login"/>
     </form>
+
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        This content is only shown to administrators.
+    </div>
+    <div sec:authorize="hasRole('ROLE_GAME_DEVELOPER')">
+        Only Game Developer can see this.
+        <a th:href="@{/mygames}">Show my games</a>
+    </div>
 </div>
 
 </body>

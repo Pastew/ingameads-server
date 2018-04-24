@@ -1,5 +1,6 @@
 package com.pastew.ingameadsserver.Game;
 
+import com.pastew.ingameadsserver.User.User;
 import com.pastew.ingameadsserver.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -7,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class GameService {
@@ -29,5 +30,11 @@ public class GameService {
 
     public Game getGame(String id) {
         return gameRepository.findById(id).orElse(null);
+    }
+
+    public List<Game> getCurrentGameDeveloperGames() {
+        String ownerName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User owner = userRepository.findByUsername(ownerName);
+        return gameRepository.findByOwnerId(owner.getId());
     }
 }
