@@ -26,6 +26,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import static com.pastew.ingameadsserver.Roles.GAME_DEV;
+
 @Service
 public class ImageService {
 
@@ -94,7 +96,7 @@ public class ImageService {
             //Files.createDirectory(Paths.get(UPLOAD_ROOT));
 
             User greg = userRepository.save(new User(Dev.GREG, Dev.userPassword, "ROLE_ADMIN", "ROLE_USER"));
-            User bob = userRepository.save(new User(Dev.BOB, Dev.userPassword, "ROLE_USER", "ROLE_GAME_DEVELOPER"));
+            User bob = userRepository.save(new User(Dev.BOB, Dev.userPassword, "ROLE_USER", "ROLE_"+GAME_DEV));
 
             Image[] images = {
                     new Image("test1.PNG", greg),

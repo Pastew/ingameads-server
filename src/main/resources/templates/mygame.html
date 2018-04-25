@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thmyeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:insert="fragments/header :: header"></head>
+<body>
+
+<div th:insert="fragments/user_info :: user_info">...</div>
+
+<h1>Gra</h1>
+
+<div>
+    <h1 th:text="${game.title}"/>
+    <p th:text="${game.description}"/>
+    <footer th:text="${game.owner.username}"/>
+    <ul>
+        <li th:each="gameImage : ${game.images}">
+            <img class="thumbnail" th:src="@{'/images/' + ${gameImage.name} + '/raw'}"/>
+        </li>
+    </ul>
+
+    <div class="image_upload_for_game">
+        Upload more images
+        <form method="post" enctype="multipart/form-data"
+              th:action="@{'/games/' + ${game.id} + '/images'}">
+            <p><input type="file" name="file"/></p>
+            <!--<input type="hidden" name="gameId" th:value="${game.id}">-->
+            <p><input type="submit" value="Upload"/></p>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

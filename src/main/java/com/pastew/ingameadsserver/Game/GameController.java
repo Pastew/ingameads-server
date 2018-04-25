@@ -53,6 +53,13 @@ public class GameController {
         return "game";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/mygames/{id}")
+    public String getMyGame(Model model, @PathVariable String id) {
+        Game game = gameService.getGame(id);
+        model.addAttribute("game", game);
+        return "mygame";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/mygames")
     public String getMyGames(Model model) {
         List<Game> currentGameDeveloperGames = gameService.getCurrentGameDeveloperGames();
