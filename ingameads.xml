@@ -1,0 +1,861 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ingameads" default="all">
+  
+  
+  <property file="ingameads.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.maven:_antlr:antlr:2.7.7.classpath">
+    <pathelement location="${path.variable.maven_repository}/antlr/antlr/2.7.7/antlr-2.7.7.jar"/>
+  </path>
+  
+  <path id="library.maven:_aopalliance:aopalliance:1.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_ch.qos.logback:logback-classic:1.2.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_ch.qos.logback:logback-core:1.2.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.9.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-core/2.9.3/jackson-core-2.9.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.9.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-databind/2.9.3/jackson-databind-2.9.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/dataformat/jackson-dataformat-xml/2.9.3/jackson-dataformat-xml-2.9.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.9.3/jackson-datatype-jdk8-2.9.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.9.3/jackson-datatype-jsr310-2.9.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.9.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.9.3/jackson-module-jaxb-annotations-2.9.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.module:jackson-module-parameter-names:2.9.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/module/jackson-module-parameter-names/2.9.3/jackson-module-parameter-names-2.9.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.woodstox:woodstox-core:5.0.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/woodstox/woodstox-core/5.0.3/woodstox-core-5.0.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml:classmate:1.3.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.github.andrewoma.dexx:dexx-collections:0.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/github/andrewoma/dexx/dexx-collections/0.2/dexx-collections-0.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.github.vlsi.compactmap:compactmap:1.2.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/github/vlsi/compactmap/compactmap/1.2.1/compactmap-1.2.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.code.findbugs:jsr305:3.0.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/google/code/findbugs/jsr305/3.0.1/jsr305-3.0.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.code.gson:gson:2.8.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/google/code/gson/gson/2.8.2/gson-2.8.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.guava:guava:16.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/google/guava/guava/16.0/guava-16.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.inject:guice:4.1.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/google/inject/guice/4.1.0/guice-4.1.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.googlecode.javaewah:javaewah:1.1.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/googlecode/javaewah/JavaEWAH/1.1.6/JavaEWAH-1.1.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.h2database:h2:1.4.197.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/h2database/h2/1.4.197/h2-1.4.197.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.jayway.jsonpath:json-path:2.4.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/jayway/jsonpath/json-path/2.4.0/json-path-2.4.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.jcraft:jsch:0.1.54.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/jcraft/jsch/0.1.54/jsch-0.1.54.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.archaius:archaius-core:0.7.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/archaius/archaius-core/0.7.6/archaius-core-0.7.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.eureka:eureka-client:1.8.8.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/eureka/eureka-client/1.8.8/eureka-client-1.8.8.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.eureka:eureka-core:1.8.8.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/eureka/eureka-core/1.8.8/eureka-core-1.8.8.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.hystrix:hystrix-core:1.5.12.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/hystrix/hystrix-core/1.5.12/hystrix-core-1.5.12.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.netflix-commons:netflix-commons-util:0.3.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/netflix-commons/netflix-commons-util/0.3.0/netflix-commons-util-0.3.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.netflix-commons:netflix-eventbus:0.3.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/netflix-commons/netflix-eventbus/0.3.0/netflix-eventbus-0.3.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.netflix-commons:netflix-infix:0.3.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/netflix-commons/netflix-infix/0.3.0/netflix-infix-0.3.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.netflix-commons:netflix-statistics:0.1.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/netflix-commons/netflix-statistics/0.1.1/netflix-statistics-0.1.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.ribbon:ribbon-core:2.2.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/ribbon/ribbon-core/2.2.5/ribbon-core-2.2.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.ribbon:ribbon-eureka:2.2.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/ribbon/ribbon-eureka/2.2.5/ribbon-eureka-2.2.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.ribbon:ribbon-httpclient:2.2.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/ribbon/ribbon-httpclient/2.2.5/ribbon-httpclient-2.2.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.ribbon:ribbon-loadbalancer:2.2.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/ribbon/ribbon-loadbalancer/2.2.5/ribbon-loadbalancer-2.2.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.ribbon:ribbon-transport:2.2.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/ribbon/ribbon-transport/2.2.5/ribbon-transport-2.2.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.ribbon:ribbon:2.2.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/ribbon/ribbon/2.2.5/ribbon-2.2.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.servo:servo-core:0.10.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/servo/servo-core/0.10.1/servo-core-0.10.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.netflix.servo:servo-internal:0.10.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/netflix/servo/servo-internal/0.10.1/servo-internal-0.10.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.sun.jersey.contribs:jersey-apache-client4:1.19.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/sun/jersey/contribs/jersey-apache-client4/1.19.1/jersey-apache-client4-1.19.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.sun.jersey:jersey-client:1.19.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/sun/jersey/jersey-client/1.19.1/jersey-client-1.19.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.sun.jersey:jersey-core:1.19.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/sun/jersey/jersey-core/1.19.1/jersey-core-1.19.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.sun.jersey:jersey-server:1.19.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/sun/jersey/jersey-server/1.19.1/jersey-server-1.19.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.sun.jersey:jersey-servlet:1.19.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/sun/jersey/jersey-servlet/1.19.1/jersey-servlet-1.19.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.thedeanda:lorem:2.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/thedeanda/lorem/2.1/lorem-2.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.thoughtworks.xstream:xstream:1.4.10.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/thoughtworks/xstream/xstream/1.4.10/xstream-1.4.10.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.vaadin.external.google:android-json:0.0.20131108.vaadin1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.zaxxer:hikaricp:2.7.8.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/zaxxer/HikariCP/2.7.8/HikariCP-2.7.8.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-codec:commons-codec:1.11.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-codec/commons-codec/1.11/commons-codec-1.11.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-collections:commons-collections:3.2.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-configuration:commons-configuration:1.8.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-configuration/commons-configuration/1.8/commons-configuration-1.8.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-jxpath:commons-jxpath:1.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-jxpath/commons-jxpath/1.3/commons-jxpath-1.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-lang:commons-lang:2.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-lang/commons-lang/2.6/commons-lang-2.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_dom4j:dom4j:1.6.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.micrometer:micrometer-core:1.0.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/io/micrometer/micrometer-core/1.0.3/micrometer-core-1.0.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-buffer:4.1.23.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/io/netty/netty-buffer/4.1.23.Final/netty-buffer-4.1.23.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-codec-http:4.1.23.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/io/netty/netty-codec-http/4.1.23.Final/netty-codec-http-4.1.23.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-codec:4.1.23.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/io/netty/netty-codec/4.1.23.Final/netty-codec-4.1.23.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-common:4.1.23.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/io/netty/netty-common/4.1.23.Final/netty-common-4.1.23.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-resolver:4.1.23.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/io/netty/netty-resolver/4.1.23.Final/netty-resolver-4.1.23.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-transport-native-epoll:4.1.23.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/io/netty/netty-transport-native-epoll/4.1.23.Final/netty-transport-native-epoll-4.1.23.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-transport-native-unix-common:4.1.23.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/io/netty/netty-transport-native-unix-common/4.1.23.Final/netty-transport-native-unix-common-4.1.23.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-transport:4.1.23.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/io/netty/netty-transport/4.1.23.Final/netty-transport-4.1.23.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.reactivex:rxjava:1.3.8.classpath">
+    <pathelement location="${path.variable.maven_repository}/io/reactivex/rxjava/1.3.8/rxjava-1.3.8.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.reactivex:rxnetty-contexts:0.4.9.classpath">
+    <pathelement location="${path.variable.maven_repository}/io/reactivex/rxnetty-contexts/0.4.9/rxnetty-contexts-0.4.9.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.reactivex:rxnetty-servo:0.4.9.classpath">
+    <pathelement location="${path.variable.maven_repository}/io/reactivex/rxnetty-servo/0.4.9/rxnetty-servo-0.4.9.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.reactivex:rxnetty:0.4.9.classpath">
+    <pathelement location="${path.variable.maven_repository}/io/reactivex/rxnetty/0.4.9/rxnetty-0.4.9.jar"/>
+  </path>
+  
+  <path id="library.maven:_javax.annotation:javax.annotation-api:1.3.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_javax.inject:javax.inject:1.classpath">
+    <pathelement location="${path.variable.maven_repository}/javax/inject/javax.inject/1/javax.inject-1.jar"/>
+  </path>
+  
+  <path id="library.maven:_javax.transaction:javax.transaction-api:1.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/javax/transaction/javax.transaction-api/1.2/javax.transaction-api-1.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_javax.validation:validation-api:2.0.1.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_javax.ws.rs:jsr311-api:1.1.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_javax.xml.stream:stax-api:1.0-2.classpath">
+    <pathelement location="${path.variable.maven_repository}/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar"/>
+  </path>
+  
+  <path id="library.maven:_joda-time:joda-time:2.9.9.classpath">
+    <pathelement location="${path.variable.maven_repository}/joda-time/joda-time/2.9.9/joda-time-2.9.9.jar"/>
+  </path>
+  
+  <path id="library.maven:_junit:junit:4.12.classpath">
+    <pathelement location="${path.variable.maven_repository}/junit/junit/4.12/junit-4.12.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.bytebuddy:byte-buddy-agent:1.7.11.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/bytebuddy/byte-buddy-agent/1.7.11/byte-buddy-agent-1.7.11.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.bytebuddy:byte-buddy:1.7.11.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/bytebuddy/byte-buddy/1.7.11/byte-buddy-1.7.11.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.minidev:accessors-smart:1.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/minidev/accessors-smart/1.2/accessors-smart-1.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.minidev:json-smart:2.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/minidev/json-smart/2.3/json-smart-2.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.antlr:antlr-runtime:3.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/antlr/antlr-runtime/3.4/antlr-runtime-3.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.antlr:stringtemplate:3.2.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/antlr/stringtemplate/3.2.1/stringtemplate-3.2.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.commons:commons-math:2.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/commons/commons-math/2.2/commons-math-2.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.httpcomponents:httpclient:4.5.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/httpcomponents/httpclient/4.5.5/httpclient-4.5.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.httpcomponents:httpcore:4.4.9.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/httpcomponents/httpcore/4.4.9/httpcore-4.4.9.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.logging.log4j:log4j-api:2.10.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-api/2.10.0/log4j-api-2.10.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.logging.log4j:log4j-to-slf4j:2.10.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-to-slf4j/2.10.0/log4j-to-slf4j-2.10.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.tomcat.embed:tomcat-embed-core:8.5.29.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/tomcat/embed/tomcat-embed-core/8.5.29/tomcat-embed-core-8.5.29.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.tomcat.embed:tomcat-embed-el:8.5.29.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/tomcat/embed/tomcat-embed-el/8.5.29/tomcat-embed-el-8.5.29.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.tomcat.embed:tomcat-embed-websocket:8.5.29.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.29/tomcat-embed-websocket-8.5.29.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.aspectj:aspectjweaver:1.8.13.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/aspectj/aspectjweaver/1.8.13/aspectjweaver-1.8.13.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.assertj:assertj-core:3.9.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/assertj/assertj-core/3.9.1/assertj-core-3.9.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.attoparser:attoparser:2.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/attoparser/attoparser/2.0.4.RELEASE/attoparser-2.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.bouncycastle:bcpkix-jdk15on:1.56.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/bouncycastle/bcpkix-jdk15on/1.56/bcpkix-jdk15on-1.56.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.bouncycastle:bcprov-jdk15on:1.56.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/bouncycastle/bcprov-jdk15on/1.56/bcprov-jdk15on-1.56.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.codehaus.jettison:jettison:1.3.7.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/codehaus/jettison/jettison/1.3.7/jettison-1.3.7.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.codehaus.woodstox:stax2-api:3.1.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/codehaus/woodstox/stax2-api/3.1.4/stax2-api-3.1.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.codehaus.woodstox:woodstox-core-asl:4.4.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/codehaus/woodstox/woodstox-core-asl/4.4.1/woodstox-core-asl-4.4.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.eclipse.jgit:org.eclipse.jgit:4.8.0.201706111038-r.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/eclipse/jgit/org.eclipse.jgit/4.8.0.201706111038-r/org.eclipse.jgit-4.8.0.201706111038-r.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.freemarker:freemarker:2.3.28.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/freemarker/freemarker/2.3.28/freemarker-2.3.28.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hamcrest:hamcrest-library:1.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hamcrest/hamcrest-library/1.3/hamcrest-library-1.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hdrhistogram:hdrhistogram:2.1.10.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hdrhistogram/HdrHistogram/2.1.10/HdrHistogram-2.1.10.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hibernate.common:hibernate-commons-annotations:5.0.1.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hibernate/common/hibernate-commons-annotations/5.0.1.Final/hibernate-commons-annotations-5.0.1.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hibernate.validator:hibernate-validator:6.0.9.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hibernate/validator/hibernate-validator/6.0.9.Final/hibernate-validator-6.0.9.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hibernate:hibernate-core:5.2.16.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hibernate/hibernate-core/5.2.16.Final/hibernate-core-5.2.16.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.javassist:javassist:3.22.0-ga.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/javassist/javassist/3.22.0-GA/javassist-3.22.0-GA.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.jboss.logging:jboss-logging:3.3.2.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.jboss:jandex:2.0.3.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/jboss/jandex/2.0.3.Final/jandex-2.0.3.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.latencyutils:latencyutils:2.0.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.mockito:mockito-core:2.15.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/mockito/mockito-core/2.15.0/mockito-core-2.15.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.objenesis:objenesis:2.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/objenesis/objenesis/2.6/objenesis-2.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.ow2.asm:asm:5.0.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.projectlombok:lombok:1.16.20.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/projectlombok/lombok/1.16.20/lombok-1.16.20.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.skyscreamer:jsonassert:1.5.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/skyscreamer/jsonassert/1.5.0/jsonassert-1.5.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.slf4j:jul-to-slf4j:1.7.25.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/slf4j/jul-to-slf4j/1.7.25/jul-to-slf4j-1.7.25.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-actuator-autoconfigure:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-actuator-autoconfigure/2.0.1.RELEASE/spring-boot-actuator-autoconfigure-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-actuator:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-actuator/2.0.1.RELEASE/spring-boot-actuator-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-autoconfigure:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-autoconfigure/2.0.1.RELEASE/spring-boot-autoconfigure-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-devtools:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-devtools/2.0.1.RELEASE/spring-boot-devtools-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-actuator:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-actuator/2.0.1.RELEASE/spring-boot-starter-actuator-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-aop:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-aop/2.0.1.RELEASE/spring-boot-starter-aop-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-data-jpa:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-data-jpa/2.0.1.RELEASE/spring-boot-starter-data-jpa-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-freemarker:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-freemarker/2.0.1.RELEASE/spring-boot-starter-freemarker-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-jdbc:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-jdbc/2.0.1.RELEASE/spring-boot-starter-jdbc-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-json:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-json/2.0.1.RELEASE/spring-boot-starter-json-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-logging:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-logging/2.0.1.RELEASE/spring-boot-starter-logging-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-security:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-security/2.0.1.RELEASE/spring-boot-starter-security-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-test:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-test/2.0.1.RELEASE/spring-boot-starter-test-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-thymeleaf:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-thymeleaf/2.0.1.RELEASE/spring-boot-starter-thymeleaf-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-tomcat:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-tomcat/2.0.1.RELEASE/spring-boot-starter-tomcat-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter-web:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter-web/2.0.1.RELEASE/spring-boot-starter-web-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-starter:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-starter/2.0.1.RELEASE/spring-boot-starter-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-test-autoconfigure:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-test-autoconfigure/2.0.1.RELEASE/spring-boot-test-autoconfigure-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot-test:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot-test/2.0.1.RELEASE/spring-boot-test-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.boot:spring-boot:2.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/boot/spring-boot/2.0.1.RELEASE/spring-boot-2.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-commons:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-commons/2.0.0.RC1/spring-cloud-commons-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-config-client:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-config-client/2.0.0.RC1/spring-cloud-config-client-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-config-server:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-config-server/2.0.0.RC1/spring-cloud-config-server-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-context:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-context/2.0.0.RC1/spring-cloud-context-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-netflix-archaius:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-netflix-archaius/2.0.0.RC1/spring-cloud-netflix-archaius-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-netflix-core:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-netflix-core/2.0.0.RC1/spring-cloud-netflix-core-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-netflix-eureka-client:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-netflix-eureka-client/2.0.0.RC1/spring-cloud-netflix-eureka-client-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-netflix-eureka-server:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-netflix-eureka-server/2.0.0.RC1/spring-cloud-netflix-eureka-server-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-netflix-ribbon:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-netflix-ribbon/2.0.0.RC1/spring-cloud-netflix-ribbon-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-starter-config:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-starter-config/2.0.0.RC1/spring-cloud-starter-config-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-starter-netflix-archaius:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-starter-netflix-archaius/2.0.0.RC1/spring-cloud-starter-netflix-archaius-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-starter-netflix-eureka-client/2.0.0.RC1/spring-cloud-starter-netflix-eureka-client-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-starter-netflix-eureka-server/2.0.0.RC1/spring-cloud-starter-netflix-eureka-server-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-starter-netflix-ribbon:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-starter-netflix-ribbon/2.0.0.RC1/spring-cloud-starter-netflix-ribbon-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.cloud:spring-cloud-starter:2.0.0.rc1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/cloud/spring-cloud-starter/2.0.0.RC1/spring-cloud-starter-2.0.0.RC1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.data:spring-data-commons:2.0.6.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/data/spring-data-commons/2.0.6.RELEASE/spring-data-commons-2.0.6.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.data:spring-data-jpa:2.0.6.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/data/spring-data-jpa/2.0.6.RELEASE/spring-data-jpa-2.0.6.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.security:spring-security-config:5.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/security/spring-security-config/5.0.4.RELEASE/spring-security-config-5.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.security:spring-security-core:5.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/security/spring-security-core/5.0.4.RELEASE/spring-security-core-5.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.security:spring-security-crypto:5.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/security/spring-security-crypto/5.0.4.RELEASE/spring-security-crypto-5.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.security:spring-security-rsa:1.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/security/spring-security-rsa/1.0.5.RELEASE/spring-security-rsa-1.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework.security:spring-security-web:5.0.4.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/security/spring-security-web/5.0.4.RELEASE/spring-security-web-5.0.4.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-aop:5.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-aop/5.0.5.RELEASE/spring-aop-5.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-aspects:5.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-aspects/5.0.5.RELEASE/spring-aspects-5.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-beans:5.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-beans/5.0.5.RELEASE/spring-beans-5.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-context-support:5.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-context-support/5.0.5.RELEASE/spring-context-support-5.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-context:5.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-context/5.0.5.RELEASE/spring-context-5.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-core:5.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-core/5.0.5.RELEASE/spring-core-5.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-expression:5.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-expression/5.0.5.RELEASE/spring-expression-5.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-jcl:5.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-jcl/5.0.5.RELEASE/spring-jcl-5.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-jdbc:5.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-jdbc/5.0.5.RELEASE/spring-jdbc-5.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-orm:5.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-orm/5.0.5.RELEASE/spring-orm-5.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-test:5.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-test/5.0.5.RELEASE/spring-test-5.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-tx:5.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-tx/5.0.5.RELEASE/spring-tx-5.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-web:5.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-web/5.0.5.RELEASE/spring-web-5.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.springframework:spring-webmvc:5.0.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/springframework/spring-webmvc/5.0.5.RELEASE/spring-webmvc-5.0.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.1.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/thymeleaf/extras/thymeleaf-extras-java8time/3.0.1.RELEASE/thymeleaf-extras-java8time-3.0.1.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/thymeleaf/extras/thymeleaf-extras-springsecurity4/3.0.2.RELEASE/thymeleaf-extras-springsecurity4-3.0.2.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.thymeleaf:thymeleaf-spring5:3.0.9.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/thymeleaf/thymeleaf-spring5/3.0.9.RELEASE/thymeleaf-spring5-3.0.9.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.thymeleaf:thymeleaf:3.0.9.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/thymeleaf/thymeleaf/3.0.9.RELEASE/thymeleaf-3.0.9.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.unbescape:unbescape:1.1.5.release.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/unbescape/unbescape/1.1.5.RELEASE/unbescape-1.1.5.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.xmlunit:xmlunit-core:2.5.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/xmlunit/xmlunit-core/2.5.1/xmlunit-core-2.5.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.yaml:snakeyaml:1.19.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/yaml/snakeyaml/1.19/snakeyaml-1.19.jar"/>
+  </path>
+  
+  <path id="library.maven:_stax:stax-api:1.0.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_xmlpull:xmlpull:1.1.3.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/xmlpull/xmlpull/1.1.3.1/xmlpull-1.1.3.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_xpp3:xpp3_min:1.1.4c.classpath">
+    <pathelement location="${path.variable.maven_repository}/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c.jar"/>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  <import file="${basedir}/ingameads-config-repo/module_ingameads-config-repo.xml"/>
+  
+  <import file="${basedir}/ingameads-config-server/module_ingameads-config-server.xml"/>
+  
+  <import file="${basedir}/ingameads-service-registry/module_ingameads-service-registry.xml"/>
+  
+  <import file="${basedir}/ingameads-ui/module_ingameads-ui.xml"/>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.ingameads-config-repo, clean.module.ingameads-config-server, clean.module.ingameads-service-registry, clean.module.ingameads-ui" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.ingameads-config-repo, compile.module.ingameads-config-server, compile.module.ingameads-service-registry, compile.module.ingameads-ui" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+</project>
