@@ -6,6 +6,7 @@
         <option value="$PROJECT_DIR$/ingameads-ui/pom.xml" />
         <option value="$PROJECT_DIR$/ingameads-config-server/pom.xml" />
         <option value="$PROJECT_DIR$/ingameads-service-registry/pom.xml" />
+        <option value="$PROJECT_DIR$/ingameads-image-provider/pom.xml" />
       </list>
     </option>
   </component>
