@@ -6,12 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ingameads-config-server" />
         <module name="ingameads-server" />
+        <module name="ingameads-service-registry" />
         <module name="ingameads-ui" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ingameads-config-server" target="1.8" />
       <module name="ingameads-server" target="1.8" />
+      <module name="ingameads-service-registry" target="1.8" />
       <module name="ingameads-ui" target="1.8" />
     </bytecodeTargetLevel>
   </component>
