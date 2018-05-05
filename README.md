@@ -1,1 +1,0 @@
-# ingameads-server
