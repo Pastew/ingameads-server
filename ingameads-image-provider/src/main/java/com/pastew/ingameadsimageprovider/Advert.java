@@ -17,4 +17,9 @@ public class Advert {
     private String gameId;
 
     private String imageURL;
+
+    private long startDate;
+
+    private long endDate;
+
 }

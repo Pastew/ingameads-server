@@ -2,20 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="adb88f5b-d298-4173-939c-cfe4b630a399" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/Advert.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderRepository.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderService.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/ingameads-image-provider/src/main/resources/bootstrap.properties" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/ingameads-image-provider-gateway/src/main/java/com/pastew/ingameadsimageprovidergateway/ImageProviderGatewayController.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderController.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/ingameads-config-repo" afterPath="$PROJECT_DIR$/ingameads-config-repo" />
-      <change beforePath="$PROJECT_DIR$/ingameads-image-provider/pom.xml" afterPath="$PROJECT_DIR$/ingameads-image-provider/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/IngameadsImageProviderApplication.java" afterPath="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/IngameadsImageProviderApplication.java" />
-      <change beforePath="$PROJECT_DIR$/ingameads-image-provider/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/ingameads-image-provider-gateway/src/main/resources/bootstrap.properties" />
-      <change beforePath="$PROJECT_DIR$/ingameads-service-registry/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/ingameads-service-registry/src/main/resources/application.properties" />
+      <change beforePath="$PROJECT_DIR$/ingameads-image-provider-gateway/src/main/java/com/pastew/ingameadsimageprovidergateway/IngameadsImageProviderGatewayApplication.java" afterPath="$PROJECT_DIR$/ingameads-image-provider-gateway/src/main/java/com/pastew/ingameadsimageprovidergateway/IngameadsImageProviderGatewayApplication.java" />
+      <change beforePath="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/Advert.java" afterPath="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/Advert.java" />
+      <change beforePath="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderRepository.java" afterPath="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderRepository.java" />
+      <change beforePath="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderService.java" afterPath="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderService.java" />
+      <change beforePath="$PROJECT_DIR$/ingameads-image-provider/src/main/resources/bootstrap.properties" afterPath="$PROJECT_DIR$/ingameads-image-provider/src/main/resources/bootstrap.properties" />
     </list>
     <ignored path="$PROJECT_DIR$/ingameads-ui/target/" />
     <ignored path="$PROJECT_DIR$/ingameads-config-server/target/" />
@@ -31,15 +26,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="IngameadsImageProviderApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/IngameadsImageProviderApplication.java">
+      <file leaf-file-name="ImageProviderController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="36" column="41" lean-forward="false" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+            <state relative-caret-position="204">
+              <caret line="12" column="14" lean-forward="false" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1401#1402#0" expanded="true" />
-                <element signature="e#1476#1477#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -48,74 +41,48 @@
       <file leaf-file-name="ImageProviderService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IngameadsImageProviderGatewayApplication.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ingameads-image-provider-gateway/src/main/java/com/pastew/ingameadsimageprovidergateway/IngameadsImageProviderGatewayApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+            <state relative-caret-position="357">
+              <caret line="25" column="10" lean-forward="false" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
               <folding>
-                <element signature="e#699#700#0" expanded="true" />
-                <element signature="e#731#732#0" expanded="true" />
-                <element signature="e#890#891#0" expanded="true" />
-                <element signature="e#931#932#0" expanded="true" />
+                <element signature="e#663#664#0" expanded="true" />
+                <element signature="e#730#731#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ingameads-image-provider-gateway/src/main/resources/bootstrap.properties">
+      <file leaf-file-name="ImageProviderRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+            <state relative-caret-position="85">
+              <caret line="5" column="37" lean-forward="false" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/resources/bootstrap.properties">
+      <file leaf-file-name="Advert.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/Advert.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="357">
+              <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ingameads-image-provider.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ingameads-config-repo/ingameads-image-provider.properties">
+      <file leaf-file-name="ImageProviderGatewayController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ingameads-image-provider-gateway/src/main/java/com/pastew/ingameadsimageprovidergateway/ImageProviderGatewayController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="29" lean-forward="false" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ingameads-image-provider-gateway.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ingameads-config-repo/ingameads-image-provider-gateway.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ingameads-image-provider-gateway/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="44" column="43" lean-forward="false" selection-start-line="44" selection-start-column="43" selection-end-line="44" selection-end-column="43" />
-              <folding />
+            <state relative-caret-position="306">
+              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#465#466#0" expanded="true" />
+                <element signature="e#513#514#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -131,8 +98,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>spring.application.name</find>
-      <find>pring.cloud.config.ur</find>
       <find>management.endpoints.web.exposure.include=*</find>
       <find>conte</find>
       <find>port</find>
@@ -161,6 +126,8 @@
       <find>Rest</find>
       <find>started</find>
       <find>RestTemplate</find>
+      <find>RequestParam</find>
+      <find>POST</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -196,18 +163,20 @@
         <option value="$PROJECT_DIR$/ingameads-image-provider/pom.xml" />
         <option value="$PROJECT_DIR$/ingameads-config-repo/ingameads-image-provider.properties" />
         <option value="$PROJECT_DIR$/ingameads-service-registry/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderRepository.java" />
         <option value="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/AdImage.java" />
         <option value="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/Ad.java" />
-        <option value="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/Advert.java" />
         <option value="$PROJECT_DIR$/ingameads-config-repo/ingameads-image-provider-proxy.properties" />
         <option value="$PROJECT_DIR$/ingameads-image-provider-gateway/pom.xml" />
-        <option value="$PROJECT_DIR$/ingameads-image-provider/src/main/resources/bootstrap.properties" />
         <option value="$PROJECT_DIR$/ingameads-config-repo/ingameads-image-provider-gateway.properties" />
         <option value="$PROJECT_DIR$/ingameads-image-provider-gateway/src/main/resources/bootstrap.properties" />
-        <option value="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderService.java" />
         <option value="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/IngameadsImageProviderApplication.java" />
         <option value="$PROJECT_DIR$/ingameads-image-provider-gateway/src/main/java/com/pastew/ingameadsimageprovidergateway/IngameadsImageProviderGatewayApplication.java" />
+        <option value="$PROJECT_DIR$/ingameads-image-provider-gateway/src/main/java/com/pastew/ingameadsimageprovidergateway/ImageProviderGatewayController.java" />
+        <option value="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/Advert.java" />
+        <option value="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderRepository.java" />
+        <option value="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderService.java" />
+        <option value="$PROJECT_DIR$/ingameads-image-provider/src/main/resources/bootstrap.properties" />
+        <option value="$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderController.java" />
       </list>
     </option>
   </component>
@@ -244,10 +213,6 @@
           <expand>
             <path>
               <item name="ingameads" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ingameads-config-repo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ingameads" type="b2602c69:ProjectViewProjectNode" />
               <item name="ingameads-image-provider" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -275,6 +240,13 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="ingameadsimageprovider" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ingameads" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ingameads-image-provider" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ingameads" type="b2602c69:ProjectViewProjectNode" />
@@ -308,10 +280,42 @@
             </path>
             <path>
               <item name="ingameads" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ingameads-image-provider-gateway" type="462c0819:PsiDirectoryNode" />
+              <item name="ingameads-ui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ingameads" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ingameads-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ingameads" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ingameads-ui" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ingameads" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ingameads-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ingameads" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ingameads-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ingameadsui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ingameads" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ingameads-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ingameadsui" type="462c0819:PsiDirectoryNode" />
+              <item name="Image" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -355,7 +359,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.IngameadsImageProviderGatewayApplication">
+  <component name="RunManager" selected="Application.IngameadsImageProviderApplication">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -552,8 +556,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.IngameadsImageProviderGatewayApplication" />
-        <item index="1" class="java.lang.String" itemvalue="Application.IngameadsImageProviderApplication" />
+        <item index="0" class="java.lang.String" itemvalue="Application.IngameadsImageProviderApplication" />
+        <item index="1" class="java.lang.String" itemvalue="Application.IngameadsImageProviderGatewayApplication" />
         <item index="2" class="java.lang.String" itemvalue="Application.IngameadsUIApplication" />
         <item index="3" class="java.lang.String" itemvalue="Application.IngameadsServiceRegistryApplication" />
         <item index="4" class="java.lang.String" itemvalue="Application.IngameadsConfigServerApplication" />
@@ -595,7 +599,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525536589574</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Ribbon Load Balancing works!">
+      <created>1525545229156</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1525545229157</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -613,10 +624,10 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.349087" sideWeight="0.27345416" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41353384" sideWeight="0.7265459" order="10" side_tool="false" content_ui="tabs" x="-74" y="373" width="1876" height="386" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46079484" sideWeight="0.48507464" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2728249" sideWeight="0.48507464" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19226637" sideWeight="0.8054371" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2228145" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2761194" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -639,7 +650,8 @@
     <MESSAGE value="in mem db" />
     <MESSAGE value="gitignore" />
     <MESSAGE value="Moved properties to remote config server and it works!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved properties to remote config server and it works!" />
+    <MESSAGE value="Ribbon Load Balancing works!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ribbon Load Balancing works!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -870,26 +882,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="70" lean-forward="false" selection-start-line="4" selection-start-column="70" selection-end-line="4" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ingameads-ui/src/main/java/com/pastew/ingameadsui/Image/Image.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="18" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/Advert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -926,14 +922,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/resources/bootstrap.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ingameads-config-repo/ingameads-image-provider-gateway.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -962,23 +950,90 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderService.java">
+    <entry file="file://$PROJECT_DIR$/ingameads-ui/src/main/java/com/pastew/ingameadsui/Image/ImageController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="284">
+          <caret line="66" column="33" lean-forward="true" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ingameads-image-provider-gateway/src/main/java/com/pastew/ingameadsimageprovidergateway/IngameadsImageProviderGatewayApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+        <state relative-caret-position="0">
+          <caret line="0" column="35" lean-forward="false" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
           <folding>
             <element signature="e#699#700#0" expanded="true" />
             <element signature="e#731#732#0" expanded="true" />
-            <element signature="e#890#891#0" expanded="true" />
-            <element signature="e#931#932#0" expanded="true" />
+            <element signature="e#774#775#0" expanded="true" />
+            <element signature="e#856#857#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/lang/System.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="352" column="30" lean-forward="false" selection-start-line="352" selection-start-column="30" selection-end-line="352" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ingameads-image-provider-gateway/src/main/java/com/pastew/ingameadsimageprovidergateway/ImageProviderGatewayController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#465#466#0" expanded="true" />
+            <element signature="e#513#514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/Advert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="37" lean-forward="false" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/resources/bootstrap.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="25" column="10" lean-forward="false" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
+          <folding>
+            <element signature="e#663#664#0" expanded="true" />
+            <element signature="e#730#731#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ingameads-image-provider/src/main/java/com/pastew/ingameadsimageprovider/ImageProviderController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="14" lean-forward="false" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

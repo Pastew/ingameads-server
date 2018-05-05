@@ -19,21 +19,6 @@ public class IngameadsImageProviderGatewayApplication {
 		return new RestTemplate();
 	}
 
-	@RestController
-	public class CodeCoupleController {
-
-		private final RestTemplate restTemplate;
-
-		public CodeCoupleController(RestTemplate restTemplate) {
-			this.restTemplate = restTemplate;
-		}
-
-		@GetMapping("/show")
-		public String AskRandomInstanceForPort(){
-			return restTemplate.getForObject("http://ingameads-image-provider/showport", String.class);
-		}
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(IngameadsImageProviderGatewayApplication.class, args);
 	}
