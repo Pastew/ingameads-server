@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ingameads-config-server" />
         <module name="ingameads-image-provider" />
+        <module name="ingameads-image-provider-gateway" />
         <module name="ingameads-server" />
         <module name="ingameads-service-registry" />
         <module name="ingameads-ui" />
@@ -16,6 +17,7 @@
     <bytecodeTargetLevel>
       <module name="ingameads-config-server" target="1.8" />
       <module name="ingameads-image-provider" target="1.8" />
+      <module name="ingameads-image-provider-gateway" target="1.8" />
       <module name="ingameads-server" target="1.8" />
       <module name="ingameads-service-registry" target="1.8" />
       <module name="ingameads-ui" target="1.8" />
