@@ -15,7 +15,7 @@ public class ImageProviderGatewayController {
     }
 
     @GetMapping("/advert/{gameId}")
-    public String AskRandomInstanceForPort(@PathVariable String gameId) {
-        return restTemplate.getForObject("http://ingameads-image-provider/" + gameId, String.class);
+    public String getCurrentAdvertByGameId(@PathVariable String gameId) {
+        return restTemplate.getForObject("http://ingameads-image-provider/advert/" + gameId, String.class);
     }
 }
