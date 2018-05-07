@@ -11,6 +11,7 @@
         <module name="ingameads-image-provider-gateway" />
         <module name="ingameads-server" />
         <module name="ingameads-service-registry" />
+        <module name="ingameads-stats-server-gateway" />
         <module name="ingameads-ui" />
       </profile>
     </annotationProcessing>
@@ -20,6 +21,7 @@
       <module name="ingameads-image-provider-gateway" target="1.8" />
       <module name="ingameads-server" target="1.8" />
       <module name="ingameads-service-registry" target="1.8" />
+      <module name="ingameads-stats-server-gateway" target="1.8" />
       <module name="ingameads-ui" target="1.8" />
     </bytecodeTargetLevel>
   </component>
