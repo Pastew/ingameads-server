@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="All services" type="CompoundRunConfigurationType" factoryName="Compound Run Configuration">
+    <toRun type="Application" name="Config Server" />
+    <toRun type="Application" name="Eureka Server" />
+    <toRun type="Application" name="Image Provider" />
+    <toRun type="Application" name="Image Provider Gateway" />
+    <toRun type="Application" name="Stats Server Gateway" />
+    <toRun type="Application" name="UI" />
+    <method />
+  </configuration>
+</component>
