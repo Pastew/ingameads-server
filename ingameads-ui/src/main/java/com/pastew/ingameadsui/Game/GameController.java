@@ -1,5 +1,6 @@
 package com.pastew.ingameadsui.Game;
 
+import com.pastew.ingameadsui.Advert.Advert;
 import com.pastew.ingameadsui.Image.ImageService;
 import com.pastew.ingameadsui.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -20,6 +22,9 @@ public class GameController {
     private final GameService gameService;
     private ImageService imageService;
     private UserRepository userRepository;
+
+    @Autowired
+    RestTemplate restTemplate;
 
     @Autowired
     public GameController(GameService gameService, ImageService imageService, UserRepository userRepository) {
@@ -46,10 +51,13 @@ public class GameController {
         return "games";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/games/{id}")
-    public String getGame(Model model, @PathVariable String id) {
-        Game game = gameService.getGame(id);
+    @RequestMapping(method = RequestMethod.GET, value = "/games/{gameId}")
+    public String getGame(Model model, @PathVariable String gameId) {
+        Game game = gameService.getGame(gameId);
+        Advert[] adverts = restTemplate.getForObject("http://ingameads-image-provider/allAdverts/" + gameId, Advert[].class);
+
         model.addAttribute("game", game);
+        model.addAttribute("adverts", adverts);
         return "game";
     }
 

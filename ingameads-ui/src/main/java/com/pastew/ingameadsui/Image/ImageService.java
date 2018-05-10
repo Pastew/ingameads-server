@@ -116,11 +116,11 @@ public class ImageService {
                 imagerepository.save(images[i]);
             }
             Lorem l = LoremIpsum.getInstance();
-            gameRepository.save(new Game("com.pastew.game1", greg, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[0], images[1])));
-            gameRepository.save(new Game("com.pastew.game2", greg, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[2])));
-            gameRepository.save(new Game("com.pastew.game3", bob, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[3])));
-            gameRepository.save(new Game("com.pastew.game4", bob, l.getTitle(1, 4), l.getWords(70, 120), null));
-            gameRepository.save(new Game("com.pastew.game5", bob, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[4])));
+            gameRepository.save(new Game("com.pastew.example_game_1", greg, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[0], images[1])));
+            gameRepository.save(new Game("com.pastew.example_game_2", greg, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[2])));
+            gameRepository.save(new Game("com.pastew.example_game_3", bob, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[3])));
+            gameRepository.save(new Game("com.pastew.example_game_4", bob, l.getTitle(1, 4), l.getWords(70, 120), null));
+            gameRepository.save(new Game("com.pastew.example_game_5", bob, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[4])));
         };
     }
 

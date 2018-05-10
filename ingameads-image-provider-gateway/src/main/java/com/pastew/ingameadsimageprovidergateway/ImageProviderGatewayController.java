@@ -18,4 +18,10 @@ public class ImageProviderGatewayController {
     public String getCurrentAdvertByGameId(@PathVariable String gameId) {
         return restTemplate.getForObject("http://ingameads-image-provider/advert/" + gameId, String.class);
     }
+
+    @GetMapping("/allAdverts/{gameId}")
+    public String getAllAdverts(@PathVariable String gameId) {
+        return restTemplate.getForObject("http://ingameads-image-provider/allAdverts/" + gameId, String.class);
+    }
+
 }

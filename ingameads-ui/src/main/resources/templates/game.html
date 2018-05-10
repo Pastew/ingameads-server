@@ -8,7 +8,7 @@
 
 <h1>Gra</h1>
 
-<div>
+<div id="game">
     <h1 th:text="${game.title}"/>
     <p th:text="${game.description}"/>
     <footer th:text="${game.owner.username}"/>
@@ -19,5 +19,32 @@
     </ul>
 </div>
 
+<div id="adverts">
+    <table id="adverts-table">
+        <tbody>
+        <tr>
+            <th>Advert image</th>
+            <th>Start date</th>
+            <th>End date</th>
+        </tr>
+        <tr th:each="advert : ${adverts}">
+            <td><img class="thumbnail" th:src="${advert.imageURL}"/></td>
+            <td class="date" th:text="${advert.startDate}"></td>
+            <td class="date" th:text="${advert.endDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+$(document).ready(function() {
+    $(".date").each(function(index) {
+        var dateEpoch = $(this).text();
+        var dateHuman = new Date(dateEpoch*1000);
+        console.log(dateHuman);
+        $(this).html(dateHuman.toLocaleDateString("en-US") + "<span class=\"advert-time\"> " + dateHuman.toLocaleTimeString("en-US") + "</span>");
+    });
+});
+</script>
 </body>
 </html>

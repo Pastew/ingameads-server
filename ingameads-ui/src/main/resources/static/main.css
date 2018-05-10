@@ -25,3 +25,7 @@ td, th {
 .image_upload_for_game {
     border: 1px solid #999;
 }
+
+.advert-time{
+     font-size: small;
+}
