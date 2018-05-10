@@ -26,29 +26,28 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
-
-import static com.pastew.ingameadsui.Roles.GAME_DEV;
+import java.util.List;
 
 @Service
 @Slf4j
 public class ImageService {
 
     private static String UPLOAD_ROOT = "images";
-    private final ImageRepository repository;
+    private final ImageRepository imageRepository;
     private final ResourceLoader resourceLoader;
     private final UserRepository userRepository;
     private final GameRepository gameRepository;
 
     @Autowired
     public ImageService(ImageRepository imageRepository, ResourceLoader resourceLoader, UserRepository userRepository, GameRepository gameRepository) {
-        this.repository = imageRepository;
+        this.imageRepository = imageRepository;
         this.resourceLoader = resourceLoader;
         this.userRepository = userRepository;
         this.gameRepository = gameRepository;
     }
 
     public Page<Image> findPage(Pageable pageable) {
-        return repository.findAll(pageable);
+        return imageRepository.findAll(pageable);
     }
 
     public Resource findOneImage(String filename) {
@@ -62,7 +61,7 @@ public class ImageService {
 
         if (!file.isEmpty()) {
             Files.copy(file.getInputStream(), Paths.get(UPLOAD_ROOT, file.getOriginalFilename()));
-            return repository.save(new Image(file.getOriginalFilename(),
+            return imageRepository.save(new Image(file.getOriginalFilename(),
                     userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())));
         }
 
@@ -71,12 +70,12 @@ public class ImageService {
 
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteImage(@Param("filename") String filename) throws IOException {
-        final Image image = repository.findByName(filename);
+        final Image image = imageRepository.findByName(filename);
         Game game = gameRepository.findByImages(image);
         game.getImages().remove(image);
         gameRepository.save(game);
 
-        repository.delete(image);
+        imageRepository.delete(image);
 
         Files.deleteIfExists(Paths.get(UPLOAD_ROOT, filename));
     }
@@ -102,8 +101,8 @@ public class ImageService {
 
             //Files.createDirectory(Paths.get(UPLOAD_ROOT));
 
-            User greg = userRepository.save(new User(Dev.GREG, Dev.userPassword, "ROLE_ADMIN", "ROLE_USER"));
-            User bob = userRepository.save(new User(Dev.BOB, Dev.userPassword, "ROLE_USER", "ROLE_"+GAME_DEV));
+            User greg = userRepository.save(new User(Dev.GREG, Dev.userPassword, "ROLE_USER"));
+            User bob = userRepository.save(new User(Dev.BOB, Dev.userPassword, "ROLE_USER"));
 
             Image[] images = {
                     new Image("test1.PNG", greg),
@@ -123,5 +122,11 @@ public class ImageService {
             gameRepository.save(new Game("com.pastew.game4", bob, l.getTitle(1, 4), l.getWords(70, 120), null));
             gameRepository.save(new Game("com.pastew.game5", bob, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[4])));
         };
+    }
+
+    public List<Image> getCurrentUserImages() {
+        String ownerName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User owner = userRepository.findByUsername(ownerName);
+        return imageRepository.findByOwner(owner);
     }
 }

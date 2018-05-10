@@ -18,8 +18,8 @@ public class ImageProviderService {
     }
 
     public String getCurrentAdvertImageURL(String gameId) {
-        long currentTime = System.currentTimeMillis()/1000;
-        Advert currentAdvert = imageProviderRepository.findFirstCurrentAdvertByGameId(gameId, currentTime);
+        long currentTimeSeconds = System.currentTimeMillis()/1000;
+        Advert currentAdvert = imageProviderRepository.findFirstCurrentAdvertByGameId(gameId, currentTimeSeconds);
 
         if(null == currentAdvert)
             return "default";

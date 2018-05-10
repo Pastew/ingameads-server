@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class ImageController {
@@ -30,15 +31,9 @@ public class ImageController {
 
 
     @RequestMapping(value = "/images")
-    public String index (Model model, Pageable pageable){
-        final Page<Image> page = imageService.findPage(pageable);
-        model.addAttribute("page", page);
-        if(page.hasPrevious())
-            model.addAttribute("prev", page.previousPageable());
-
-        if(page.hasNext())
-            model.addAttribute("next", page.nextPageable());
-
+    public String getMyImages (Model model){
+        List<Image> currentUserImages = imageService.getCurrentUserImages();
+        model.addAttribute("currentUserImages", currentUserImages);
         return "images";
     }
 
@@ -68,7 +63,7 @@ public class ImageController {
             redirectAttributes.addFlashAttribute("flash.message", "Failed to upload " + file.getOriginalFilename() + " => " + e.getMessage());
         }
 
-        return "redirect:/";
+        return "redirect:/images";
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = BASE_PATH + "/" + FILENAME)
