@@ -2,10 +2,9 @@ package com.pastew.ingameadsimageprovider;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
@@ -32,6 +31,18 @@ public class ImageProviderController {
         Advert[] result = imageProviderService.getAllAdverts(gameId);
         log.info("I will return: " + result);
         return result;
+    }
+
+    @PostMapping("/{gameId}/saveAdvert")
+    public ResponseEntity addAdvert(@RequestBody Advert advert) {
+        log.info("Somebody asked me to add advert for game" + advert.getGameId());
+        try {
+            imageProviderService.saveAdvert(advert);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
 

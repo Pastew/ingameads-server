@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -11,7 +12,7 @@ import javax.persistence.Id;
 public class Advert {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String gameId;
@@ -22,4 +23,13 @@ public class Advert {
 
     private long endDate;
 
+    public Advert(String gameId, String imageURL, long startDate, long endDate) {
+        this.gameId = gameId;
+        this.imageURL = imageURL;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public Advert() {
+    }
 }

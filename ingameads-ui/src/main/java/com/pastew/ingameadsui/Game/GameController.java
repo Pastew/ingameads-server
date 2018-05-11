@@ -1,19 +1,21 @@
 package com.pastew.ingameadsui.Game;
 
 import com.pastew.ingameadsui.Advert.Advert;
+import com.pastew.ingameadsui.Exceptions.AdvertBuyException;
 import com.pastew.ingameadsui.Image.ImageService;
 import com.pastew.ingameadsui.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -22,9 +24,6 @@ public class GameController {
     private final GameService gameService;
     private ImageService imageService;
     private UserRepository userRepository;
-
-    @Autowired
-    RestTemplate restTemplate;
 
     @Autowired
     public GameController(GameService gameService, ImageService imageService, UserRepository userRepository) {
@@ -54,8 +53,7 @@ public class GameController {
     @RequestMapping(method = RequestMethod.GET, value = "/games/{gameId}")
     public String getGame(Model model, @PathVariable String gameId) {
         Game game = gameService.getGame(gameId);
-        Advert[] adverts = restTemplate.getForObject("http://ingameads-image-provider/allAdverts/" + gameId, Advert[].class);
-
+        Advert[] adverts = gameService.getGameAdverts(gameId);
         model.addAttribute("game", game);
         model.addAttribute("adverts", adverts);
         return "game";
@@ -89,5 +87,30 @@ public class GameController {
         }
 
         return "redirect:/mygames";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/games/{gameId}/buyAdvert")
+    public String buyAdvert(@RequestParam("file") MultipartFile file,
+                            @PathVariable String gameId,
+                            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+                            RedirectAttributes redirectAttributes) {
+
+        try {
+            String imageUrl = gameService.uploadImage(file);
+            Advert advert = new Advert();
+            advert.setGameId(gameId);
+            advert.setImageURL(imageUrl);
+            advert.setStartDate(startDate.getTime()/1000);
+            advert.setEndDate(endDate.getTime()/1000 );
+            gameService.buyAdvert(advert);
+            redirectAttributes.addFlashAttribute("flash.message", "Successfully bought advert!");
+        } catch (AdvertBuyException e) {
+            redirectAttributes.addFlashAttribute("flash.message", "Can't buy advert: " + e.getMessage());
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("flash.message", "Failed to upload image " + e.getMessage());
+        }
+
+        return "redirect:/games/" + gameId;
     }
 }

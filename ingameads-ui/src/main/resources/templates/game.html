@@ -6,9 +6,10 @@
 
 <div th:insert="fragments/user_info :: user_info">...</div>
 
-<h1>Gra</h1>
+<h3 th:if="${#vars['flash.message']}" th:text="${#vars['flash.message']}" class="flash"></h3>
 
-<div id="game">
+
+<div id="game-panel">
     <h1 th:text="${game.title}"/>
     <p th:text="${game.description}"/>
     <footer th:text="${game.owner.username}"/>
@@ -18,8 +19,7 @@
         </li>
     </ul>
 </div>
-
-<div id="adverts">
+<div id="adverts-panel">
     <table id="adverts-table">
         <tbody>
         <tr>
@@ -36,6 +36,16 @@
     </table>
 </div>
 
+<div id="buy-panel">
+    <h2>Buy Advert</h2>
+    <form method="post" enctype="multipart/form-data" th:action="@{'/games/' + ${game.id} + '/buyAdvert'}">
+        <p><input type="file" name="file"/></p>
+        <p><input type="date" name="startDate"/></p>
+        <p><input type="date" name="endDate"/></p>
+        <input type="submit" value="Buy Advert">
+    </form>
+</div>
+
 <script>
 $(document).ready(function() {
     $(".date").each(function(index) {
@@ -45,6 +55,7 @@ $(document).ready(function() {
         $(this).html(dateHuman.toLocaleDateString("en-US") + "<span class=\"advert-time\"> " + dateHuman.toLocaleTimeString("en-US") + "</span>");
     });
 });
+
 </script>
 </body>
 </html>
