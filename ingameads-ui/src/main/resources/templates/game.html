@@ -38,24 +38,12 @@
 
 <div id="buy-panel">
     <h2>Buy Advert</h2>
-    <form method="post" enctype="multipart/form-data" th:action="@{'/games/' + ${game.id} + '/buyAdvert'}">
+    <form method="post" enctype="multipart/form-data" th:action="@{'/games/' + ${game.id} + '/bu`yAdvert'}">
         <p>Advert image <input type="file" name="file"/></p>
         <p>Advert start time <input type="date" name="startDate"/></p>
         <p>Advert end time <input type="date" name="endDate"/></p>
         <input type="submit" value="Buy Advert">
     </form>
 </div>
-
-<script>
-$(document).ready(function() {
-    $(".date").each(function(index) {
-        var dateEpoch = $(this).text();
-        var dateHuman = new Date(dateEpoch*1000);
-        console.log(dateHuman);
-        $(this).html(dateHuman.toLocaleDateString("en-US") + "<span class=\"advert-time\"> " + dateHuman.toLocaleTimeString("en-US") + "</span>");
-    });
-});
-
-</script>
 </body>
 </html>

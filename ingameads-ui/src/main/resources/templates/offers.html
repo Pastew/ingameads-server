@@ -14,8 +14,8 @@
             <div class="offer">
                 <table>
                     <tr><td>Game ID</td><td th:text="${offer.advert.game.id}"/></tr>
-                    <tr><td>Starting date</td><td th:text="${offer.advert.startDate}"/>
-                    <tr><td>End date</td><td th:text="${offer.advert.endDate}"/>
+                    <tr><td>Starting date</td><td class="date" th:text="${offer.advert.startDate}"/>
+                    <tr><td>End date</td><td class="date" th:text="${offer.advert.endDate}"/>
                     <tr><td>Your name (TODO: delete this)</td><td th:text="${offer.advert.game.owner.username}"/>
                     <tr><td>Buyer name</td><td th:text="${offer.buyer.username}"/>
                     <tr><td>Image</td><td><img th:src="${offer.advert.imageURL}"/></td>
