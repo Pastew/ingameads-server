@@ -13,9 +13,12 @@ public class AdvertOffer {
     @GeneratedValue
     long id;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.PERSIST})
     Advert advert;
 
     @ManyToOne
     User buyer;
+
+    @ManyToOne
+    User gameOwner;
 }

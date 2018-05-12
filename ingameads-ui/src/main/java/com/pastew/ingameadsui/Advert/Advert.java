@@ -1,10 +1,12 @@
 package com.pastew.ingameadsui.Advert;
 
+import com.pastew.ingameadsui.Game.Game;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Data
@@ -14,7 +16,8 @@ public class Advert {
     @GeneratedValue
     private Long id;
 
-    private String gameId;
+    @ManyToOne
+    private Game game;
 
     private String imageURL;
 

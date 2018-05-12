@@ -100,7 +100,7 @@ public class GameController {
         try {
             String imageUrl = gameService.uploadImage(file);
             Advert advert = new Advert();
-            advert.setGameId(gameId);
+            advert.setGame(gameService.getGame(gameId));
             advert.setImageURL(imageUrl);
             advert.setStartDate(startDate.getTime()/1000);
             advert.setEndDate(endDate.getTime()/1000 );

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thmyeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:insert="fragments/header :: header"></head>
+<body>
+
+<div th:insert="fragments/user_info :: user_info">...</div>
+
+<h1>Your offers</h1>
+
+<div>
+    <ul>
+        <li th:each="offer : ${offers}">
+            <div class="offer">
+                <p th:text="${offer.id}"/>
+                <p th:text="${offer.advert.game.id}"/>
+                <p th:text="${offer.advert.startDate}"/>
+                <p th:text="${offer.advert.endDate}"/>
+                <p th:text="${offer.advert.game.owner.username}"/>
+                <p th:text="${offer.buyer.username}"/>
+                <p th:text="${offer.gameOwner.username}"/>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

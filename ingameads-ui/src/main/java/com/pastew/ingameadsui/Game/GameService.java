@@ -73,6 +73,7 @@ public class GameService {
         User loggedUser =  userService.getLoggedUser();
         verifyIfUserIsLogged(loggedUser);
         advertOffer.setBuyer(loggedUser);
+        advertOffer.setGameOwner(advertOffer.getAdvert().getGame().getOwner());
         verifyIfTimeSlotIsAvailable(advertOffer);
 
         advertOfferService.addAdvertOffer(advertOffer);
@@ -95,7 +96,7 @@ public class GameService {
     private void verifyIfTimeSlotIsAvailable(AdvertOffer advertOffer) throws AdvertBuyException {
         Advert ad = advertOffer.getAdvert();
 
-        Advert[] adverts = getGameAdverts(ad.getGameId());
+        Advert[] adverts = getGameAdverts(ad.getGame().getId());
 
         for (Advert a : adverts) {
             if (twoDatesOverlap(a.getStartDate(), a.getEndDate(),
