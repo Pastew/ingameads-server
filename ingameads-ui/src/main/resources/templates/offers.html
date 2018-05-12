@@ -6,19 +6,20 @@
 
 <div th:insert="fragments/user_info :: user_info">...</div>
 
-<h1>Your offers</h1>
+<h1>Offers waiting for your acceptance</h1>
 
 <div>
     <ul>
         <li th:each="offer : ${offers}">
             <div class="offer">
-                <p th:text="${offer.id}"/>
-                <p th:text="${offer.advert.game.id}"/>
-                <p th:text="${offer.advert.startDate}"/>
-                <p th:text="${offer.advert.endDate}"/>
-                <p th:text="${offer.advert.game.owner.username}"/>
-                <p th:text="${offer.buyer.username}"/>
-                <p th:text="${offer.gameOwner.username}"/>
+                <table>
+                    <tr><td>Game ID</td><td th:text="${offer.advert.game.id}"/></tr>
+                    <tr><td>Starting date</td><td th:text="${offer.advert.startDate}"/>
+                    <tr><td>End date</td><td th:text="${offer.advert.endDate}"/>
+                    <tr><td>Your name (TODO: delete this)</td><td th:text="${offer.advert.game.owner.username}"/>
+                    <tr><td>Buyer name</td><td th:text="${offer.buyer.username}"/>
+                    <tr><td>Image</td><td><img th:src="${offer.advert.imageURL}"/></td>
+                </table>
             </div>
         </li>
     </ul>
