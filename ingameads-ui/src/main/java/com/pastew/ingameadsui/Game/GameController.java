@@ -1,6 +1,7 @@
 package com.pastew.ingameadsui.Game;
 
 import com.pastew.ingameadsui.Advert.Advert;
+import com.pastew.ingameadsui.Advert.AdvertOffer;
 import com.pastew.ingameadsui.Exceptions.AdvertBuyException;
 import com.pastew.ingameadsui.Image.ImageService;
 import com.pastew.ingameadsui.User.UserRepository;
@@ -103,7 +104,10 @@ public class GameController {
             advert.setImageURL(imageUrl);
             advert.setStartDate(startDate.getTime()/1000);
             advert.setEndDate(endDate.getTime()/1000 );
-            gameService.buyAdvert(advert);
+
+            AdvertOffer advertOffer = new AdvertOffer();
+            advertOffer.setAdvert(advert);
+            gameService.buyAdvert(advertOffer);
             redirectAttributes.addFlashAttribute("flash.message", "Successfully bought advert!");
         } catch (AdvertBuyException e) {
             redirectAttributes.addFlashAttribute("flash.message", "Can't buy advert: " + e.getMessage());

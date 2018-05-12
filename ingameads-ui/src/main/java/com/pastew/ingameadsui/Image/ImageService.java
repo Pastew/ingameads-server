@@ -4,6 +4,7 @@ import com.pastew.ingameadsui.Game.Game;
 import com.pastew.ingameadsui.Game.GameRepository;
 import com.pastew.ingameadsui.User.User;
 import com.pastew.ingameadsui.User.UserRepository;
+import com.pastew.ingameadsui.User.UserService;
 import com.pastew.ingameadsui.dev.Dev;
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
@@ -37,13 +38,15 @@ public class ImageService {
     private final ResourceLoader resourceLoader;
     private final UserRepository userRepository;
     private final GameRepository gameRepository;
+    private final UserService userService;
 
     @Autowired
-    public ImageService(ImageRepository imageRepository, ResourceLoader resourceLoader, UserRepository userRepository, GameRepository gameRepository) {
+    public ImageService(ImageRepository imageRepository, ResourceLoader resourceLoader, UserRepository userRepository, GameRepository gameRepository, UserService userService) {
         this.imageRepository = imageRepository;
         this.resourceLoader = resourceLoader;
         this.userRepository = userRepository;
         this.gameRepository = gameRepository;
+        this.userService = userService;
     }
 
     public Page<Image> findPage(Pageable pageable) {
@@ -125,8 +128,7 @@ public class ImageService {
     }
 
     public List<Image> getCurrentUserImages() {
-        String ownerName = SecurityContextHolder.getContext().getAuthentication().getName();
-        User owner = userRepository.findByUsername(ownerName);
+        User owner = userService.getLoggedUser();
         return imageRepository.findByOwner(owner);
     }
 }

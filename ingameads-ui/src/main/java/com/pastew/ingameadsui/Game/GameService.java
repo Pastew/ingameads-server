@@ -1,22 +1,22 @@
 package com.pastew.ingameadsui.Game;
 
+import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.pastew.ingameadsui.Advert.Advert;
+import com.pastew.ingameadsui.Advert.AdvertOffer;
+import com.pastew.ingameadsui.Advert.AdvertOfferService;
 import com.pastew.ingameadsui.Exceptions.AdvertBuyException;
 import com.pastew.ingameadsui.Image.Image;
 import com.pastew.ingameadsui.Image.ImageService;
 import com.pastew.ingameadsui.User.User;
-import com.pastew.ingameadsui.User.UserRepository;
+import com.pastew.ingameadsui.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-import com.cloudinary.*;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -28,10 +28,13 @@ public class GameService {
     private GameRepository gameRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private ImageService imageService;
 
     @Autowired
-    private ImageService imageService;
+    private UserService userService;
+
+    @Autowired
+    private AdvertOfferService advertOfferService;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -42,7 +45,7 @@ public class GameService {
             "api_secret", "cGwYcd8ef5b3xN08im8JmM_I75o"));
 
     public void addGame(Game game) {
-        game.setOwner(userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+        game.setOwner(userService.getLoggedUser());
         gameRepository.save(game);
     }
 
@@ -55,8 +58,7 @@ public class GameService {
     }
 
     public List<Game> getCurrentGameDeveloperGames() {
-        String ownerName = SecurityContextHolder.getContext().getAuthentication().getName();
-        User owner = userRepository.findByUsername(ownerName);
+        User owner = userService.getLoggedUser();
         return gameRepository.findByOwnerId(owner.getId());
     }
 
@@ -67,24 +69,40 @@ public class GameService {
         gameRepository.save(game);
     }
 
-    public void buyAdvert(Advert ad) throws AdvertBuyException {
+    public void buyAdvert(AdvertOffer advertOffer) throws AdvertBuyException {
+        User loggedUser =  userService.getLoggedUser();
+        verifyIfUserIsLogged(loggedUser);
+        advertOffer.setBuyer(loggedUser);
+        verifyIfTimeSlotIsAvailable(advertOffer);
+
+        advertOfferService.addAdvertOffer(advertOffer);
+
+//        HttpEntity<Advert> request = new HttpEntity<>(ad);
+//
+//        ResponseEntity<String> response = restTemplate.postForEntity(
+//                "http://ingameads-image-provider/" + ad.getGameId() + "/saveAdvert/",
+//                request, String.class);
+
+//        if(!response.getStatusCode().is2xxSuccessful())
+//            throw new AdvertBuyException("Failed to buy advert");
+    }
+
+    private void verifyIfUserIsLogged(User loggedUser) throws AdvertBuyException {
+        if(null == loggedUser)
+            throw new AdvertBuyException("You have to login first!");
+    }
+
+    private void verifyIfTimeSlotIsAvailable(AdvertOffer advertOffer) throws AdvertBuyException {
+        Advert ad = advertOffer.getAdvert();
+
         Advert[] adverts = getGameAdverts(ad.getGameId());
 
         for (Advert a : adverts) {
             if (twoDatesOverlap(a.getStartDate(), a.getEndDate(),
                     ad.getStartDate(),
                     ad.getEndDate()))
-                throw new AdvertBuyException("Choose another dates!");
+                throw new AdvertBuyException("Incorrect dates!");
         }
-
-        HttpEntity<Advert> request = new HttpEntity<>(ad);
-
-        ResponseEntity<String> response = restTemplate.postForEntity(
-                "http://ingameads-image-provider/" + ad.getGameId() + "/saveAdvert/",
-                request, String.class);
-
-        if(!response.getStatusCode().is2xxSuccessful())
-            throw new AdvertBuyException("Failed to buy advert");
     }
 
     public Advert[] getGameAdverts(String gameId) {
