@@ -47,9 +47,9 @@ public class AdvertOfferController {
         try {
             advertOfferService.acceptOffer(offerId);
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("flash.message", "Couldn't accept an advert: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("flash.message", "Nie udało się zaakceptować oferty: " + e.getMessage());
         }
-        redirectAttributes.addFlashAttribute("flash.message", "Accepted advert!");
+        redirectAttributes.addFlashAttribute("flash.message", "Oferta zaakceptowana!");
         return "redirect:/offers";
     }
 
@@ -59,9 +59,9 @@ public class AdvertOfferController {
 
         try {
             advertOfferService.payForAdvert(offerId);
-            redirectAttributes.addFlashAttribute("flash.message", "Payed advert!");
+            redirectAttributes.addFlashAttribute("flash.message", "Reklama opłacona!");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("flash.message", "Couldn't pay for advert: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("flash.message", "Nie udało się opłacić reklamy: " + e.getMessage());
             return "redirect:/offers";
         }
         return "redirect:/offers";

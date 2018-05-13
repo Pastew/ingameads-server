@@ -58,9 +58,9 @@ public class ImageController {
     public String createFile(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
         try {
             imageService.createImage(file);
-            redirectAttributes.addFlashAttribute("flash.message", "Successfully uploaded " + file.getOriginalFilename());
+            redirectAttributes.addFlashAttribute("flash.message", "Zdjęcie wysłano " + file.getOriginalFilename());
         } catch (IOException e) {
-            redirectAttributes.addFlashAttribute("flash.message", "Failed to upload " + file.getOriginalFilename() + " => " + e.getMessage());
+            redirectAttributes.addFlashAttribute("flash.message", "Nie udało się wysłać zdjęcia " + file.getOriginalFilename() + " => " + e.getMessage());
         }
 
         return "redirect:/images";
@@ -71,9 +71,9 @@ public class ImageController {
 
         try {
             imageService.deleteImage(filename);
-            redirectAttributes.addFlashAttribute("flash.message", "Sucessfully deleted image " + filename);
+            redirectAttributes.addFlashAttribute("flash.message", "Usunięto zdjęcie " + filename);
         } catch (IOException | RuntimeException e) {
-            redirectAttributes.addFlashAttribute("flash.message", "Failed to delete image " + filename + " => " + e.getMessage());
+            redirectAttributes.addFlashAttribute("flash.message", "Nie udało się usunąć zdjęcia " + filename + " => " + e.getMessage());
         }
         return "redirect:/images";
     }

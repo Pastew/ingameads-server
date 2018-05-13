@@ -83,9 +83,9 @@ public class GameController {
 
         try {
             gameService.addImageToGame(file, gameId);
-            redirectAttributes.addFlashAttribute("flash.message", "Successfully uploaded " + file.getOriginalFilename());
+            redirectAttributes.addFlashAttribute("flash.message", "Udało się wysłać zdjęcie " + file.getOriginalFilename());
         } catch (IOException e) {
-            redirectAttributes.addFlashAttribute("flash.message", "Failed to upload " + file.getOriginalFilename() + " => " + e.getMessage());
+            redirectAttributes.addFlashAttribute("flash.message", "Nie udało się wysłać zdjęcia " + file.getOriginalFilename() + " => " + e.getMessage());
         }
 
         return "redirect:/mygames";
@@ -110,11 +110,11 @@ public class GameController {
             advertOffer.setState(AdvertOfferStates.WAITING_FOR_GAME_OWNER_ACCEPTANCE);
             advertOffer.setAdvert(advert);
             gameService.submitAdvertOffer(advertOffer);
-            redirectAttributes.addFlashAttribute("flash.message", "Successfully made an offer!");
+            redirectAttributes.addFlashAttribute("flash.message", "Pomyślnie złożono ofertę!");
         } catch (AdvertBuyException e) {
-            redirectAttributes.addFlashAttribute("flash.message", "Can't buy advert: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("flash.message", "Nie udało się złożyć oferty: " + e.getMessage());
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("flash.message", "Failed to upload image " + e.getMessage());
+            redirectAttributes.addFlashAttribute("flash.message", "Nie udało się wysłać zdjęcia " + e.getMessage());
         }
 
         return "redirect:/games/" + gameId;
