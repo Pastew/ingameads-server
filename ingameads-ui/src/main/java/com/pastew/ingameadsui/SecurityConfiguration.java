@@ -22,6 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers(HttpMethod.GET, "/", "images/**", "main.css").permitAll()
             .antMatchers(HttpMethod.GET, "/mygames/**").hasRole(Roles.USER)
+            .antMatchers(HttpMethod.GET, "/offers/**").hasRole(Roles.USER)
             //.antMatchers(HttpMethod.GET, "/images").hasRole(Roles.USER)
             //.antMatchers("/h2/**").hasRole("ADMIN").anyRequest()
         .and()

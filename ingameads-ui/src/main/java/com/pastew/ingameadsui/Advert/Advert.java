@@ -3,10 +3,7 @@ package com.pastew.ingameadsui.Advert;
 import com.pastew.ingameadsui.Game.Game;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -19,6 +16,7 @@ public class Advert {
     @ManyToOne
     private Game game;
 
+    @Column( length = 500 )
     private String imageURL;
 
     private long startDate;

@@ -9,8 +9,8 @@ td, th {
 }
 
 .thumbnail {
-    max-widh: 75px;
-    max-height: 75px;
+    max-widh: 100px;
+    max-height: 100px;
 }
 
 .flash {

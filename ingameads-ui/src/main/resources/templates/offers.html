@@ -6,9 +6,13 @@
 
 <div th:insert="fragments/user_info :: user_info">...</div>
 
+<h3 th:if="${#vars['flash.message']}" th:text="${#vars['flash.message']}" class="flash"></h3>
 <h1>Offers waiting for your acceptance</h1>
 
-<div>
+<div class="no-offers-panel" th:if="${#lists.isEmpty(offers)}">
+    You have no offers to accept.
+</div>
+<div id="offers-list-panel" th:if="${not #lists.isEmpty(offers)}">
     <ul>
         <li th:each="offer : ${offers}">
             <div class="offer">
@@ -16,10 +20,15 @@
                     <tr><td>Game ID</td><td th:text="${offer.advert.game.id}"/></tr>
                     <tr><td>Starting date</td><td class="date" th:text="${offer.advert.startDate}"/>
                     <tr><td>End date</td><td class="date" th:text="${offer.advert.endDate}"/>
-                    <tr><td>Your name (TODO: delete this)</td><td th:text="${offer.advert.game.owner.username}"/>
                     <tr><td>Buyer name</td><td th:text="${offer.buyer.username}"/>
-                    <tr><td>Image</td><td><img th:src="${offer.advert.imageURL}"/></td>
+                    <tr><td>Image</td><td><img class="thumbnail" th:src="${offer.advert.imageURL}"/></td>
                 </table>
+                <form method="post" th:action="'/offers/' + ${offer.id} + '/accept'">
+                    <input type="submit" value="Accept offer">
+                </form>
+                <form th:action="'/offers/' + ${offer.id} + '/decline'">
+                    <input type="submit" value="Decline offer">
+                </form>
             </div>
         </li>
     </ul>

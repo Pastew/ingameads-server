@@ -20,7 +20,6 @@ public class AdvertOfferService {
         this.userService = userService;
     }
 
-
     public void addAdvertOffer(AdvertOffer advertOffer) {
         repo.save(advertOffer);
     }
@@ -30,5 +29,11 @@ public class AdvertOfferService {
         List<AdvertOffer> offers = repo.findByAdvertGameOwner(currentUser);
 
         return offers;
+    }
+
+    public void acceptOffer(Long offerId) {
+        AdvertOffer offer = repo.findById(offerId).get();
+        offer.setState(AdvertOfferStates.ACCEPTED_AND_WAITING_FOR_PAYMENT);
+        repo.save(offer);
     }
 }

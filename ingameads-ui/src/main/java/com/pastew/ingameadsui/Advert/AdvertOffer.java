@@ -21,4 +21,8 @@ public class AdvertOffer {
 
     @ManyToOne
     User gameOwner;
+
+    @Enumerated(EnumType.STRING)
+    private AdvertOfferStates state;
+
 }

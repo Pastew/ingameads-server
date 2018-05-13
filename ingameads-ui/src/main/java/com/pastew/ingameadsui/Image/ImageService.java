@@ -1,5 +1,9 @@
 package com.pastew.ingameadsui.Image;
 
+import com.pastew.ingameadsui.Advert.Advert;
+import com.pastew.ingameadsui.Advert.AdvertOffer;
+import com.pastew.ingameadsui.Advert.AdvertOfferRepository;
+import com.pastew.ingameadsui.Advert.AdvertOfferStates;
 import com.pastew.ingameadsui.Game.Game;
 import com.pastew.ingameadsui.Game.GameRepository;
 import com.pastew.ingameadsui.User.User;
@@ -27,6 +31,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -87,7 +92,8 @@ public class ImageService {
         //@Profile("dev")
     CommandLineRunner setUp(ImageRepository imagerepository,
                             UserRepository userRepository,
-                            GameRepository gameRepository) throws IOException {
+                            GameRepository gameRepository,
+                            AdvertOfferRepository advertOfferRepository) throws IOException {
 
         return args -> {
             File folder = new File(UPLOAD_ROOT);
@@ -124,6 +130,32 @@ public class ImageService {
             gameRepository.save(new Game("com.pastew.example_game_3", bob, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[3])));
             gameRepository.save(new Game("com.pastew.example_game_4", bob, l.getTitle(1, 4), l.getWords(70, 120), null));
             gameRepository.save(new Game("com.pastew.example_game_5", bob, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[4])));
+
+            Advert advert = new Advert();
+            advert.setStartDate(1529056800); // 15 June 2018
+            advert.setEndDate(1529316000); // 18 June 2018
+            advert.setImageURL("http://www.colouringinteam.co.uk/portfolio/storage/cache/images/000/182/FRijj,large.1433757631.jpg");
+            advert.setGame(gameRepository.findById("com.pastew.example_game_1").get());
+
+            AdvertOffer advertOffer = new AdvertOffer();
+            advertOffer.setBuyer(bob);
+            advertOffer.setState(AdvertOfferStates.WAITING_FOR_GAME_OWNER_ACCEPTANCE);
+            advertOffer.setAdvert(advert);
+            advertOffer.setGameOwner(advert.getGame().getOwner());
+            advertOfferRepository.save(advertOffer);
+
+            Advert advert2 = new Advert();
+            advert2.setStartDate(1529056800); // 15 June 2018
+            advert2.setEndDate(1529316000); // 18 June 2018
+            advertOffer.setState(AdvertOfferStates.WAITING_FOR_GAME_OWNER_ACCEPTANCE);
+            advert2.setImageURL("https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/foodnavigator.com/article/2017/01/11/ferrero-defends-palm-oil-in-nutella-with-advert-against-unfair-smear-campaign/1179591-6-eng-GB/Ferrero-defends-palm-oil-in-Nutella-with-advert-against-unfair-smear-campaign_wrbm_large.jpg");
+            advert2.setGame(gameRepository.findById("com.pastew.example_game_2").get());
+
+            AdvertOffer advertOffer2 = new AdvertOffer();
+            advertOffer2.setBuyer(bob);
+            advertOffer2.setAdvert(advert2);
+            advertOffer2.setGameOwner(advert2.getGame().getOwner());
+            advertOfferRepository.save(advertOffer2);
         };
     }
 
