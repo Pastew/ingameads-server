@@ -7,11 +7,9 @@
 <div th:insert="fragments/user_info :: user_info">...</div>
 
 <h3 th:if="${#vars['flash.message']}" th:text="${#vars['flash.message']}" class="flash"></h3>
-<h2>Offers waiting for your acceptance</h2>
 
-<div class="no-offers-panel" th:if="${#lists.isEmpty(offers)}">
-    You have no offers to accept.
-</div>
+<h2>Offers waiting for your acceptance</h2>
+<div th:if="${#lists.isEmpty(offers)}">You have no offers to accept</div>
 <div id="offers-list-panel" th:if="${not #lists.isEmpty(offers)}">
     <ul>
         <li th:each="offer : ${offers}">
@@ -34,8 +32,9 @@
     </ul>
 </div>
 
+<h2>Offers accepted by you and waiting for payment by buyer</h2>
+<div th:if="${#lists.isEmpty(waitingForPaymentOffers)}">You have no offers that are waiting for payment</div>
 <div id="waiting-for-payment-offers-list-panel" th:if="${not #lists.isEmpty(waitingForPaymentOffers)}">
-    <h2>Offers accepted by you and waiting for payment</h2>
     <ul>
         <li th:each="offer : ${waitingForPaymentOffers}">
             <div class="offer">
@@ -46,6 +45,27 @@
                     <tr><td>Buyer name</td><td th:text="${offer.buyer.username}"/>
                     <tr><td>Image</td><td><img class="thumbnail" th:src="${offer.advert.imageURL}"/></td>
                 </table>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<h2>Offers accepted by game owner and waiting for your payment</h2>
+<div th:if="${#lists.isEmpty(waitingForPaymentOffersForCurrentUser)}">You have no payments waiting for you</div>
+<div id="waiting-for-payment-by-current-user-offers-list-panel" th:if="${not #lists.isEmpty(waitingForPaymentOffersForCurrentUser)}">
+    <ul>
+        <li th:each="offer : ${waitingForPaymentOffersForCurrentUser}">
+            <div class="offer">
+                <table>
+                    <tr><td>Game ID</td><td th:text="${offer.advert.game.id}"/></tr>
+                    <tr><td>Starting date</td><td class="date" th:text="${offer.advert.startDate}"/>
+                    <tr><td>End date</td><td class="date" th:text="${offer.advert.endDate}"/>
+                    <tr><td>Buyer name</td><td th:text="${offer.buyer.username}"/>
+                    <tr><td>Image</td><td><img class="thumbnail" th:src="${offer.advert.imageURL}"/></td>
+                </table>
+                <form method="post" th:action="'/offers/' + ${offer.id} + '/pay'">
+                    <input type="submit" value="Pay">
+                </form>
             </div>
         </li>
     </ul>

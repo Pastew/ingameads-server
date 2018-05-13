@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface AdvertOfferRepository extends CrudRepository<AdvertOffer, Long> {
     List<AdvertOffer> findByAdvertGameOwner(User gameOwner);
+
+    List<AdvertOffer> findByBuyer(User currentUser);
 }

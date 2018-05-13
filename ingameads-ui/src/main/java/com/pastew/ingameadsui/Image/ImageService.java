@@ -152,7 +152,7 @@ public class ImageService {
 
             AdvertOffer advertOffer2 = new AdvertOffer();
             advertOffer2.setBuyer(bob);
-            advertOffer2.setState(AdvertOfferStates.WAITING_FOR_GAME_OWNER_ACCEPTANCE);
+            advertOffer2.setState(AdvertOfferStates.ACCEPTED_AND_WAITING_FOR_PAYMENT);
             advertOffer2.setAdvert(advert2);
             advertOffer2.setGameOwner(advert2.getGame().getOwner());
             advertOfferRepository.save(advertOffer2);

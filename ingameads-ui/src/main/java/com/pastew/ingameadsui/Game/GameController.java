@@ -91,8 +91,8 @@ public class GameController {
         return "redirect:/mygames";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/games/{gameId}/buyAdvert")
-    public String buyAdvert(@RequestParam("file") MultipartFile file,
+    @RequestMapping(method = RequestMethod.POST, value = "/games/{gameId}/submitAdvertOffer")
+    public String submitAdvertOffer(@RequestParam("file") MultipartFile file,
                             @PathVariable String gameId,
                             @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
                             @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
@@ -109,7 +109,7 @@ public class GameController {
             AdvertOffer advertOffer = new AdvertOffer();
             advertOffer.setState(AdvertOfferStates.WAITING_FOR_GAME_OWNER_ACCEPTANCE);
             advertOffer.setAdvert(advert);
-            gameService.buyAdvert(advertOffer);
+            gameService.submitAdvertOffer(advertOffer);
             redirectAttributes.addFlashAttribute("flash.message", "Successfully made an offer!");
         } catch (AdvertBuyException e) {
             redirectAttributes.addFlashAttribute("flash.message", "Can't buy advert: " + e.getMessage());

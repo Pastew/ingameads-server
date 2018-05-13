@@ -69,7 +69,7 @@ public class GameService {
         gameRepository.save(game);
     }
 
-    public void buyAdvert(AdvertOffer advertOffer) throws AdvertBuyException {
+    public void submitAdvertOffer(AdvertOffer advertOffer) throws AdvertBuyException {
         User loggedUser =  userService.getLoggedUser();
         verifyIfUserIsLogged(loggedUser);
         advertOffer.setBuyer(loggedUser);
@@ -77,15 +77,6 @@ public class GameService {
         verifyIfTimeSlotIsAvailable(advertOffer);
 
         advertOfferService.addAdvertOffer(advertOffer);
-
-//        HttpEntity<Advert> request = new HttpEntity<>(ad);
-//
-//        ResponseEntity<String> response = restTemplate.postForEntity(
-//                "http://ingameads-image-provider/" + ad.getGameId() + "/saveAdvert/",
-//                request, String.class);
-
-//        if(!response.getStatusCode().is2xxSuccessful())
-//            throw new AdvertBuyException("Failed to buy advert");
     }
 
     private void verifyIfUserIsLogged(User loggedUser) throws AdvertBuyException {

@@ -38,9 +38,8 @@ public class ImageProviderService {
     }
 
     public void saveAdvert(Advert advert) {
-        Advert ad = new Advert(advert.getGameId(), advert.getImageURL(), advert.getStartDate(), advert.getEndDate());
-        imageProviderRepository.save(ad);
-        String adId = String.valueOf(ad.getId());
+        imageProviderRepository.save(advert);
+        String adId = String.valueOf(advert.getId());
         System.out.println("Added new ad with id " + adId);
     }
 
