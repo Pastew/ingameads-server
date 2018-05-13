@@ -85,6 +85,7 @@ public class AdvertOfferService {
             throw new AdvertBuyException("Failed to pay for advert");
 
         offer.setState(AdvertOfferStates.PAYED);
+        repo.save(offer);
     }
 
     private class AdvertPostRequestObject {
