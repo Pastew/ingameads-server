@@ -147,12 +147,12 @@ public class ImageService {
             Advert advert2 = new Advert();
             advert2.setStartDate(1529056800); // 15 June 2018
             advert2.setEndDate(1529316000); // 18 June 2018
-            advertOffer.setState(AdvertOfferStates.WAITING_FOR_GAME_OWNER_ACCEPTANCE);
             advert2.setImageURL("https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/foodnavigator.com/article/2017/01/11/ferrero-defends-palm-oil-in-nutella-with-advert-against-unfair-smear-campaign/1179591-6-eng-GB/Ferrero-defends-palm-oil-in-Nutella-with-advert-against-unfair-smear-campaign_wrbm_large.jpg");
             advert2.setGame(gameRepository.findById("com.pastew.example_game_2").get());
 
             AdvertOffer advertOffer2 = new AdvertOffer();
             advertOffer2.setBuyer(bob);
+            advertOffer2.setState(AdvertOfferStates.WAITING_FOR_GAME_OWNER_ACCEPTANCE);
             advertOffer2.setAdvert(advert2);
             advertOffer2.setGameOwner(advert2.getGame().getOwner());
             advertOfferRepository.save(advertOffer2);
