@@ -6,11 +6,46 @@
 <body>
 <div th:insert="fragments/user_info :: user_info">...</div>
 
-<h2>Hello, this is index</h2>
-<ui>
-    <li><a th:href="@{/images}">Images</a></li>
-    <li><a th:href="@{/games}">Games</a></li>
-    <li><a th:href="@{/offers}">Offers</a></li>
-</ui>
+<div class="container">
+    <div class="section">
+
+        <!--   Icon Section   -->
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
+                    <h5 class="center">Reklamodawco!</h5>
+
+                    <p class="light">Wynajmij powierzchnię reklamową w popularnych grach, niech miliony graczy zobaczy Twoją reklamę już dziś!</p>
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
+                    <h5 class="center">Game Developerze!</h5>
+
+                    <p class="light">Udostępnij miejsce w swojej grze i zarabiaj na swojej grze!</p>
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
+                    <h5 class="center">Łatwość użycia</h5>
+
+                    <p class="light">Wystarczy kilka minut żeby reklama znalazła się na ekranach graczy.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br><br>
+</div>
+
+<div class="row">
+    <a class="col s3 offset-s4 waves-effect waves-light btn-large" href="/games">Zobacz dostępne gry</a>
+</div>
+
 </body>
 </html>

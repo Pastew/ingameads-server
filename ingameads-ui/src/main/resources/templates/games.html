@@ -6,31 +6,36 @@
 
 <div th:insert="fragments/user_info :: user_info">...</div>
 
-<h1>Gry</h1>
+<h1>Dostępne gry</h1>
+<p class="flow-text">To jest katalog gier w których możesz wynająć miejsce reklamowe.</p>
 
-<div>
-    <h3 th:text="${page.number + 1} + ' of ' + ${page.totalPages}"/>
-    <h4 th:text="${page.size} + ' item(s) per page'"/>
-
+<div class="row">
+    <div class="col s4 offset-s4">
     <ul>
         <li th:each="game : ${page.content}">
-            <div class="game">
-                <h3><a th:href="@{'/games/' + ${game.id}}" th:text="${game.title}"/></h3>
-                <p th:text="${game.description}"/>
-                <span th:text="${game.owner.username}"/>
-                <ul>
-                    <li th:each="gameImage : ${game.images}">
-                        <img class="thumbnail" th:src="@{'/images/' + ${gameImage.name} + '/raw'}"/>
-                    </li>
-                </ul>
+            <div class="card">
+                <div class="card-image">
+                    <img th:if="${not #lists.isEmpty(game.images)}" th:src="@{'/images/' + ${game.images[0].name} + '/raw'}"/>
+                    <span class="card-title" th:href="@{'/games/' + ${game.id}}" th:text="${game.title}"/>
+                </div>
+                <div class="card-content">
+                    <p th:text="${game.description}"/>
+                </div>
+                <div class="card-action">
+                    <a th:href="@{'/games/' + ${game.id}}">Obejrzyj grę</a>
+                </div>
             </div>
+
         </li>
     </ul>
-
     <ul>
         <li th:if="${prev}"><a th:href="@{/(size=${prev.pageSize}, page=${prev.pageNumber})}">Previous</a></li>
         <li th:if="${next}"><a th:href="@{/(size=${next.pageSize}, page=${next.pageNumber})}">Next</a></li>
     </ul>
+    <p th:text="${page.number + 1} + ' of ' + ${page.totalPages}"/>
+    <p th:text="${page.size} + ' item(s) per page'"/>
+    </div>
+
 </div>
 </body>
 </html>

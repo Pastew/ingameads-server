@@ -3,29 +3,27 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
 </head>
 <body>
 
-<div th:fragment="user_info">
-    <span sec:authentication="name"/> has <span sec:authentication="authorities"/>
-    <form sec:authorize-expr="isFullyAuthenticated()" method="post" th:action="@{/logout}">
-        <input type="submit" value="Sign Off"/>
-    </form>
-    <form sec:authorize-expr="!isFullyAuthenticated()" method="post" th:action="@{/login}">
-        <label>User</label><input type="text" name="username" value=""/>
-        <label>Password</label><input type="password" name="password"/>
-        <input type="submit" value="Login"/>
-    </form>
+<nav th:fragment="user_info" class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">In Game Ads</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a th:href="@{/games}">Games</a></li>
+            <li><a sec:authorize-expr="isFullyAuthenticated()" th:href="@{/offers}">Offers</a></li>
+            <li><a sec:authorize-expr="!isFullyAuthenticated()" th:href="@{/login}">Zaloguj się</a></li>
+            <li><a sec:authorize-expr="isFullyAuthenticated()" th:href="@{/logout}">Wyloguj się</a></li>
+            <li sec:authorize-expr="isFullyAuthenticated()" class="black-text " sec:authentication="name"/></li>
 
-    <div sec:authorize="hasRole('ROLE_ADMIN')">
-        This content is only shown to administrators.
-    </div>
-    <div sec:authorize="hasRole('ROLE_GAME_DEVELOPER')">
-        Only Game Developer can see this.
-        <a th:href="@{/mygames}">Show my games</a>
-    </div>
-</div>
+        </ul>
 
+        <ul id="nav-mobile" class="sidenav">
+            <li><a th:href="@{/games}">Games</a></li>
+            <li><a sec:authorize-expr="isFullyAuthenticated()" th:href="@{/offers}">Offers</a></li>
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+
+</nav>
 </body>
 </html>

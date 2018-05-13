@@ -20,7 +20,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .antMatchers(HttpMethod.GET, "/", "images/**", "main.css").permitAll()
+            .antMatchers(HttpMethod.GET, "/", "images/**", "ingameads.css").permitAll()
             .antMatchers(HttpMethod.GET, "/mygames/**").hasRole(Roles.USER)
             .antMatchers(HttpMethod.GET, "/offers/**").hasRole(Roles.USER)
             //.antMatchers(HttpMethod.GET, "/images").hasRole(Roles.USER)
@@ -28,6 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .and()
             .formLogin()
             .permitAll()
+                .loginPage("/login")
         .and()
             .logout()
             .logoutSuccessUrl("/");

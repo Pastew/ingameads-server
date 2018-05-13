@@ -5,46 +5,75 @@
 <body>
 
 <div th:insert="fragments/user_info :: user_info">...</div>
-
 <h3 th:if="${#vars['flash.message']}" th:text="${#vars['flash.message']}" class="flash"></h3>
 
+<div class="container">
+    <div class="row">
+        <div class="col s8">
+            <h1 th:text="${game.title}"/>
 
-<div id="game-panel">
-    <h1 th:text="${game.title}"/>
-    <p th:text="${game.description}"/>
-    <p>Price per day: $<span class="price" th:text="${game.pricePerDay}"/></p>
-    <footer th:text="${game.owner.username}"/>
-    <ul>
-        <li th:each="gameImage : ${game.images}">
-            <img class="thumbnail" th:src="@{'/images/' + ${gameImage.name} + '/raw'}"/>
-        </li>
-    </ul>
-</div>
-<div id="adverts-panel">
-    <table id="adverts-table">
-        <tbody>
-        <tr>
-            <th>Advert image</th>
-            <th>Start date</th>
-            <th>End date</th>
-        </tr>
-        <tr th:each="advert : ${adverts}">
-            <td><img class="thumbnail" th:src="${advert.imageURL}"/></td>
-            <td class="date" th:text="${advert.startDate}"></td>
-            <td class="date" th:text="${advert.endDate}"></td>
-        </tr>
-        </tbody>
-    </table>
+            <p class="flow-text" th:text="${game.description}"/>
+
+            <blockquote>
+                <p>Cena za jeden dzień: $<span class="price" th:text="${game.pricePerDay}"/></p>
+                <p>Właściciel gry: <span th:text="${game.owner.username}"/></p>
+            </blockquote>
+        </div>
+        <div class="col s4">
+            <br/><br/><br/><br/><br/><br/>
+            <ul class="carousel carousel-slider">
+                <li class="carousel-item" th:each="gameImage : ${game.images}">
+                    <img th:src="@{'/images/' + ${gameImage.name} + '/raw'}"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s4" id="buy-panel">
+            <h3>Kup reklamę</h3>
+            <form method="post" enctype="multipart/form-data"
+                  th:action="@{'/games/' + ${game.id} + '/submitAdvertOffer'}">
+                <p>Grafika reklamy <input type="file" name="file"/></p>
+                <p>Rozpoczęcie kampanii reklamowej <input type="date" name="startDate"/></p>
+                <p>Zakończenie kampanii reklamowej <input type="date" name="endDate"/></p>
+                <input type="submit" value="Make an offer">
+            </form>
+        </div>
+        <div class="col s2"></div>
+        <div class="col s6" id="adverts-panel">
+            <h4>Reklamy wykupione w tej grze</h4>
+            <table id="adverts-table">
+                <tbody>
+                <tr>
+                    <th>Grafika reklamy</th>
+                    <th>Data rozpoczęcia kampanii</th>
+                    <th>Data zakończenia</th>
+                </tr>
+                <tr th:each="advert : ${adverts}">
+                    <td><img class="thumbnail" th:src="${advert.imageURL}"/></td>
+                    <td class="date" th:text="${advert.startDate}"></td>
+                    <td class="date" th:text="${advert.endDate}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
 
-<div id="buy-panel">
-    <h2>Buy Advert</h2>
-    <form method="post" enctype="multipart/form-data" th:action="@{'/games/' + ${game.id} + '/submitAdvertOffer'}">
-        <p>Advert image <input type="file" name="file"/></p>
-        <p>Advert start time <input type="date" name="startDate"/></p>
-        <p>Advert end time <input type="date" name="endDate"/></p>
-        <input type="submit" value="Make an offer">
-    </form>
-</div>
+
+<script>
+  $(document).ready(function(){
+    $('.carousel').carousel();
+  });
+
+
+
+
+
+
+
+</script>
 </body>
 </html>
