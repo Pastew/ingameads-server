@@ -58,7 +58,7 @@ public class AdvertOfferController {
                               RedirectAttributes redirectAttributes) {
 
         try {
-            advertOfferService.payForAdvert(offerId);
+            advertOfferService.payForAdvertOffer(offerId);
             redirectAttributes.addFlashAttribute("flash.message", "Reklama opłacona!");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("flash.message", "Nie udało się opłacić reklamy: " + e.getMessage());

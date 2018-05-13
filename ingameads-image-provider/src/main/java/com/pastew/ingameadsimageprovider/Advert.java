@@ -9,7 +9,6 @@ import javax.persistence.*;
 public class Advert {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String gameId;
@@ -21,7 +20,8 @@ public class Advert {
 
     private long endDate;
 
-    public Advert(String gameId, String imageURL, long startDate, long endDate) {
+    public Advert(Long id, String gameId, String imageURL, long startDate, long endDate) {
+        this.id = id;
         this.gameId = gameId;
         this.imageURL = imageURL;
         this.startDate = startDate;

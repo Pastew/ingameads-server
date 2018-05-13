@@ -1,9 +1,6 @@
 package com.pastew.ingameadsui.Image;
 
-import com.pastew.ingameadsui.Advert.Advert;
-import com.pastew.ingameadsui.Advert.AdvertOffer;
-import com.pastew.ingameadsui.Advert.AdvertOfferRepository;
-import com.pastew.ingameadsui.Advert.AdvertOfferStates;
+import com.pastew.ingameadsui.Advert.*;
 import com.pastew.ingameadsui.Game.Game;
 import com.pastew.ingameadsui.Game.GameRepository;
 import com.pastew.ingameadsui.User.User;
@@ -31,7 +28,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -93,7 +89,8 @@ public class ImageService {
     CommandLineRunner setUp(ImageRepository imagerepository,
                             UserRepository userRepository,
                             GameRepository gameRepository,
-                            AdvertOfferRepository advertOfferRepository) throws IOException {
+                            AdvertOfferRepository advertOfferRepository,
+                            AdvertOfferService advertOfferService) throws IOException {
 
         return args -> {
             File folder = new File(UPLOAD_ROOT);
@@ -155,6 +152,21 @@ public class ImageService {
             advertOffer2.setAdvert(advert2);
             advertOffer2.setGameOwner(advert2.getGame().getOwner());
             advertOfferRepository.save(advertOffer2);
+
+            Advert advert3 = new Advert();
+            advert3.setStartDate(1526242800); // 12 may 2018
+            advert3.setEndDate(1529316000); // 18 June 2018
+            advert3.setImageURL("https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/foodnavigator.com/article/2017/01/11/ferrero-defends-palm-oil-in-nutella-with-advert-against-unfair-smear-campaign/1179591-6-eng-GB/Ferrero-defends-palm-oil-in-Nutella-with-advert-against-unfair-smear-campaign_wrbm_large.jpg");
+            advert3.setGame(gameRepository.findById("com.pastew.example_game_2").get());
+
+            AdvertOffer advertOffer3 = new AdvertOffer();
+            advertOffer3.setBuyer(bob);
+            advertOffer3.setState(AdvertOfferStates.ACCEPTED_AND_WAITING_FOR_PAYMENT);
+            advertOffer3.setAdvert(advert3);
+            advertOffer3.setGameOwner(advert3.getGame().getOwner());
+            advertOfferRepository.save(advertOffer3);
+
+            advertOfferService.payForAdvertOffer(advertOffer3.getId());
         };
     }
 

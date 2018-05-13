@@ -18,9 +18,9 @@ public class ImageProviderController {
     }
 
     @GetMapping("/advert/{gameId}")
-    public String getCurrentAdvertImageURL(@PathVariable String gameId) {
+    public AdvertGameObject getCurrentAdvertImageURL(@PathVariable String gameId) {
         log.info("Somebody asked me about image for game " + gameId);
-        String result = imageProviderService.getCurrentAdvertImageURL(gameId);
+        AdvertGameObject result = imageProviderService.getCurrentAdvert(gameId);
         log.info("I will return: " + result);
         return result;
     }

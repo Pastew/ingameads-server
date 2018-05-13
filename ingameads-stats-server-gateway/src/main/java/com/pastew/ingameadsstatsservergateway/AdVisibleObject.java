@@ -1,12 +1,22 @@
 package com.pastew.ingameadsstatsservergateway;
 
-public class AdVisibleObject
-{
+public class AdVisibleObject {
+
+    public long advertId;
     public String gameObjectName;
     public int visibleStartTimestamp;
     public int visibleEndTimestamp;
+    public String advertURL;
 
     public AdVisibleObject() {
+    }
+
+    public long getAdvertId() {
+        return advertId;
+    }
+
+    public void setAdvertId(long advertId) {
+        this.advertId = advertId;
     }
 
     public String getGameObjectName() {
@@ -31,6 +41,14 @@ public class AdVisibleObject
 
     public void setVisibleEndTimestamp(int visibleEndTimestamp) {
         this.visibleEndTimestamp = visibleEndTimestamp;
+    }
+
+    public String getAdvertURL() {
+        return advertURL;
+    }
+
+    public void setAdvertURL(String advertURL) {
+        this.advertURL = advertURL;
     }
 
     @Override

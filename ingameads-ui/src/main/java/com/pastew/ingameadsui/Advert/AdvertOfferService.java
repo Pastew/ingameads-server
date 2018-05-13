@@ -69,7 +69,7 @@ public class AdvertOfferService {
         repo.save(offer);
     }
 
-    public void payForAdvert(Long offerId) throws AdvertBuyException {
+    public void payForAdvertOffer(Long offerId) throws AdvertBuyException {
         AdvertOffer offer = repo.findById(offerId).get();
         Advert ad = offer.getAdvert();
 
@@ -89,12 +89,14 @@ public class AdvertOfferService {
     }
 
     private class AdvertPostRequestObject {
+        public long id;
         public long endDate;
         public long startDate;
         public String imageURL;
         public String gameId;
 
         public AdvertPostRequestObject(Advert ad) {
+            this.id = ad.getId();
             this.gameId = ad.getGame().getId();
             this.imageURL = ad.getImageURL();
             this.startDate = ad.getStartDate();
