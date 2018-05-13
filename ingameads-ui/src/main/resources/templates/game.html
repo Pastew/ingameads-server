@@ -12,6 +12,7 @@
 <div id="game-panel">
     <h1 th:text="${game.title}"/>
     <p th:text="${game.description}"/>
+    <p>Price per day: $<span class="price" th:text="${game.pricePerDay}"/></p>
     <footer th:text="${game.owner.username}"/>
     <ul>
         <li th:each="gameImage : ${game.images}">

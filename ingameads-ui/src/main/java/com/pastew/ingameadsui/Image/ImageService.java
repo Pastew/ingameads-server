@@ -125,12 +125,11 @@ public class ImageService {
                 imagerepository.save(images[i]);
             }
             Lorem l = LoremIpsum.getInstance();
-            gameRepository.save(new Game("com.pastew.example_game_1", greg, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[0], images[1])));
-            gameRepository.save(new Game("com.pastew.example_game_2", greg, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[2])));
-            gameRepository.save(new Game("com.pastew.example_game_3", bob, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[3])));
-            gameRepository.save(new Game("com.pastew.example_game_4", bob, l.getTitle(1, 4), l.getWords(70, 120), null));
-            gameRepository.save(new Game("com.pastew.example_game_5", bob, l.getTitle(1, 4), l.getWords(70, 120), Arrays.asList(images[4])));
-
+            gameRepository.save(new Game("com.pastew.example_game_1", l.getTitle(1, 4), 1, l.getWords(70, 120), greg, Arrays.asList(images[0], images[1])));
+            gameRepository.save(new Game("com.pastew.example_game_2", l.getTitle(1, 4), 1, l.getWords(70, 120), greg, Arrays.asList(images[2])));
+            gameRepository.save(new Game("com.pastew.example_game_3", l.getTitle(1, 4), 1, l.getWords(70, 120), bob, Arrays.asList(images[3])));
+            gameRepository.save(new Game("com.pastew.example_game_4", l.getTitle(1, 4), 1, l.getWords(70, 120), bob, null));
+            gameRepository.save(new Game("com.pastew.example_game_5", l.getTitle(1, 4), 1, l.getWords(70, 120), bob, Arrays.asList(images[4])));
             Advert advert = new Advert();
             advert.setStartDate(1529056800); // 15 June 2018
             advert.setEndDate(1529316000); // 18 June 2018
