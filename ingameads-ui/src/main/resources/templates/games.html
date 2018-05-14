@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-image">
                         <img th:if="${not #lists.isEmpty(game.images)}"
-                             th:src="@{'/images/' + ${game.images[0].name} + '/raw'}"/>
+                             th:src="${game.images[0].url}"/>
                         <span class="card-title" th:href="@{'/games/' + ${game.id}}" th:text="${game.title}"/>
                     </div>
                     <div class="card-content">

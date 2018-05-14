@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ImageRepository extends PagingAndSortingRepository<Image, Long> {
 
-    public Image findByName(String name);
-
     List<Image> findByOwner(User owner);
+
+    Image findByUrl(String url);
 }
