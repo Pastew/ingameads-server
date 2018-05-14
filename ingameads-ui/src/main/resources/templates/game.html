@@ -15,7 +15,7 @@
             <p class="flow-text" th:text="${game.description}"/>
 
             <blockquote>
-                <p>Cena za jeden dzień: $<span class="price" th:text="${game.pricePerDay}"/></p>
+                <p>Cena za jeden dzień: $<span id="price" th:text="${game.pricePerDay}"/></p>
                 <p>Właściciel gry: <span th:text="${game.owner.username}"/></p>
             </blockquote>
         </div>
@@ -32,11 +32,21 @@
     <div class="row">
         <div class="col s4" id="buy-panel">
             <h3>Kup reklamę</h3>
-            <form method="post" enctype="multipart/form-data"
+            <form id="offer-form" method="post" enctype="multipart/form-data"
                   th:action="@{'/games/' + ${game.id} + '/submitAdvertOffer'}">
-                <p>Grafika reklamy <input type="file" name="file"/></p>
-                <p>Rozpoczęcie kampanii reklamowej <input type="date" name="startDate"/></p>
-                <p>Zakończenie kampanii reklamowej <input type="date" name="endDate"/></p>
+                <!--<p>Grafika reklamy <input type="file" name="file"/></p>-->
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>Grafika reklamy</span>
+                        <input type="file" name="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+                <p>Rozpoczęcie kampanii reklamowej <input id="start_date" type="text" class="datepicker" name="startDate"/></p>
+                <p>Zakończenie kampanii reklamowej <input id="end_date" type="text" class="datepicker" name="endDate"/></p>
+                <p>Koszt: $<span id="cost"></span></p>
                 <input type="submit" value="Złóż ofertę">
             </form>
         </div>
@@ -64,16 +74,47 @@
 
 
 <script>
-  $(document).ready(function(){
+$(document).ready(function(){
     $('.carousel').carousel();
-  });
+
+    var todayDate = new Date();
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        autoClose: true,
+        firstDay: 1,
+        minDate: todayDate
+    });
+
+    var pricePerDay = $('#price').text();
+    var cost = $('#cost');
 
 
+    $('.datepicker').change(function(){
+        var startDate = new Date(document.getElementById('start_date').value);
+        var endDate = new Date(document.getElementById('end_date').value);
+        var oneDay = 24*60*60*1000; // h*m*s*ms
+        var diffDays = Math.round(Math.abs((startDate.getTime() - endDate.getTime())/(oneDay)));
+        console.log(diffDays);
+        var newCost = pricePerDay * diffDays;
+        if(! isNaN(newCost))
+            cost.text(newCost);
+    });
 
+    $('#offer-form').validate({
+    rules: {
+        startDate: {
+            required: true,
+        },
+        endDate: {
+            required: true,
+        },
+        file: {
+            required: true,
+        },
+    },
+    });
 
-
-
-
+});
 </script>
 </body>
 </html>
