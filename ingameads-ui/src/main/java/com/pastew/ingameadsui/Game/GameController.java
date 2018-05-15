@@ -5,7 +5,9 @@ import com.pastew.ingameadsui.Advert.AdvertOffer;
 import com.pastew.ingameadsui.Advert.AdvertOfferStates;
 import com.pastew.ingameadsui.Exceptions.AdvertBuyException;
 import com.pastew.ingameadsui.Image.ImageService;
+import com.pastew.ingameadsui.Stats.AdVisibleObject;
 import com.pastew.ingameadsui.User.UserRepository;
+import org.cloudinary.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,8 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
+import java.time.Instant;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
+import java.util.*;
 
 @Controller
 public class GameController {
@@ -65,7 +69,61 @@ public class GameController {
     public String getMyGame(Model model, @PathVariable String id) {
         Game game = gameService.getGame(id);
         model.addAttribute("game", game);
+
+        AdVisibleObject[] adVisibleObjects = gameService.getAdVisibleObjects(id);
+        model.addAttribute("adVisibleObjects", adVisibleObjects);
+        model.addAttribute("views", getTotalViews(adVisibleObjects));
+        model.addAttribute("averageAdViewTime", getAverageAdViewTime(adVisibleObjects));
+        model.addAttribute("medianAdViewTime", getMedianAdViewTime(adVisibleObjects));
+        model.addAttribute("viewsPerHour", getViewsPerHour(adVisibleObjects));
+
         return "mygame";
+    }
+
+    private String getViewsPerHour(AdVisibleObject[] adVisibleObjects) {
+        int[] hoursMap = new int[24];
+
+        for (AdVisibleObject adVisibleObject : adVisibleObjects) {
+            int hour = Instant.ofEpochSecond(adVisibleObject.getVisibleStartTimestamp())
+                    .atOffset(ZoneOffset.UTC).toLocalTime().getHour();
+
+            ++hoursMap[hour];
+        }
+
+        StringBuilder hoursMapJson = new StringBuilder("[");
+        for(int i = 0 ; i < hoursMap.length ; ++i){
+            //hoursMapJson.append(String.format("{\"x\":\"%s\", \"y\":\"%s\"},", i, hoursMap[i]));
+            hoursMapJson.append(String.format("%s,",hoursMap[i]));
+        }
+        hoursMapJson.setLength(hoursMapJson.length() - 1); // To remove last ,
+        hoursMapJson.append("]");
+
+        return hoursMapJson.toString();
+    }
+
+    private double getMedianAdViewTime(AdVisibleObject[] adVisibleObjects) {
+        long[] timeViews = new long[adVisibleObjects.length];
+
+        for (int i = 0; i < adVisibleObjects.length; ++i)
+            timeViews[i] = adVisibleObjects[i].getViewTime();
+
+        Arrays.sort(timeViews);
+        if (timeViews.length % 2 == 0)
+            return ((double) timeViews[timeViews.length / 2] + (double) timeViews[timeViews.length / 2 - 1]) / 2;
+        else
+            return (double) timeViews[timeViews.length / 2];
+    }
+
+    private double getAverageAdViewTime(AdVisibleObject[] adVisibleObjects) {
+        double sum = 0;
+        for (int i = 0; i < adVisibleObjects.length; ++i)
+            sum += adVisibleObjects[i].getViewTime();
+
+        return sum / adVisibleObjects.length;
+    }
+
+    private int getTotalViews(AdVisibleObject[] adVisibleObjects) {
+        return adVisibleObjects.length;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/mygames")
@@ -93,18 +151,18 @@ public class GameController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/games/{gameId}/submitAdvertOffer")
     public String submitAdvertOffer(@RequestParam("file") MultipartFile file,
-                            @PathVariable String gameId,
-                            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-                            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
-                            RedirectAttributes redirectAttributes) {
+                                    @PathVariable String gameId,
+                                    @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                                    @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+                                    RedirectAttributes redirectAttributes) {
 
         try {
             String imageUrl = imageService.createImage(file).getUrl();
             Advert advert = new Advert();
             advert.setGame(gameService.getGame(gameId));
             advert.setImageURL(imageUrl);
-            advert.setStartDate(startDate.getTime()/1000);
-            advert.setEndDate(endDate.getTime()/1000 );
+            advert.setStartDate(startDate.getTime() / 1000);
+            advert.setEndDate(endDate.getTime() / 1000);
 
             AdvertOffer advertOffer = new AdvertOffer();
             advertOffer.setState(AdvertOfferStates.WAITING_FOR_GAME_OWNER_ACCEPTANCE);

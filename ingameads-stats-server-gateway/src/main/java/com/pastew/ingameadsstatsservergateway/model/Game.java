@@ -1,6 +1,5 @@
 package com.pastew.ingameadsstatsservergateway.model;
 
-import com.pastew.ingameadsstatsservergateway.AdVisibleObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

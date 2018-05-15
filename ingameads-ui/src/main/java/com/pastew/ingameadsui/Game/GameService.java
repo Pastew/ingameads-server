@@ -8,6 +8,7 @@ import com.pastew.ingameadsui.Advert.AdvertOfferService;
 import com.pastew.ingameadsui.Exceptions.AdvertBuyException;
 import com.pastew.ingameadsui.Image.Image;
 import com.pastew.ingameadsui.Image.ImageService;
+import com.pastew.ingameadsui.Stats.AdVisibleObject;
 import com.pastew.ingameadsui.User.User;
 import com.pastew.ingameadsui.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,4 +101,7 @@ public class GameService {
         return start1 <= end2 && start2 <= end1;
     }
 
+    public AdVisibleObject[] getAdVisibleObjects(String gameId) {
+        return restTemplate.getForObject("http://ingameads-stats-server-gateway/adVisibleObjects/" + gameId, AdVisibleObject[].class);
+    }
 }

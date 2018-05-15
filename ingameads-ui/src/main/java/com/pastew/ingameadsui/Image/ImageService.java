@@ -9,8 +9,6 @@ import com.pastew.ingameadsui.User.User;
 import com.pastew.ingameadsui.User.UserRepository;
 import com.pastew.ingameadsui.User.UserService;
 import com.pastew.ingameadsui.dev.Dev;
-import com.thedeanda.lorem.Lorem;
-import com.thedeanda.lorem.LoremIpsum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -113,12 +111,11 @@ public class ImageService {
 
             for (Image image : images) imagerepository.save(image);
 
-            Lorem l = LoremIpsum.getInstance();
-            Game gta5 = gameRepository.save(new Game("com.rockstar.gta5", l.getTitle(1, 4), 1, l.getWords(70, 120), greg, Arrays.asList(images[4], images[5], images[6])));
-            Game watchDogs = gameRepository.save(new Game("com.ubisoft.watch_dogs", l.getTitle(1, 4), 1, l.getWords(70, 120), bob, Arrays.asList(images[0], images[1])));
-            Game sonic = gameRepository.save(new Game("com.sega.sonic", l.getTitle(1, 4), 1, l.getWords(70, 120), bob, Arrays.asList(images[2])));
-            Game spiderman = gameRepository.save(new Game("com.activision.spiderman", l.getTitle(1, 4), 1, l.getWords(70, 120), greg, Arrays.asList(images[3])));
-            Game ingameadsClient = gameRepository.save(new Game("com.pastew.ingameads_client", l.getTitle(1, 4), 1, l.getWords(70, 120), greg, Arrays.asList(images[7])));
+            Game gta5 = gameRepository.save(new Game("com.rockstar.gta5", "Grand Theft Auto 5", 50, "Piąta, pełnoprawna odsłona niezwykle popularnej serii gier akcji, nad której rozwojem pieczę sprawuje studio Rockstar North we współpracy z koncernem Take Two Interactive. Miejscem akcji Grand Theft Auto V jest fikcyjne miasto Los Santos (wzorowane na Los Angeles), a fabuła koncentruje się na perypetiach trójki bohaterów: Michaela De Santy, Trevora Philipsa i Franklina Clintona, którym nieobce są zatargi z prawem. Twórcy gry pozostali wierni sandboksowemu modelowi rozgrywki, pozwalając graczom na dużą swobodę w wykonywaniu zadań i poruszaniu się po wirtualnym mieście. Koszty produkcji i promocji tytułu oszacowane zostały na ponad 360 milionów dolarów, co pobiło wszystkie wcześniejsze rekordy w branży gier wideo.", greg, Arrays.asList(images[4], images[5], images[6])));
+            Game watchDogs = gameRepository.save(new Game("com.ubisoft.watch_dogs", "Watch Dogs", 10, "Przygodowa gra akcji z widokiem z perspektywy trzeciej osoby (TPP), za której powstanie odpowiadają studia deweloperskie koncernu Ubisoft na czele z Ubisoft Montreal. Fabuła Watch Dogs przenosi graczy w niedaleką przyszłość do Chicago, jednego z wielu amerykańskich miast, których infrastrukturą zarządza Centralny System Operacyjny (CtOS). Główny bohater to Aiden Pearce, utalentowany haker potrafiący włamać się niemal do każdego urządzenia elektronicznego i wykorzystać jego możliwości, by sprokurować rozwój wypadków lub wpłynąć na zachowanie innych ludzi. Rozgrywka toczy się w otwartym świecie, a gracz ma dużą swobodę w wykonywaniu zadań", bob, Arrays.asList(images[0], images[1])));
+            Game sonic = gameRepository.save(new Game("com.sega.sonic", "Sonic", 15, "Sonic Generations to zręcznościowa platformówka powstała z myślą o uczczeniu 20. urodzin tytułowego niebieskiego jeża. W grze autorstwa ekipy Sonic Team występują dwa wcielenia Sonika - klasyczny i nowoczesny, które starają się zlikwidować dziury w czasoprzestrzeni. W grze pojawia się wiele lokacji stanowiących nawiązanie do poziomów, znanych fanom wcześniejszych odsłon cyklu", bob, Arrays.asList(images[2])));
+            Game spiderman = gameRepository.save(new Game("com.activision.spiderman", "Spiderman", 10, "Przygodowa gra akcji ze słynnym superbohaterem w roli głównej. Rozgrywka polega oczywiście na walczeniu z przestępcami. Za produkcję odpowiada słynne studio Insomniac Games, znane m.in. z serii Ratchet & Clank, Resistance czy Sunset Overdrive.", greg, Arrays.asList(images[3])));
+            Game ingameadsClient = gameRepository.save(new Game("com.pastew.ingameads_client", "InGameAds - przykładowa gra", 2, "Przykładowa gra wizualizująca działanie sytemu. https://github.com/Pastew/ingameads-client", greg, Arrays.asList(images[7])));
 
             Advert advert = new Advert();
             advert.setStartDate(1529056800); // 15 June 2018

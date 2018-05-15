@@ -1,5 +1,6 @@
 package com.pastew.ingameadsstatsservergateway;
 
+import com.pastew.ingameadsstatsservergateway.model.AdVisibleObject;
 import com.pastew.ingameadsstatsservergateway.model.Game;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -42,7 +43,7 @@ public class StatServerGatewayService {
         gameRepository.save(updatedGame);
     }
 
-    public List<AdVisibleObject> getAdvertsByGame(String gameId) {
+    public List<AdVisibleObject> getAdVisibleObjects(String gameId) {
         Game game = gameRepository.findById(gameId).get();
         return game.getAdVisibleObjectList();
     }
