@@ -10,18 +10,14 @@
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">In Game Ads</a>
         <ul class="right hide-on-med-and-down">
             <li><a th:href="@{/games}">Wynajmij reklamę</a></li>
-            <li><a sec:authorize-expr="isFullyAuthenticated()" th:href="@{/offers}">Offers</a></li>
+            <li><a th:href="@{/offers}">Panel ofert</a></li>
+            <li><a th:href="@{/mygames}">Moje gry</a></li>
             <li><a sec:authorize-expr="!isFullyAuthenticated()" th:href="@{/login}">Zaloguj się</a></li>
             <li><a sec:authorize-expr="isFullyAuthenticated()" th:href="@{/logout}">Wyloguj się</a></li>
             <li sec:authorize-expr="isFullyAuthenticated()" class="black-text " sec:authentication="name"/></li>
 
         </ul>
 
-        <ul id="nav-mobile" class="sidenav">
-            <li><a th:href="@{/games}">Wynajmij reklamę</a></li>
-            <li><a sec:authorize-expr="isFullyAuthenticated()" th:href="@{/offers}">Offers</a></li>
-        </ul>
-        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
 
 </nav>

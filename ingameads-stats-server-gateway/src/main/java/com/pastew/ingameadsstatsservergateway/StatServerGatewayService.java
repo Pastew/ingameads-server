@@ -41,4 +41,9 @@ public class StatServerGatewayService {
         updatedGame.getAdVisibleObjectList().addAll(adVisibleObjectsList);
         gameRepository.save(updatedGame);
     }
+
+    public List<AdVisibleObject> getAdvertsByGame(String gameId) {
+        Game game = gameRepository.findById(gameId).get();
+        return game.getAdVisibleObjectList();
+    }
 }

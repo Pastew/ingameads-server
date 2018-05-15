@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @RestController
 public class StatsServerGatewayController {
 
@@ -18,5 +20,10 @@ public class StatsServerGatewayController {
             System.out.print(ad);
 
         statServerGatewayService.uploadStats(gameId, adVisibleObjects);
+    }
+
+    @GetMapping("/games/{gameId}")
+    public List<AdVisibleObject> getAdvertsByGame(@PathVariable String gameId){
+        return statServerGatewayService.getAdvertsByGame(gameId);
     }
 }

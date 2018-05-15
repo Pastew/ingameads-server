@@ -37,23 +37,6 @@ public class ImageController {
         return "images";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = BASE_PATH + "/" + FILENAME + "/raw")
-    @ResponseBody
-    public ResponseEntity<?> oneRawImage(@PathVariable String filename) {
-        Resource file = imageService.findOneImage(filename);
-        try {
-            return ResponseEntity
-                    .ok()
-                    .contentLength(file.contentLength())
-                    .contentType(MediaType.IMAGE_JPEG)
-                    .body(new InputStreamResource(file.getInputStream()));
-        } catch (IOException e) {
-            return ResponseEntity
-                    .badRequest()
-                    .body("Couldn't find " + filename + " => " + e.getMessage());
-        }
-    }
-
     @RequestMapping(method = RequestMethod.POST, value = BASE_PATH)
     public String createFile(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
         try {

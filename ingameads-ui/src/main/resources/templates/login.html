@@ -9,15 +9,23 @@
 </head>
 
 <body>
-<div class="row">
-<div class="col s3 offset-s4">
-    <form sec:authorize-expr="!isFullyAuthenticated()" method="post" th:action="@{/login}">
-        <label>User</label><input type="text" name="username" value=""/>
-        <label>Password</label><input type="password" name="password"/>
-        <input type="submit" value="Login"/>
-    </form>
-</div>
-</div>
+
+<div class="section"></div>
+<div class="section"></div>
+
+    <div class="row">
+        <div class="col s3 offset-s4 z-depth-1 grey lighten-4 row"
+             style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+            <h5 class="indigo-text">Zaloguj się</h5>
+            <div class="section"></div>
+
+            <form sec:authorize-expr="!isFullyAuthenticated()" method="post" th:action="@{/login}">
+                <label>User</label><input type="text" name="username" value=""/>
+                <label>Password</label><input type="password" name="password"/>
+                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

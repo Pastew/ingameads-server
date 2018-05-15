@@ -15,20 +15,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +32,6 @@ import java.util.Map;
 @Slf4j
 public class ImageService {
 
-    private static String UPLOAD_ROOT = "images";
     private final ImageRepository imageRepository;
     private final ResourceLoader resourceLoader;
     private final UserRepository userRepository;
@@ -47,7 +41,8 @@ public class ImageService {
     private Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
             "cloud_name", "ingameads",
             "api_key", "726636437293547",
-            "api_secret", "cGwYcd8ef5b3xN08im8JmM_I75o"));
+            "api_secret", "cGwYcd8ef5b3xN08im8JmM_I75o",
+            "proxy", "http://10.158.100.2:8080"));
 
     @Autowired
     public ImageService(ImageRepository imageRepository, ResourceLoader resourceLoader, UserRepository userRepository, GameRepository gameRepository, UserService userService) {
@@ -62,10 +57,6 @@ public class ImageService {
         return imageRepository.findAll(pageable);
     }
 
-    public Resource findOneImage(String filename) {
-        return resourceLoader.getResource("file:" + UPLOAD_ROOT + "/" + filename);
-    }
-
     public Image createImage(MultipartFile file) throws IOException {
 
         if ("".equals(file.getOriginalFilename()))
@@ -74,7 +65,6 @@ public class ImageService {
         if (file.isEmpty())
             throw new IOException("File is empty");
 
-        Files.copy(file.getInputStream(), Paths.get(UPLOAD_ROOT, file.getOriginalFilename()));
         Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
         String url = (String) uploadResult.get("url");
 
@@ -92,6 +82,11 @@ public class ImageService {
         imageRepository.delete(image);
     }
 
+    public List<Image> getCurrentUserImages() {
+        User owner = userService.getLoggedUser();
+        return imageRepository.findByOwner(owner);
+    }
+
     @Bean
         //@Profile("dev")
     CommandLineRunner setUp(ImageRepository imagerepository,
@@ -106,14 +101,14 @@ public class ImageService {
 
 
             Image[] images = {
-                    new Image(bob,"http://www.res.cloudinary.com/ingameads/image/upload/v1526309281/watch_dogs_2.png"),
-                    new Image(bob,"http://www.res.cloudinary.com/ingameads/image/upload/v1526309280/watch_dogs.png"),
-                    new Image(bob,"http://www.res.cloudinary.com/ingameads/image/upload/v1526309281/sonic.jpg"),
-                    new Image(greg,"http://www.res.cloudinary.com/ingameads/image/upload/v1526309278/spiderman.jpg"),
-                    new Image(greg,"http://res.cloudinary.com/ingameads/image/upload/v1526325835/gta5_0.jpg"),
-                    new Image(greg,"http://www.res.cloudinary.com/ingameads/image/upload/v1526309280/gta.jpg"),
-                    new Image(greg,"http://res.cloudinary.com/ingameads/image/upload/v1526325836/gta5_2.png"),
-                    new Image(greg,"http://res.cloudinary.com/ingameads/image/upload/v1526329519/ingameads.png"),
+                    new Image(bob, "http://www.res.cloudinary.com/ingameads/image/upload/v1526309281/watch_dogs_2.png"),
+                    new Image(bob, "http://www.res.cloudinary.com/ingameads/image/upload/v1526309280/watch_dogs.png"),
+                    new Image(bob, "http://www.res.cloudinary.com/ingameads/image/upload/v1526309281/sonic.jpg"),
+                    new Image(greg, "http://www.res.cloudinary.com/ingameads/image/upload/v1526309278/spiderman.jpg"),
+                    new Image(greg, "http://res.cloudinary.com/ingameads/image/upload/v1526325835/gta5_0.jpg"),
+                    new Image(greg, "http://www.res.cloudinary.com/ingameads/image/upload/v1526309280/gta.jpg"),
+                    new Image(greg, "http://res.cloudinary.com/ingameads/image/upload/v1526325836/gta5_2.png"),
+                    new Image(greg, "http://res.cloudinary.com/ingameads/image/upload/v1526329519/ingameads.png"),
             };
 
             for (Image image : images) imagerepository.save(image);
@@ -166,10 +161,5 @@ public class ImageService {
 
             advertOfferService.payForAdvertOffer(advertOffer3.getId());
         };
-    }
-
-    public List<Image> getCurrentUserImages() {
-        User owner = userService.getLoggedUser();
-        return imageRepository.findByOwner(owner);
     }
 }

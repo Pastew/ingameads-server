@@ -39,11 +39,6 @@ public class GameService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
-            "cloud_name", "ingameads",
-            "api_key", "726636437293547",
-            "api_secret", "cGwYcd8ef5b3xN08im8JmM_I75o"));
-
     public void addGame(Game game) {
         game.setOwner(userService.getLoggedUser());
         gameRepository.save(game);
@@ -70,7 +65,7 @@ public class GameService {
     }
 
     public void submitAdvertOffer(AdvertOffer advertOffer) throws AdvertBuyException {
-        User loggedUser =  userService.getLoggedUser();
+        User loggedUser = userService.getLoggedUser();
         verifyIfUserIsLogged(loggedUser);
         advertOffer.setBuyer(loggedUser);
         advertOffer.setGameOwner(advertOffer.getAdvert().getGame().getOwner());
@@ -80,7 +75,7 @@ public class GameService {
     }
 
     private void verifyIfUserIsLogged(User loggedUser) throws AdvertBuyException {
-        if(null == loggedUser)
+        if (null == loggedUser)
             throw new AdvertBuyException("You have to login first!");
     }
 
@@ -105,8 +100,4 @@ public class GameService {
         return start1 <= end2 && start2 <= end1;
     }
 
-    public String uploadImage(MultipartFile file) throws IOException {
-        Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-        return (String) uploadResult.get("url");
-    }
 }

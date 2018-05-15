@@ -5,24 +5,23 @@
 <head th:insert="fragments/header :: header"></head>
 <div th:insert="fragments/user_info :: user_info"></div>
 
-<h1>My games</h1>
+<h1 class="header center">Moje gry</h1>
 
 <body>
-<div>
-    <h3 th:if="${#vars['flash.message']}" th:text="${#vars['flash.message']}" class="flash"></h3>
+<h3 th:if="${#vars['flash.message']}" th:text="${#vars['flash.message']}" class="flash"></h3>
+
+<div class="container">
     <ul>
         <li th:each="game : ${mygames}">
-            <div class="game">
-                <h3><a th:href="@{'/mygames/' + ${game.id}}" th:text="${game.title}"/></h3>
-                <p th:text="${game.description}"/>
-                <span th:if="${#lists.isEmpty(game.images)}">No images for this game uploaded</span>
-                <ul>
-                    <li th:each="gameImage : ${game.images}">
-                        <img class="thumbnail" th:src="@{'/images/' + ${gameImage.name} + '/raw'}"/>
-                    </li>
-                </ul>
-
-                <span th:text="${game.owner.username}"/>
+            <div class="card">
+                <div class="card-content">
+                    <h3><a th:href="@{'/mygames/' + ${game.id}}" th:text="${game.title}"/></h3>
+                    <p th:text="${game.description}"/>
+                    <span th:if="${#lists.isEmpty(game.images)}">No images for this game uploaded</span>
+                    <center>
+                        <img class="thumbnail z-depth-3" th:src="${game.images[0].url}"/>
+                    </center>
+                </div>
             </div>
         </li>
     </ul>

@@ -3,7 +3,6 @@ package com.pastew.ingameadsui.Advert;
 import com.pastew.ingameadsui.Exceptions.AdvertBuyException;
 import com.pastew.ingameadsui.User.User;
 import com.pastew.ingameadsui.User.UserService;
-import org.cloudinary.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

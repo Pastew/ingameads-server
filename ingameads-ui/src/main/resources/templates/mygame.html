@@ -6,25 +6,22 @@
 
 <div th:insert="fragments/user_info :: user_info">...</div>
 
-<h1>Gra</h1>
-
-<div>
+<div class="container">
     <h1 th:text="${game.title}"/>
     <p th:text="${game.description}"/>
     <footer th:text="${game.owner.username}"/>
     <ul>
         <li th:each="gameImage : ${game.images}">
-            <img class="thumbnail" th:src="@{'/images/' + ${gameImage.name} + '/raw'}"/>
+            <img class="thumbnail" th:src="${gameImage.url}"/>
         </li>
     </ul>
 
-    <div class="image_upload_for_game">
+    <div>
         Upload more images
         <form method="post" enctype="multipart/form-data"
               th:action="@{'/games/' + ${game.id} + '/images'}">
             <p><input type="file" name="file"/></p>
-            <!--<input type="hidden" name="gameId" th:value="${game.id}">-->
-            <p><input type="submit" value="Upload"/></p>
+            <p><button class="waves-effect waves-light btn" type="submit">Dodaj zdjęcie</button></p>
         </form>
     </div>
 </div>

@@ -99,7 +99,7 @@ public class GameController {
                             RedirectAttributes redirectAttributes) {
 
         try {
-            String imageUrl = gameService.uploadImage(file);
+            String imageUrl = imageService.createImage(file).getUrl();
             Advert advert = new Advert();
             advert.setGame(gameService.getGame(gameId));
             advert.setImageURL(imageUrl);
