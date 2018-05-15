@@ -62,21 +62,20 @@ public class GameController {
         Advert[] adverts = gameService.getGameAdverts(gameId);
         model.addAttribute("game", game);
         model.addAttribute("adverts", adverts);
-        return "game";
-    }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/mygames/{id}")
-    public String getMyGame(Model model, @PathVariable String id) {
-        Game game = gameService.getGame(id);
-        model.addAttribute("game", game);
-
-        AdVisibleObject[] adVisibleObjects = gameService.getAdVisibleObjects(id);
-        model.addAttribute("adVisibleObjects", adVisibleObjects);
+        AdVisibleObject[] adVisibleObjects = gameService.getAdVisibleObjects(gameId);
+        //model.addAttribute("adVisibleObjects", adVisibleObjects);
         model.addAttribute("views", getTotalViews(adVisibleObjects));
         model.addAttribute("averageAdViewTime", getAverageAdViewTime(adVisibleObjects));
         model.addAttribute("medianAdViewTime", getMedianAdViewTime(adVisibleObjects));
         model.addAttribute("viewsPerHour", getViewsPerHour(adVisibleObjects));
+        return "game";
+    }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/mygames/{gameId}")
+    public String getMyGame(Model model, @PathVariable String gameId) {
+        Game game = gameService.getGame(gameId);
+        model.addAttribute("game", game);
         return "mygame";
     }
 
