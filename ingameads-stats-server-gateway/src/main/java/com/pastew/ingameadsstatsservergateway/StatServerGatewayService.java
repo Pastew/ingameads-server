@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -43,7 +44,7 @@ public class StatServerGatewayService {
         gameRepository.save(updatedGame);
     }
 
-    public List<AdVisibleObject> getAdVisibleObjects(String gameId) {
+    public List<AdVisibleObject> getAdVisibleObjects(String gameId) throws NoSuchElementException {
         Game game = gameRepository.findById(gameId).get();
         return game.getAdVisibleObjectList();
     }

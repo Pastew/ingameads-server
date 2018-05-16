@@ -64,11 +64,13 @@ public class GameController {
         model.addAttribute("adverts", adverts);
 
         AdVisibleObject[] adVisibleObjects = gameService.getAdVisibleObjects(gameId);
-        //model.addAttribute("adVisibleObjects", adVisibleObjects);
-        model.addAttribute("views", getTotalViews(adVisibleObjects));
-        model.addAttribute("averageAdViewTime", getAverageAdViewTime(adVisibleObjects));
-        model.addAttribute("medianAdViewTime", getMedianAdViewTime(adVisibleObjects));
-        model.addAttribute("viewsPerHour", getViewsPerHour(adVisibleObjects));
+        if(adVisibleObjects.length > 0) {
+            //model.addAttribute("adVisibleObjects", adVisibleObjects);
+            model.addAttribute("views", getTotalViews(adVisibleObjects));
+            model.addAttribute("averageAdViewTime", getAverageAdViewTime(adVisibleObjects));
+            model.addAttribute("medianAdViewTime", getMedianAdViewTime(adVisibleObjects));
+            model.addAttribute("viewsPerHour", getViewsPerHour(adVisibleObjects));
+        }
         return "game";
     }
 

@@ -4,7 +4,9 @@ import com.pastew.ingameadsstatsservergateway.model.AdVisibleObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 public class StatsServerGatewayController {
@@ -24,6 +26,11 @@ public class StatsServerGatewayController {
 
     @GetMapping("/adVisibleObjects/{gameId}")
     public List<AdVisibleObject> adVisibleObjects(@PathVariable String gameId){
-        return statServerGatewayService.getAdVisibleObjects(gameId);
+        try {
+            return statServerGatewayService.getAdVisibleObjects(gameId);
+        }
+        catch(NoSuchElementException e){
+            return new ArrayList<AdVisibleObject>();
+        }
     }
 }
