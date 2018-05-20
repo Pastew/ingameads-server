@@ -47,6 +47,7 @@
                                                           name="startDate"/></p>
                 <p>Zakończenie kampanii reklamowej <input id="end_date" type="text" class="datepicker" name="endDate"/>
                 </p>
+                <p>Ilość dni: <span id="days"></span></p>
                 <p>Koszt: $<span id="cost"></span></p>
                 <button class="waves-effect waves-light btn" type="submit">Złóż ofertę</button>
             </form>
@@ -119,6 +120,7 @@ $(document).ready(function(){
 
     var pricePerDay = $('#price').text();
     var cost = $('#cost');
+    var days = $('#days');
 
 
     $('.datepicker').change(function(){
@@ -126,7 +128,9 @@ $(document).ready(function(){
         var endDate = new Date(document.getElementById('end_date').value);
         var oneDay = 24*60*60*1000; // h*m*s*ms
         var diffDays = Math.round(Math.abs((startDate.getTime() - endDate.getTime())/(oneDay)));
-        console.log(diffDays);
+        if(! isNaN(diffDays))
+            cost.text(diffDays);
+
         var newCost = pricePerDay * diffDays;
         if(! isNaN(newCost))
             cost.text(newCost);
