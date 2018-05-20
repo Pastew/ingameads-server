@@ -103,6 +103,21 @@ public class AdvertOfferService {
         return repo.findById(offerId).get();
     }
 
+    public List<AdvertOffer> getOffersPayedByBuyer() {
+        User currentUser = userService.getLoggedUser();
+        return repo.findByBuyer(currentUser).stream()
+                .filter(offer -> AdvertOfferStates.PAYED.equals(offer.getState()))
+                .collect(Collectors.toList());
+    }
+
+    public List<AdvertOffer> getOffersPayedByGameDeveloper() {
+        User currentUser = userService.getLoggedUser();
+        return repo.findByAdvertGameOwner(currentUser).stream()
+                .filter(offer -> AdvertOfferStates.PAYED.equals(offer.getState()))
+                .collect(Collectors.toList());
+    }
+
+
     private class AdvertPostRequestObject {
         public long id;
         public long endDate;

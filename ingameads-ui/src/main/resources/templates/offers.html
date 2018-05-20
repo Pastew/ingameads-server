@@ -65,7 +65,7 @@
             Tutaj znajdziesz oferty które zaakceptowałeś, ale jeszcze nie zostały opłacone przez reklamodawcę.
         </blockquote>
         <div th:if="${#lists.isEmpty(waitingForPaymentOffers)}">Nie ma żadnych ofert które czekają na płatność</div>
-        <div id="waiting-for-payment-offers-list-panel" th:if="${not #lists.isEmpty(waitingForPaymentOffers)}">
+        <div th:if="${not #lists.isEmpty(waitingForPaymentOffers)}">
             <ul>
                 <li th:each="offer : ${waitingForPaymentOffers}">
                     <div class="offer">
@@ -100,8 +100,7 @@
             Gdy opłacisz reklamę - trafi na ekrany graczy!
         </blockquote>
         <div th:if="${#lists.isEmpty(waitingForPaymentOffersForCurrentUser)}">Nie masz ofert czekających na Twoją płatność</div>
-        <div id="waiting-for-payment-by-current-user-offers-list-panel"
-             th:if="${not #lists.isEmpty(waitingForPaymentOffersForCurrentUser)}">
+        <div th:if="${not #lists.isEmpty(waitingForPaymentOffersForCurrentUser)}">
             <ul>
                 <li th:each="offer : ${waitingForPaymentOffersForCurrentUser}">
                     <div class="offer">
@@ -116,16 +115,73 @@
                             <tr>
                                 <td>Zakończenie kampanii</td>
                                 <td class="date" th:text="${offer.advert.endDate}"/>
-                            <tr>
-                                <td>Kupujący</td>
-                                <td th:text="${offer.buyer.username}"/>
-                            <tr>
                                 <td>Grafika reklamy</td>
                                 <td><img class="thumbnail" th:src="${offer.advert.imageURL}"/></td>
                         </table>
                         <form method="post" th:action="'/offers/' + ${offer.id} + '/pay'">
                             <button class="waves-effect waves-light btn-large pulse" type="submit">Zapłać</button>
                         </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <br/><br/><br/><br/><br/><br/>
+        <h4>Reklamy opłacone przez Ciebie</h4>
+        <blockquote>
+            Reklamy które już opłaciłeś
+        </blockquote>
+        <div th:if="${#lists.isEmpty(payedByBuyer)}">Nie masz opłaconych przez Ciebie reklam.</div>
+        <div th:if="${not #lists.isEmpty(payedByBuyer)}">
+            <ul>
+                <li th:each="offer : ${payedByBuyer}">
+                    <div class="offer">
+                        <table class="bordered">
+                            <tr>
+                                <td>ID gry</td>
+                                <td th:text="${offer.advert.game.id}"/>
+                            </tr>
+                            <tr>
+                                <td>Rozpoczęcie kampanii</td>
+                                <td class="date" th:text="${offer.advert.startDate}"/>
+                            <tr>
+                                <td>Zakończenie kampanii</td>
+                                <td class="date" th:text="${offer.advert.endDate}"/>
+                            <tr>
+                                <td>Grafika reklamy</td>
+                                <td><img class="thumbnail" th:src="${offer.advert.imageURL}"/></td>
+                        </table>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <br/><br/><br/><br/><br/><br/>
+        <h4>Opłacone reklamy w Twoich grach</h4>
+        <blockquote>
+            Reklamy w Twoich grach które już są opłacone.
+        </blockquote>
+        <div th:if="${#lists.isEmpty(payedByGameDeveloper)}">Nie masz opłaconych reklam w Twoich grach.</div>
+        <div th:if="${not #lists.isEmpty(offersPayedByMe)}">
+            <ul>
+                <li th:each="offer : ${payedByBuyer}">
+                    <div class="offer">
+                        <table class="bordered">
+                            <tr>
+                                <td>ID gry</td>
+                                <td th:text="${offer.advert.game.id}"/>
+                            </tr>
+                            <tr>
+                                <td>Rozpoczęcie kampanii</td>
+                                <td class="date" th:text="${offer.advert.startDate}"/>
+                            <tr>
+                                <td>Zakończenie kampanii</td>
+                                <td class="date" th:text="${offer.advert.endDate}"/>
+                            <tr>
+                                <td>Grafika reklamy</td>
+                                <td><img class="thumbnail" th:src="${offer.advert.imageURL}"/></td>
+                        </table>
                     </div>
                 </li>
             </ul>

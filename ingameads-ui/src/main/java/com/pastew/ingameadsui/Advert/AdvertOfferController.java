@@ -38,9 +38,13 @@ public class AdvertOfferController {
 
         List<AdvertOffer> waitingForPaymentOffersForCurrentUser = advertOfferService.getAdvertOffersWaitingForPayment();
 
+        List<AdvertOffer> payedAdvertOffers = advertOfferService.getOffersPayedByBuyer();
+
         model.addAttribute("offers", offersWaitingForAcceptance);
         model.addAttribute("waitingForPaymentOffers", waitingForPaymentOffers);
         model.addAttribute("waitingForPaymentOffersForCurrentUser", waitingForPaymentOffersForCurrentUser);
+        model.addAttribute("payedByGameDeveloper", advertOfferService.getOffersPayedByGameDeveloper());
+        model.addAttribute("payedByBuyer", advertOfferService.getOffersPayedByBuyer());
         return "offers";
     }
 
