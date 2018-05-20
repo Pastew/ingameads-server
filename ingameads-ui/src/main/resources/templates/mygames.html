@@ -11,6 +11,29 @@
 <h3 th:if="${#vars['flash.message']}" th:text="${#vars['flash.message']}" class="flash"></h3>
 
 <div class="container">
+    <div>
+        <h3>Dodaj nową grę</h3>
+        <form method="post" enctype="multipart/form-data"
+              th:action="@{/games/add}">
+            <p>ID gry (np. com.example.mygame) <input type="text" name="id"/></p>
+            <p>Tytuł gry <input type="text" name="title"/></p>
+            <p>Opis gry</p> <textarea type="text" name="description"></textarea>
+            <p>Cena za jeden dzień reklamy: $<input type="number" min="1" max="10000" name="pricePerDay"/></p>
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>Grafika gry</span>
+                    <input type="file" name="file">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+            <button class="waves-effect waves-light btn" type="submit">Dodaj grę</button>
+        </form>
+    </div>
+
+    <br/><br/><br/>
+    <h3>Lista Twoich gier</h3>
     <ul>
         <li th:each="game : ${mygames}">
             <div class="card">
@@ -26,5 +49,6 @@
         </li>
     </ul>
 </div>
+
 </body>
 </html>

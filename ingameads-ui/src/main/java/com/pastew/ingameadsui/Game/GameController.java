@@ -4,6 +4,7 @@ import com.pastew.ingameadsui.Advert.Advert;
 import com.pastew.ingameadsui.Advert.AdvertOffer;
 import com.pastew.ingameadsui.Advert.AdvertOfferStates;
 import com.pastew.ingameadsui.Exceptions.AdvertBuyException;
+import com.pastew.ingameadsui.Image.Image;
 import com.pastew.ingameadsui.Image.ImageService;
 import com.pastew.ingameadsui.Stats.AdVisibleObject;
 import com.pastew.ingameadsui.User.UserRepository;
@@ -64,7 +65,7 @@ public class GameController {
         model.addAttribute("adverts", adverts);
 
         AdVisibleObject[] adVisibleObjects = gameService.getAdVisibleObjects(gameId);
-        if(adVisibleObjects.length > 0) {
+        if (adVisibleObjects.length > 0) {
             //model.addAttribute("adVisibleObjects", adVisibleObjects);
             model.addAttribute("views", getTotalViews(adVisibleObjects));
             model.addAttribute("averageAdViewTime", getAverageAdViewTime(adVisibleObjects));
@@ -92,9 +93,9 @@ public class GameController {
         }
 
         StringBuilder hoursMapJson = new StringBuilder("[");
-        for(int i = 0 ; i < hoursMap.length ; ++i){
+        for (int i = 0; i < hoursMap.length; ++i) {
             //hoursMapJson.append(String.format("{\"x\":\"%s\", \"y\":\"%s\"},", i, hoursMap[i]));
-            hoursMapJson.append(String.format("%s,",hoursMap[i]));
+            hoursMapJson.append(String.format("%s,", hoursMap[i]));
         }
         hoursMapJson.setLength(hoursMapJson.length() - 1); // To remove last ,
         hoursMapJson.append("]");
@@ -150,12 +151,41 @@ public class GameController {
         return "redirect:/mygames";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/games/{gameId}/submitAdvertOffer")
-    public String submitAdvertOffer(@RequestParam("file") MultipartFile file,
-                                    @PathVariable String gameId,
-                                    @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-                                    @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
-                                    RedirectAttributes redirectAttributes) {
+    @RequestMapping(method = RequestMethod.POST, value = "/games/add")
+    public String addNewGame(@RequestParam("file") MultipartFile file,
+                             @RequestParam("id") String id,
+                             @RequestParam("title") String title,
+                             @RequestParam("description") String description,
+                             @RequestParam("pricePerDay") int pricePerDay,
+                             RedirectAttributes redirectAttributes) {
+
+
+        Image gameImage;
+        try {
+            gameImage = imageService.createImage(file);
+        } catch (IOException e) {
+            redirectAttributes.addFlashAttribute("flash.message", "Nie udało się wysłać zdjęcia, spróbuj ponownie później." + file.getOriginalFilename());
+            return "redirect:/mygames";
+        }
+
+        Game game = new Game();
+        game.setId(id);
+        game.setTitle(title);
+        game.setDescription(description);
+        game.setPricePerDay(pricePerDay);
+        game.setImages(Arrays.asList(gameImage));
+        gameService.addGame(game);
+        redirectAttributes.addFlashAttribute("flash.message", "Dodano nową grę." + file.getOriginalFilename());
+
+        return "redirect:/mygames";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/games/{gameId}/submitAdvertOfferForGame")
+    public String submitAdvertOfferForGame(@RequestParam("file") MultipartFile file,
+                                           @PathVariable String gameId,
+                                           @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                                           @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+                                           RedirectAttributes redirectAttributes) {
 
         try {
             String imageUrl = imageService.createImage(file).getUrl();

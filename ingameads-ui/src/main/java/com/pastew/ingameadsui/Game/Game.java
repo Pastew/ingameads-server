@@ -5,7 +5,6 @@ import com.pastew.ingameadsui.User.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,6 +17,7 @@ public class Game {
 
     @Id
     private String id;
+
     private String title;
     private int pricePerDay; // $
 
