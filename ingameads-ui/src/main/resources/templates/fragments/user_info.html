@@ -13,11 +13,10 @@
             <li><a th:href="@{/offers}">Panel ofert</a></li>
             <li><a th:href="@{/mygames}">Moje gry</a></li>
             <li><a sec:authorize-expr="!isFullyAuthenticated()" th:href="@{/login}">Zaloguj się</a></li>
+            <li><a sec:authorize-expr="!isFullyAuthenticated()" th:href="@{/register}">Zarejestruj się</a></li>
             <li><a sec:authorize-expr="isFullyAuthenticated()" th:href="@{/logout}">Wyloguj się</a></li>
             <li sec:authorize-expr="isFullyAuthenticated()" class="black-text " sec:authentication="name"/></li>
-
         </ul>
-
     </div>
 
 </nav>

@@ -19,7 +19,7 @@
             <h5 class="indigo-text">Zaloguj się</h5>
             <div class="section"></div>
 
-            <form sec:authorize-expr="!isFullyAuthenticated()" method="post" th:action="@{/login}">
+            <form method="post" th:action="@{/login}">
                 <label>User</label><input type="text" name="username" value=""/>
                 <label>Password</label><input type="password" name="password"/>
                 <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>

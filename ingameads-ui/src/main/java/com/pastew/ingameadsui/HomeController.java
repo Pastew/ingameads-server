@@ -16,4 +16,9 @@ public class HomeController {
     public String login(){
         return "login";
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/register")
+    public String register(){
+        return "register";
+    }
 }
