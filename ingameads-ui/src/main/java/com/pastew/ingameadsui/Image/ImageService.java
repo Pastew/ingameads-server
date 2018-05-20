@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,6 +36,8 @@ public class ImageService {
     private final UserRepository userRepository;
     private final GameRepository gameRepository;
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
+
 
     private Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
             "cloud_name", "ingameads",
@@ -42,13 +45,14 @@ public class ImageService {
             "api_secret", "cGwYcd8ef5b3xN08im8JmM_I75o",
             "proxy", "http://10.158.100.2:8080"));
 
-    @Autowired
-    public ImageService(ImageRepository imageRepository, ResourceLoader resourceLoader, UserRepository userRepository, GameRepository gameRepository, UserService userService) {
+    public ImageService(ImageRepository imageRepository, ResourceLoader resourceLoader, UserRepository userRepository,
+                        GameRepository gameRepository, UserService userService, PasswordEncoder passwordEncoder) {
         this.imageRepository = imageRepository;
         this.resourceLoader = resourceLoader;
         this.userRepository = userRepository;
         this.gameRepository = gameRepository;
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Page<Image> findPage(Pageable pageable) {
@@ -94,8 +98,8 @@ public class ImageService {
                             AdvertOfferService advertOfferService) throws IOException {
 
         return args -> {
-            User greg = userRepository.save(new User(Dev.GREG, Dev.userPassword, "greg@qwe.com", "ROLE_USER"));
-            User bob = userRepository.save(new User(Dev.BOB, Dev.userPassword, "bob@qwe.com", "ROLE_USER"));
+            User greg = userRepository.save(new User(Dev.GREG,  passwordEncoder.encode(Dev.userPassword), "greg@qwe.com", "ROLE_USER"));
+            User bob = userRepository.save(new User(Dev.BOB,  passwordEncoder.encode(Dev.userPassword), "bob@qwe.com", "ROLE_USER"));
 
 
             Image[] images = {
