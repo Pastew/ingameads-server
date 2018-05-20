@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thmyeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:insert="fragments/header :: header"></head>
+<body>
+
+<center>
+    <p th:text="${message}"/>
+    <a th:href="@{'/offers/'}">Powrót do ofert</a>
+</center>
+
+</body>
+</html>

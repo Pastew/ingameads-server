@@ -89,7 +89,7 @@ public class GameService {
             if (twoDatesOverlap(a.getStartDate(), a.getEndDate(),
                     ad.getStartDate(),
                     ad.getEndDate()))
-                throw new AdvertBuyException("Incorrect dates!");
+                throw new AdvertBuyException("Ten termin jest zajęty, wybierz inną datę.");
         }
     }
 

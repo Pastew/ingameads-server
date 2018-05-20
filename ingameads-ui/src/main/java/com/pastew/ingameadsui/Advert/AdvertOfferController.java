@@ -1,5 +1,6 @@
 package com.pastew.ingameadsui.Advert;
 
+import com.pastew.ingameadsui.Payment.PaymentService;
 import com.pastew.ingameadsui.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ public class AdvertOfferController {
 
     @Autowired
     private AdvertOfferService advertOfferService;
+
+    @Autowired
+    private PaymentService paymentService;
 
     @Autowired
     private UserService userService;
@@ -41,8 +45,7 @@ public class AdvertOfferController {
     }
 
     @PostMapping("/offers/{offerId}/accept")
-    public String acceptOffer(@PathVariable Long offerId,
-                              RedirectAttributes redirectAttributes) {
+    public String acceptOffer(@PathVariable Long offerId, RedirectAttributes redirectAttributes) {
 
         try {
             advertOfferService.acceptOffer(offerId);
@@ -54,16 +57,14 @@ public class AdvertOfferController {
     }
 
     @PostMapping("/offers/{offerId}/pay")
-    public String payForOffer(@PathVariable Long offerId,
-                              RedirectAttributes redirectAttributes) {
-
+    public String payForOffer(@PathVariable Long offerId, RedirectAttributes redirectAttributes) {
         try {
-            advertOfferService.payForAdvertOffer(offerId);
-            redirectAttributes.addFlashAttribute("flash.message", "Reklama opłacona!");
+            AdvertOffer advertOffer= advertOfferService.findById(offerId);
+            String payPalUrl = advertOfferService.payForAdvertOffer(advertOffer);
+            return "redirect:" + payPalUrl;
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("flash.message", "Nie udało się opłacić reklamy: " + e.getMessage());
             return "redirect:/offers";
         }
-        return "redirect:/offers";
     }
 }

@@ -94,8 +94,8 @@ public class ImageService {
                             AdvertOfferService advertOfferService) throws IOException {
 
         return args -> {
-            User greg = userRepository.save(new User(Dev.GREG, Dev.userPassword, "ROLE_USER"));
-            User bob = userRepository.save(new User(Dev.BOB, Dev.userPassword, "ROLE_USER"));
+            User greg = userRepository.save(new User(Dev.GREG, Dev.userPassword, "greg@qwe.com", "ROLE_USER"));
+            User bob = userRepository.save(new User(Dev.BOB, Dev.userPassword, "bob@qwe.com", "ROLE_USER"));
 
 
             Image[] images = {
@@ -111,11 +111,11 @@ public class ImageService {
 
             for (Image image : images) imagerepository.save(image);
 
-            Game gta5 = gameRepository.save(new Game("com.rockstar.gta5", "Grand Theft Auto 5", 50, "Piąta, pełnoprawna odsłona niezwykle popularnej serii gier akcji, nad której rozwojem pieczę sprawuje studio Rockstar North we współpracy z koncernem Take Two Interactive. Miejscem akcji Grand Theft Auto V jest fikcyjne miasto Los Santos (wzorowane na Los Angeles), a fabuła koncentruje się na perypetiach trójki bohaterów: Michaela De Santy, Trevora Philipsa i Franklina Clintona, którym nieobce są zatargi z prawem. Twórcy gry pozostali wierni sandboksowemu modelowi rozgrywki, pozwalając graczom na dużą swobodę w wykonywaniu zadań i poruszaniu się po wirtualnym mieście. Koszty produkcji i promocji tytułu oszacowane zostały na ponad 360 milionów dolarów, co pobiło wszystkie wcześniejsze rekordy w branży gier wideo.", greg, Arrays.asList(images[4], images[5], images[6])));
+            Game gta5 = gameRepository.save(new Game("com.rockstar.gta5", "Grand Theft Auto 5", 50, "Piąta, pełnoprawna odsłona niezwykle popularnej serii gier akcji, nad której rozwojem pieczę sprawuje studio Rockstar North we współpracy z koncernem Take Two Interactive. Miejscem akcji Grand Theft Auto V jest fikcyjne miasto Los Santos (wzorowane na Los Angeles), a fabuła koncentruje się na perypetiach trójki bohaterów: Michaela De Santy, Trevora Philipsa i Franklina Clintona, którym nieobce są zatargi z prawem. Twórcy gry pozostali wierni sandboksowemu modelowi rozgrywki, pozwalając graczom na dużą swobodę w wykonywaniu zadań i poruszaniu się po wirtualnym mieście. Koszty produkcji i promocji tytułu oszacowane zostały na ponad 360 milionów dolarów, co pobiło wszystkie wcześniejsze rekordy w branży gier wideo.", bob, Arrays.asList(images[4], images[5], images[6])));
             Game watchDogs = gameRepository.save(new Game("com.ubisoft.watch_dogs", "Watch Dogs", 10, "Przygodowa gra akcji z widokiem z perspektywy trzeciej osoby (TPP), za której powstanie odpowiadają studia deweloperskie koncernu Ubisoft na czele z Ubisoft Montreal. Fabuła Watch Dogs przenosi graczy w niedaleką przyszłość do Chicago, jednego z wielu amerykańskich miast, których infrastrukturą zarządza Centralny System Operacyjny (CtOS). Główny bohater to Aiden Pearce, utalentowany haker potrafiący włamać się niemal do każdego urządzenia elektronicznego i wykorzystać jego możliwości, by sprokurować rozwój wypadków lub wpłynąć na zachowanie innych ludzi. Rozgrywka toczy się w otwartym świecie, a gracz ma dużą swobodę w wykonywaniu zadań", bob, Arrays.asList(images[0], images[1])));
-            Game sonic = gameRepository.save(new Game("com.sega.sonic", "Sonic", 15, "Sonic Generations to zręcznościowa platformówka powstała z myślą o uczczeniu 20. urodzin tytułowego niebieskiego jeża. W grze autorstwa ekipy Sonic Team występują dwa wcielenia Sonika - klasyczny i nowoczesny, które starają się zlikwidować dziury w czasoprzestrzeni. W grze pojawia się wiele lokacji stanowiących nawiązanie do poziomów, znanych fanom wcześniejszych odsłon cyklu", bob, Arrays.asList(images[2])));
+            Game sonic = gameRepository.save(new Game("com.sega.sonic", "Sonic", 15, "Sonic Generations to zręcznościowa platformówka powstała z myślą o uczczeniu 20. urodzin tytułowego niebieskiego jeża. W grze autorstwa ekipy Sonic Team występują dwa wcielenia Sonika - klasyczny i nowoczesny, które starają się zlikwidować dziury w czasoprzestrzeni. W grze pojawia się wiele lokacji stanowiących nawiązanie do poziomów, znanych fanom wcześniejszych odsłon cyklu", greg, Arrays.asList(images[2])));
             Game spiderman = gameRepository.save(new Game("com.activision.spiderman", "Spiderman", 10, "Przygodowa gra akcji ze słynnym superbohaterem w roli głównej. Rozgrywka polega oczywiście na walczeniu z przestępcami. Za produkcję odpowiada słynne studio Insomniac Games, znane m.in. z serii Ratchet & Clank, Resistance czy Sunset Overdrive.", greg, Arrays.asList(images[3])));
-            Game ingameadsClient = gameRepository.save(new Game("com.pastew.ingameads_client", "InGameAds - przykładowa gra", 2, "Przykładowa gra wizualizująca działanie sytemu. https://github.com/Pastew/ingameads-client", greg, Arrays.asList(images[7])));
+            Game ingameadsClient = gameRepository.save(new Game("com.pastew.ingameads_client", "InGameAds - przykładowa gra", 2, "Przykładowa gra wizualizująca działanie sytemu. https://github.com/Pastew/ingameads-client", bob, Arrays.asList(images[7])));
 
             Advert advert = new Advert();
             advert.setStartDate(1529056800); // 15 June 2018
@@ -124,7 +124,7 @@ public class ImageService {
             advert.setGame(gta5);
 
             AdvertOffer advertOffer = new AdvertOffer();
-            advertOffer.setBuyer(bob);
+            advertOffer.setBuyer(greg);
             advertOffer.setState(AdvertOfferStates.WAITING_FOR_GAME_OWNER_ACCEPTANCE);
             advertOffer.setAdvert(advert);
             advertOffer.setGameOwner(advert.getGame().getOwner());
@@ -137,7 +137,7 @@ public class ImageService {
             advert2.setGame(gta5);
 
             AdvertOffer advertOffer2 = new AdvertOffer();
-            advertOffer2.setBuyer(bob);
+            advertOffer2.setBuyer(greg);
             advertOffer2.setState(AdvertOfferStates.ACCEPTED_AND_WAITING_FOR_PAYMENT);
             advertOffer2.setAdvert(advert2);
             advertOffer2.setGameOwner(advert2.getGame().getOwner());
@@ -150,13 +150,13 @@ public class ImageService {
             advert3.setGame(ingameadsClient);
 
             AdvertOffer advertOffer3 = new AdvertOffer();
-            advertOffer3.setBuyer(bob);
+            advertOffer3.setBuyer(greg);
             advertOffer3.setState(AdvertOfferStates.ACCEPTED_AND_WAITING_FOR_PAYMENT);
             advertOffer3.setAdvert(advert3);
             advertOffer3.setGameOwner(advert3.getGame().getOwner());
             advertOfferRepository.save(advertOffer3);
 
-            advertOfferService.payForAdvertOffer(advertOffer3.getId());
+            advertOfferService.notifyImageProviderAboutNewAdvert(advertOffer3.getId());
         };
     }
 }

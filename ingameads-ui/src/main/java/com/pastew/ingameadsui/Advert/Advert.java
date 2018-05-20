@@ -23,4 +23,8 @@ public class Advert {
 
     private long endDate;
 
+    public double calculateCost() {
+        int days = 4; //TODY: Calculate end - start days
+        return days * game.getPricePerDay();
+    }
 }
