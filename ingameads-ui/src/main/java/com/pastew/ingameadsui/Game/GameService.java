@@ -1,7 +1,5 @@
 package com.pastew.ingameadsui.Game;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.pastew.ingameadsui.Advert.Advert;
 import com.pastew.ingameadsui.Advert.AdvertOffer;
 import com.pastew.ingameadsui.Advert.AdvertOfferService;
@@ -20,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class GameService {
@@ -68,16 +65,24 @@ public class GameService {
     public void submitAdvertOffer(AdvertOffer advertOffer) throws AdvertBuyException {
         User loggedUser = userService.getLoggedUser();
         verifyIfUserIsLogged(loggedUser);
+
         advertOffer.setBuyer(loggedUser);
         advertOffer.setGameOwner(advertOffer.getAdvert().getGame().getOwner());
+
+        verifyIfBuyerEqualsGameOwner(loggedUser, advertOffer.getBuyer());
         verifyIfTimeSlotIsAvailable(advertOffer);
 
         advertOfferService.addAdvertOffer(advertOffer);
     }
 
+    private void verifyIfBuyerEqualsGameOwner(User loggedUser, User buyer) throws AdvertBuyException {
+        if(buyer.getId().equals(loggedUser.getId()))
+            throw new AdvertBuyException("Nie możesz kupić reklamy w swojej grze");
+    }
+
     private void verifyIfUserIsLogged(User loggedUser) throws AdvertBuyException {
         if (null == loggedUser)
-            throw new AdvertBuyException("You have to login first!");
+            throw new AdvertBuyException("Musisz się zalogować");
     }
 
     private void verifyIfTimeSlotIsAvailable(AdvertOffer advertOffer) throws AdvertBuyException {

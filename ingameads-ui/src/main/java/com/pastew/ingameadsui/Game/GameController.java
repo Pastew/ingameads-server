@@ -173,7 +173,7 @@ public class GameController {
         } catch (AdvertBuyException e) {
             redirectAttributes.addFlashAttribute("flash.message", "Nie udało się złożyć oferty: " + e.getMessage());
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("flash.message", "Nie udało się wysłać zdjęcia " + e.getMessage());
+            redirectAttributes.addFlashAttribute("flash.message", "Coś poszło nie tak: " + e.getMessage());
         }
 
         return "redirect:/games/" + gameId;
