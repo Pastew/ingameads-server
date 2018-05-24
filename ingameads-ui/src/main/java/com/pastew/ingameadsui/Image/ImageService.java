@@ -137,7 +137,7 @@ public class ImageService {
             Advert advert2 = new Advert();
             advert2.setStartDate(1529056800); // 15 June 2018
             advert2.setEndDate(1529316000); // 18 June 2018
-            advert2.setImageURL("https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/foodnavigator.com/article/2017/01/11/ferrero-defends-palm-oil-in-nutella-with-advert-against-unfair-smear-campaign/1179591-6-eng-GB/Ferrero-defends-palm-oil-in-Nutella-with-advert-against-unfair-smear-campaign_wrbm_large.jpg");
+            advert2.setImageURL("https://orig00.deviantart.net/8854/f/2009/205/c/0/starbucks_advert_by_vinayizblank.jpg");
             advert2.setGame(gta5);
 
             AdvertOffer advertOffer2 = new AdvertOffer();
@@ -150,7 +150,7 @@ public class ImageService {
             Advert advert3 = new Advert();
             advert3.setStartDate(1526242800); // 12 may 2018
             advert3.setEndDate(1529316000); // 18 June 2018
-            advert3.setImageURL("https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/foodnavigator.com/article/2017/01/11/ferrero-defends-palm-oil-in-nutella-with-advert-against-unfair-smear-campaign/1179591-6-eng-GB/Ferrero-defends-palm-oil-in-Nutella-with-advert-against-unfair-smear-campaign_wrbm_large.jpg");
+            advert3.setImageURL("https://orig00.deviantart.net/8854/f/2009/205/c/0/starbucks_advert_by_vinayizblank.jpg");
             advert3.setGame(ingameadsClient);
 
             AdvertOffer advertOffer3 = new AdvertOffer();
