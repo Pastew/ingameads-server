@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.pastew</groupId>
-    <artifactId>ingameadsmaster</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <modules>
         <module>ingameads-image-provider</module>
@@ -16,8 +16,4 @@
         <module>ingameads-ui</module>
         <module>ingameads-config-server</module>
     </modules>
-
-    <build>
-        <finalName>ingameadsmaster</finalName>
-    </build>
 </project>
