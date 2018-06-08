@@ -160,7 +160,7 @@ public class ImageService {
             advertOffer3.setGameOwner(advert3.getGame().getOwner());
             advertOfferRepository.save(advertOffer3);
 
-            advertOfferService.notifyImageProviderAboutNewAdvert(advertOffer3.getId());
+            //advertOfferService.notifyImageProviderAboutNewAdvert(advertOffer3.getId());
         };
     }
 }
