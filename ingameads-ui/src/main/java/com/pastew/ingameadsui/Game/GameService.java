@@ -69,7 +69,7 @@ public class GameService {
         advertOffer.setBuyer(loggedUser);
         advertOffer.setGameOwner(advertOffer.getAdvert().getGame().getOwner());
 
-        verifyIfBuyerEqualsGameOwner(loggedUser, advertOffer.getBuyer());
+        verifyIfBuyerEqualsGameOwner(loggedUser, advertOffer.getGameOwner());
         verifyIfTimeSlotIsAvailable(advertOffer);
 
         advertOfferService.addAdvertOffer(advertOffer);
