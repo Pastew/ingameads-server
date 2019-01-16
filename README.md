@@ -1,8 +1,8 @@
 # In game ads
-This is server-side app for renting advert space inside game world.
-This application is an intermediary between video game owners and advertisers that are willing to pay for placing their advertisements inside the game world.
-Payment is fully covered in this app, I used PayPay for it.
-The entire system is a complete and working prototype with basic flow implemented and it is ready for new features development.
+This is server-side app for renting advert space inside game world.\
+This application is an intermediary between video game owners and advertisers that are willing to pay for placing their advertisements inside the game world.\
+Payment is fully covered in this app, I used PayPay for it.\
+The entire system is a complete and working prototype with basic flow implemented and it is ready for new features development.\
 
 ## Technology used, some keywords:
 * Java 8
@@ -16,29 +16,29 @@ The entire system is a complete and working prototype with basic flow implemente
 * Remote image hosting - Cloudinary.
 
 ## Architecture
-* Here's architecture picture.
+* Here's architecture picture.\
+(TODO: translate to english)
 ![Alt text](architecture.PNG?raw=true "Architecture")
 
-* Screenshot from Eureka Server
-(TODO: translate to english)
+* Screenshot from Eureka Server\
 ![Alt text](eureka.PNG?raw=true "eureka")
 
 ## User Interface
 * UI was rendered with thmyeleaf.
-* For CSS I used Google Materialize (materializecss.com) just because I didn't know it and I wanted to learn it.
+* For CSS I used Google Materialize (materializecss.com) just because I didn't know it and I wanted to learn it.\
 
-* Home page
+* Here's how home page looks like:
 ![Alt text](UI.PNG?raw=true "UI")
 
-* Game page
+* Game page\
 Here advert provider can choose start and end day of advertising campaign, upload advert image and know how much it will cost him. He also can see stats of this game.
 ![Alt text](game.PNG?raw=true "game")
 
-* Offer page
+* Offer page\
 Once advert provider completed order, game developer needs to approve (or reject) it.
 ![Alt text](offer.PNG?raw=true "offer")
 
-* Payment
+* Payment\
 Here's how payment works. Part of money goes to In-game-ads owner, part to PayPay and the rest to game developer. Numbers are configurable.
 ![Alt text](payment.PNG?raw=true "payment")
 
