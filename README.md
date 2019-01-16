@@ -17,7 +17,7 @@ The entire system is a complete and working prototype with basic flow implemente
 
 ## Architecture
 * Here's architecture picture.\
-(TODO: translate to english)
+(TODO: translate to english)\
 ![Alt text](architecture.PNG?raw=true "Architecture")
 
 * Screenshot from Eureka Server\
@@ -27,22 +27,22 @@ The entire system is a complete and working prototype with basic flow implemente
 * UI was rendered with thmyeleaf.
 * For CSS I used Google Materialize (materializecss.com) just because I didn't know it and I wanted to learn it.\
 
-* Here's how home page looks like:
+* Here's how home page looks like:\
 ![Alt text](UI.PNG?raw=true "UI")
 
 * Game page\
-Here advert provider can choose start and end day of advertising campaign, upload advert image and know how much it will cost him. He also can see stats of this game.
+Here advert provider can choose start and end day of advertising campaign, upload advert image and know how much it will cost him. He also can see stats of this game.\
 ![Alt text](game.PNG?raw=true "game")
 
 * Offer page\
-Once advert provider completed order, game developer needs to approve (or reject) it.
+Once advert provider completed order, game developer needs to approve (or reject) it.\
 ![Alt text](offer.PNG?raw=true "offer")
 
 * Payment\
-Here's how payment works. Part of money goes to In-game-ads owner, part to PayPay and the rest to game developer. Numbers are configurable.
+Here's how payment works. Part of money goes to In-game-ads owner, part to PayPay and the rest to game developer. Numbers are configurable.\
 ![Alt text](payment.PNG?raw=true "payment")
 
-When game developer accepts the offer - advert provider is notified about this and he can pay in advance for the advert campaign.
+When game developer accepts the offer - advert provider is notified about this and he can pay in advance for the advert campaign.\
 ![Alt text](paypal.PNG?raw=true "paypal")
 
 
